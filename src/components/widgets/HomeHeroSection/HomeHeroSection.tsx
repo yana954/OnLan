@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import { Link } from 'react-router';
 import clsx from 'clsx';
-import imgAir from '@images/Avia.webp';
-import imgSea from '@images/Morski.webp';
-import imgRoad from '@images/MultiModals.webp';
+import imgSea from '@images/aboutUsNew/containers.webp';
+import imgAir from '@images/aboutUsNew/plane.webp';
+import imgRoad from '@images/aboutUsNew/truck.webp';
 import { HOME_HERO } from '@/content/homeHero';
 
 type ModeKey = (typeof HOME_HERO.modes)[number]['key'];
@@ -16,11 +16,11 @@ const MODE_IMAGES: Record<ModeKey, string> = {
     road: imgRoad,
 };
 
-/** Морський блок займає обидва ряди, решта — по одному. */
+/** Автоперевезення — широка плитка зверху, решта — по одній знизу. */
 const MODE_LAYOUT: Record<ModeKey, string> = {
-    sea: 'row-span-2',
+    road: 'col-span-2',
     air: '',
-    road: '',
+    sea: '',
 };
 
 export const HomeHeroSection = () => {
@@ -55,10 +55,6 @@ export const HomeHeroSection = () => {
             <div className="container relative z-1 mx-auto px-4 py-12 md:py-16 min-[1200px]:py-10">
                 <div className="grid w-full items-center gap-10 min-[1200px]:grid-cols-[1.05fr_0.95fr] min-[1200px]:gap-14">
                     <div className="min-w-0">
-                        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-onlan-lime/40 bg-onlan-white/10 px-4 py-2 text-sm font-bold tracking-wide text-onlan-lime backdrop-blur-sm">
-                            <span className="size-2 rounded-full bg-onlan-lime" aria-hidden />
-                            {HOME_HERO.badge}
-                        </div>
 
                         <h1
                             id={headingId}
@@ -89,20 +85,20 @@ export const HomeHeroSection = () => {
                         </div>
 
                         <ul className="mt-10 grid max-w-[600px] list-none grid-cols-3 gap-3 border-t md:gap-4 border-onlan-lavender/25 pt-6 min-[1200px]:mt-12">
-                            {HOME_HERO.advantages.map((advantage) => (
-                                <li key={advantage.key}>
+                            {HOME_HERO.facts.map((fact) => (
+                                <li key={fact.key}>
                                     <strong className="mb-1 block text-base font-extrabold leading-tight text-onlan-lime md:text-2xl">
-                                        {advantage.title}
+                                        {fact.value}
                                     </strong>
                                     <p className="m-0 text-xs leading-snug text-onlan-lavender md:text-sm">
-                                        {advantage.description}
+                                        {fact.label}
                                     </p>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    <ul className="m-0 grid h-[22rem] list-none grid-cols-2 grid-rows-2 gap-3 p-0 sm:h-[30rem] md:gap-4 min-[1200px]:h-[min(35rem,calc(100dvh-14rem))]">
+                    <ul className="m-0 grid h-[22rem] list-none grid-cols-2 grid-rows-[1.3fr_1fr] gap-3 p-0 sm:h-[30rem] md:gap-4 min-[1200px]:h-[min(35rem,calc(100dvh-14rem))]">
                         {HOME_HERO.modes.map((mode, index) => (
                             <li
                                 key={mode.key}
