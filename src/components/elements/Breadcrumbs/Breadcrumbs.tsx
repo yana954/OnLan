@@ -1,3 +1,6 @@
+'use client';
+
+import { useT } from '@/components/app/LangProvider';
 import { Link } from '@/lib/router';
 import type { BreadcrumbItem } from '@/lib/routes';
 
@@ -12,12 +15,14 @@ interface BreadcrumbsProps {
  * same page, so the markup and the structured data always agree.
  */
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+    const t = useT();
+
     if (items.length < 2) {
         return null;
     }
 
     return (
-        <nav aria-label="Навігаційний ланцюжок" className={className}>
+        <nav aria-label={t('Навігаційний ланцюжок', 'Breadcrumbs')} className={className}>
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
                 {items.map((item, index) => {
                     const isCurrent = index === items.length - 1;

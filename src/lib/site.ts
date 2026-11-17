@@ -48,7 +48,10 @@ export const OG_IMAGE = {
     width: 1200,
     height: 630,
     type: 'image/png',
-    alt: 'OnLan Logistic — міжнародні вантажні перевезення та митне оформлення',
+    alt: {
+        uk: 'OnLan Logistic — міжнародні вантажні перевезення та митне оформлення',
+        en: 'OnLan Logistic — international freight and customs clearance',
+    },
 } as const;
 
 export const LOGO_IMAGE = {

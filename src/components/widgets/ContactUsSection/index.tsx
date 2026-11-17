@@ -5,8 +5,12 @@ import Image from 'next/image';
 import LinesSvg from '@icons/Lines.svg';
 import { Elements } from '@elements/index.ts';
 import Title from '@/components/elements/Title';
+import { useLang, useT } from '@/components/app/LangProvider';
 
 export function ContactUsSection() {
+    const lang = useLang();
+    const t = useT();
+    const googleHl = lang === 'en' ? '?hl=en' : '';
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [accepted, setAccepted] = useState(false);
@@ -33,7 +37,7 @@ export function ContactUsSection() {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            Контакти
+                            {t('Контакти', 'Contacts')}
                         </p>
                     </div>
                 </div>
@@ -56,12 +60,12 @@ export function ContactUsSection() {
                     <div className="relative z-10 w-full max-w-[624px] p-6 md:p-8 lg:p-10 xl:p-12">
                         <Title
                             id="contact-us-section-heading"
-                            title="Довірте нам свою логістику"
+                            title={t('Довірте нам свою логістику', 'Trust us with your logistics')}
                             type="h2"
                             className="text-onlan-white text-[clamp(1.75rem,6vw,3.75rem)] leading-tight"
                         />
                         <p className="mt-3 text-base font-medium text-onlan-lavender md:text-lg">
-                            І отримаєте сервіс, на який можна покластися.
+                            {t('І отримаєте сервіс, на який можна покластися.', 'And get a service you can rely on.')}
                         </p>
 
                         <form className="mt-8 flex w-full flex-col gap-5" onSubmit={onSubmit} noValidate>
@@ -69,9 +73,9 @@ export function ContactUsSection() {
                                 id="contact-section-name"
                                 name="name"
                                 type="text"
-                                label="Ім’я"
+                                label={t('Ім’я', 'Name')}
                                 labelClassName="!text-onlan-white"
-                                placeholder="Ваше ім’я"
+                                placeholder={t('Ваше ім’я', 'Your name')}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 inputWrapClassName="flex !h-[61px] min-h-[61px] items-center bg-onlan-white border-onlan-white"
@@ -82,9 +86,9 @@ export function ContactUsSection() {
                                 id="contact-section-phone"
                                 name="phone"
                                 type="tel"
-                                label="Телефон"
+                                label={t('Телефон', 'Phone')}
                                 labelClassName="!text-onlan-white"
-                                placeholder="Номер телефону"
+                                placeholder={t('Номер телефону', 'Phone number')}
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 inputWrapClassName="flex !h-[61px] min-h-[61px] items-center bg-onlan-white border-onlan-white"
@@ -93,25 +97,25 @@ export function ContactUsSection() {
                             />
 
                             <p className="text-xs leading-relaxed text-onlan-white/75 md:text-sm">
-                                Цей сайт захищено reCAPTCHA. Діють{' '}
+                                {t('Цей сайт захищено reCAPTCHA. Діють', 'This site is protected by reCAPTCHA and the Google')}{' '}
                                 <a
-                                    href="https://policies.google.com/privacy"
+                                    href={`https://policies.google.com/privacy${googleHl}`}
                                     className="underline underline-offset-2 hover:text-onlan-white"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Політика конфіденційності
+                                    {t('Політика конфіденційності', 'Privacy Policy')}
                                 </a>{' '}
-                                та{' '}
+                                {t('та', 'and')}{' '}
                                 <a
-                                    href="https://policies.google.com/terms"
+                                    href={`https://policies.google.com/terms${googleHl}`}
                                     className="underline underline-offset-2 hover:text-onlan-white"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Умови використання
+                                    {t('Умови використання', 'Terms of Service')}
                                 </a>{' '}
-                                Google.
+                                {t('Google.', 'apply.')}
                             </p>
 
                             <label className="flex cursor-pointer items-center gap-3 text-sm text-onlan-white md:text-base">
@@ -156,8 +160,8 @@ export function ContactUsSection() {
                                   * once the page is published.
                                   */}
                                 <span className="leading-snug">
-                                    Я приймаю{' '}
-                                    <span className="font-semibold">Умови та положення</span>
+                                    {t('Я приймаю', 'I accept the')}{' '}
+                                    <span className="font-semibold">{t('Умови та положення', 'Terms and Conditions')}</span>
                                 </span>
                             </label>
 
@@ -167,7 +171,7 @@ export function ContactUsSection() {
                                 size="md"
                                 className="mt-2 h-12 w-full justify-center font-semibold disabled:opacity-50 sm:w-auto sm:min-w-[240px] lg:h-14"
                             >
-                                зв&apos;яжіться зі мною
+                                {t('зв\'яжіться зі мною', 'contact me')}
                             </Elements.Button>
                         </form>
                     </div>

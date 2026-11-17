@@ -8,6 +8,8 @@ const nextConfig = {
     // Generate canonical app routes without a trailing slash, e.g. `/terms` instead of `/terms/`
     trailingSlash: false,
     productionBrowserSourceMaps: true,
+    // Two root layouts ((uk) and (en)/en) → the 404 owns its own <html>.
+    experimental: { globalNotFound: true },
     eslint: {
         ignoreDuringBuilds: true,
     },

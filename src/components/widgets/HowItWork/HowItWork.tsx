@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Link } from 'react-router';
+import { useT } from '@/components/app/LangProvider';
 import type { HowItWorkProps } from '@/types/HowItWorks.interface';
 
 /** Easing from reference: cubic-bezier(0.25, 0.46, 0.45, 0.94) */
@@ -12,6 +13,7 @@ const SLIDE_EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 const PANEL_BG = '#2D368B';
 
 export function HowItWork(props: HowItWorkProps) {
+    const t = useT();
     const { index, total, number, title, description, slug, backgroundImageSrc, panelImageSrc } =
         props;
     const serviceHref = `/services/${slug}`;
@@ -87,7 +89,7 @@ export function HowItWork(props: HowItWorkProps) {
                             <div className="flex items-center justify-start gap-2">
                                 <div className="w-2 h-2 bg-onlan-lime rounded-full"></div>
                                 <span className="inline-flex w-fit rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-semibold tracking-wide text-onlan-lime uppercase backdrop-blur-sm md:text-sm">
-                                    Наші Послуги
+                                    {t('Наші Послуги', 'Our services')}
                                 </span>
                             </div>
 
@@ -123,7 +125,7 @@ export function HowItWork(props: HowItWorkProps) {
                                         to={serviceHref}
                                         className="btn btn-accent btn-md inline-flex h-12 min-h-12 w-full max-w-md items-center justify-center gap-2 px-8 font-semibold text-onlan-black shadow-none sm:w-auto"
                                     >
-                                        Більше про послугу
+                                        {t('Більше про послугу', 'Learn more about this service')}
                                         <span aria-hidden>→</span>
                                     </Link>
                                 </div>

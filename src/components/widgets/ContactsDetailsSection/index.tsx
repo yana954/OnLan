@@ -1,9 +1,10 @@
 'use client';
 
 import { Elements } from '@/components/elements';
-import { CONTACTS_DETAILS_SECTION } from '@/content/contacts';
+import { useContent } from '@/hooks/useContent';
 
 export function ContactsDetailsSection() {
+    const c = useContent();
     const headingId = 'contacts-details-heading';
 
     return (
@@ -13,20 +14,20 @@ export function ContactsDetailsSection() {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">
                         <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-onlan-black md:text-sm">
-                            {CONTACTS_DETAILS_SECTION.eyebrow}
+                            {c.contactsDetails.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={headingId}
-                    title={CONTACTS_DETAILS_SECTION.heading}
+                    title={c.contactsDetails.heading}
                     type="h2"
                     className="mx-auto mt-4 max-w-3xl text-center text-onlan-black md:mt-6"
                 />
 
                 <div className="mt-8 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-2 lg:mt-12 xl:grid-cols-4">
-                    {CONTACTS_DETAILS_SECTION.columns.map((column) => (
+                    {c.contactsDetails.columns.map((column) => (
                         <article
                             key={column.title}
                             className="rounded-2xl border border-onlan-black/10 bg-onlan-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:p-6 lg:p-7"

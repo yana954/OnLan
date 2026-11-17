@@ -1,4 +1,5 @@
-import { ORGANIZATION } from '@/content/organization';
+import { getOrganization } from '@/content/organization';
+import { OG_LOCALE_TAG, localePath, type Lang } from '@/lib/i18n';
 import type { BreadcrumbItem, PageSeo } from '@/lib/routes';
 import type { ServiceContent } from '@/types/Service.interface';
 import { LOGO_IMAGE, OG_IMAGE, SITE_NAME, SITE_URL, absoluteUrl } from '@/lib/site';
@@ -14,25 +15,27 @@ import { LOGO_IMAGE, OG_IMAGE, SITE_NAME, SITE_URL, absoluteUrl } from '@/lib/si
 export type JsonLdNode = Record<string, unknown>;
 
 /** Stable `@id` for a page-scoped node, e.g. `https://onlan.com.ua/services/air#webpage`. */
-function nodeId(path: string, fragment: string): string {
-    const url = absoluteUrl(path);
+function nodeId(path: string, fragment: string, lang: Lang = 'uk'): string {
+    const url = absoluteUrl(localePath(lang, path));
     return `${url === SITE_URL ? `${url}/` : url}#${fragment}`;
 }
 
+/** One organization entity for both languages; the website entity is per language. */
 const ORGANIZATION_ID = nodeId('/', 'organization');
-const WEBSITE_ID = nodeId('/', 'website');
+const websiteId = (lang: Lang) => nodeId('/', 'website', lang);
 
 export const organizationRef = { '@id': ORGANIZATION_ID };
-export const websiteRef = { '@id': WEBSITE_ID };
+const websiteRef = (lang: Lang) => ({ '@id': websiteId(lang) });
 
-export function createOrganizationNode(): JsonLdNode {
+export function createOrganizationNode(lang: Lang = 'uk'): JsonLdNode {
+    const ORGANIZATION = getOrganization(lang);
     const node: JsonLdNode = {
         '@type': 'Organization',
         '@id': ORGANIZATION_ID,
         name: ORGANIZATION.name,
         alternateName: ORGANIZATION.alternateName,
         description: ORGANIZATION.description,
-        url: absoluteUrl('/'),
+        url: absoluteUrl(localePath(lang, '/')),
         logo: {
             '@type': 'ImageObject',
             url: absoluteUrl(LOGO_IMAGE.path),
@@ -76,13 +79,13 @@ export function createOrganizationNode(): JsonLdNode {
  * No `SearchAction` — the site has no on-site search endpoint, and declaring one
  * that does not exist is exactly the kind of fiction Google ignores at best.
  */
-export function createWebsiteNode(): JsonLdNode {
+export function createWebsiteNode(lang: Lang = 'uk'): JsonLdNode {
     return {
         '@type': 'WebSite',
-        '@id': WEBSITE_ID,
+        '@id': websiteId(lang),
         name: SITE_NAME,
-        url: absoluteUrl('/'),
-        inLanguage: 'uk-UA',
+        url: absoluteUrl(localePath(lang, '/')),
+        inLanguage: OG_LOCALE_TAG[lang],
         publisher: organizationRef,
     };
 }
@@ -91,17 +94,18 @@ type WebPageType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
 
 export function createWebPageNode(
     config: PageSeo,
-    options: { type?: WebPageType; breadcrumbTrail?: BreadcrumbItem[] } = {},
+    options: { type?: WebPageType; breadcrumbTrail?: BreadcrumbItem[]; lang?: Lang } = {},
 ): JsonLdNode {
-    const url = absoluteUrl(config.path);
+    const lang = options.lang ?? 'uk';
+    const url = absoluteUrl(localePath(lang, config.path));
     const node: JsonLdNode = {
         '@type': options.type ?? 'WebPage',
-        '@id': nodeId(config.path, 'webpage'),
+        '@id': nodeId(config.path, 'webpage', lang),
         url,
         name: config.name,
         description: config.description,
-        inLanguage: 'uk-UA',
-        isPartOf: websiteRef,
+        inLanguage: OG_LOCALE_TAG[lang],
+        isPartOf: websiteRef(lang),
         about: organizationRef,
         primaryImageOfPage: {
             '@type': 'ImageObject',
@@ -112,41 +116,53 @@ export function createWebPageNode(
     };
 
     if (options.breadcrumbTrail && options.breadcrumbTrail.length > 1) {
-        node.breadcrumb = { '@id': nodeId(config.path, 'breadcrumb') };
+        node.breadcrumb = { '@id': nodeId(config.path, 'breadcrumb', lang) };
     }
 
     return node;
 }
 
-export function createBreadcrumbNode(pagePath: string, trail: BreadcrumbItem[]): JsonLdNode {
+export function createBreadcrumbNode(
+    pagePath: string,
+    trail: BreadcrumbItem[],
+    lang: Lang = 'uk',
+): JsonLdNode {
     return {
         '@type': 'BreadcrumbList',
-        '@id': nodeId(pagePath, 'breadcrumb'),
+        '@id': nodeId(pagePath, 'breadcrumb', lang),
         itemListElement: trail.map((item, index) => ({
             '@type': 'ListItem',
             position: index + 1,
             name: item.name,
-            item: absoluteUrl(item.path),
+            item: absoluteUrl(localePath(lang, item.path)),
         })),
     };
 }
 
 /** Географія з бігучого рядка регіонів на головній. */
-const SERVICE_AREA = ['Україна', 'Європа', 'Азія', 'США', 'Велика Британія'].map((name) => ({ '@type': 'Place', name }));
+const SERVICE_AREA_NAMES: Record<Lang, string[]> = {
+    uk: ['Україна', 'Європа', 'Азія', 'США', 'Велика Британія'],
+    en: ['Ukraine', 'Europe', 'Asia', 'USA', 'United Kingdom'],
+};
+const serviceArea = (lang: Lang) => SERVICE_AREA_NAMES[lang].map((name) => ({ '@type': 'Place', name }));
 
-export function createServiceNode(service: ServiceContent, imagePath?: string): JsonLdNode {
-    const url = absoluteUrl(`/services/${service.slug}`);
+export function createServiceNode(
+    service: ServiceContent,
+    imagePath?: string,
+    lang: Lang = 'uk',
+): JsonLdNode {
+    const url = absoluteUrl(localePath(lang, `/services/${service.slug}`));
 
     const node: JsonLdNode = {
         '@type': 'Service',
-        '@id': nodeId(`/services/${service.slug}`, 'service'),
+        '@id': nodeId(`/services/${service.slug}`, 'service', lang),
         name: service.title,
         serviceType: service.tagLabel,
         description: service.lead,
         provider: organizationRef,
-        areaServed: SERVICE_AREA,
+        areaServed: serviceArea(lang),
         url,
-        mainEntityOfPage: { '@id': nodeId(`/services/${service.slug}`, 'webpage') },
+        mainEntityOfPage: { '@id': nodeId(`/services/${service.slug}`, 'webpage', lang) },
     };
 
     if (imagePath) {
@@ -164,6 +180,7 @@ export function createServiceNode(service: ServiceContent, imagePath?: string): 
 export function createFaqNode(
     pagePath: string,
     faq: { question: string; answer: string }[],
+    lang: Lang = 'uk',
 ): JsonLdNode | null {
     const answered = faq.filter((item) => item.question.trim() && item.answer.trim());
     if (answered.length === 0) {
@@ -172,7 +189,7 @@ export function createFaqNode(
 
     return {
         '@type': 'FAQPage',
-        '@id': nodeId(pagePath, 'faq'),
+        '@id': nodeId(pagePath, 'faq', lang),
         mainEntity: answered.map((item) => ({
             '@type': 'Question',
             name: item.question,
@@ -187,17 +204,18 @@ export function createFaqNode(
 export function createServiceListNode(
     pagePath: string,
     services: ServiceContent[],
+    lang: Lang = 'uk',
 ): JsonLdNode {
     return {
         '@type': 'ItemList',
-        '@id': nodeId(pagePath, 'services'),
-        name: 'Послуги OnLan Logistic',
+        '@id': nodeId(pagePath, 'services', lang),
+        name: lang === 'en' ? 'OnLan Logistic services' : 'Послуги OnLan Logistic',
         numberOfItems: services.length,
         itemListElement: services.map((service, index) => ({
             '@type': 'ListItem',
             position: index + 1,
             name: service.title,
-            url: absoluteUrl(`/services/${service.slug}`),
+            url: absoluteUrl(localePath(lang, `/services/${service.slug}`)),
         })),
     };
 }

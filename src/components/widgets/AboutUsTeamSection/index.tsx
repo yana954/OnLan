@@ -5,11 +5,9 @@ import { FaLinkedinIn } from 'react-icons/fa6';
 import girlPhoto from '@/assets/images/girl.webp';
 import menPhoto from '@/assets/images/men.webp';
 import { Elements } from '@/components/elements';
-import {
-    ABOUT_US_TEAM,
-    ABOUT_US_TEAM_SECTION,
-    type AboutUsTeamPhotoKey,
-} from '@/content/aboutUsTeam';
+import { type AboutUsTeamPhotoKey } from '@/content/aboutUsTeam';
+import { useContent } from '@/hooks/useContent';
+import { useT } from '@/components/app/LangProvider';
 
 const PHOTO_BY_KEY: Record<AboutUsTeamPhotoKey, typeof girlPhoto> = {
     girl: girlPhoto,
@@ -17,6 +15,8 @@ const PHOTO_BY_KEY: Record<AboutUsTeamPhotoKey, typeof girlPhoto> = {
 };
 
 export const AboutUsTeamSection = () => {
+    const c = useContent();
+    const t = useT();
     const sectionId = 'about-us-team-heading';
 
     return (
@@ -29,20 +29,20 @@ export const AboutUsTeamSection = () => {
                     <div className="size-2 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            {ABOUT_US_TEAM_SECTION.eyebrow}
+                            {c.aboutTeamSection.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={sectionId}
-                    title={ABOUT_US_TEAM_SECTION.heading}
+                    title={c.aboutTeamSection.heading}
                     type="h2"
                     className="mt-6 mx-auto max-w-4xl text-balance text-center text-onlan-black"
                 />
 
                 <ul className="mx-auto mt-10 grid w-full max-w-[1200px] list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-6">
-                    {ABOUT_US_TEAM.map((member) => (
+                    {c.aboutTeam.map((member) => (
                         <li key={member.name}>
                             <article className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-onlan-black/10 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
                                 <Image
@@ -57,7 +57,7 @@ export const AboutUsTeamSection = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="absolute right-3 top-3 z-20 inline-flex size-10 items-center justify-center rounded-full bg-onlan-lime text-onlan-blue transition-colors hover:bg-onlan-lime-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-onlan-blue"
-                                    aria-label={`Профіль ${member.name} у LinkedIn`}
+                                    aria-label={t(`Профіль ${member.name} у LinkedIn`, `${member.name}’s LinkedIn profile`)}
                                 >
                                     <FaLinkedinIn className="size-[18px]" aria-hidden />
                                 </a>

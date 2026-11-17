@@ -1,6 +1,7 @@
 'use client';
 
 import { Elements } from '@/components/elements';
+import { useT } from '@/components/app/LangProvider';
 
 const GLOW_SIZE = 642;
 
@@ -14,6 +15,8 @@ const glowStyle = (background: string, top: string, left: string) => ({
 });
 
 export function ContactsGlowCardSection() {
+    const t = useT();
+
     return (
         <section className="w-full bg-onlan-white pb-10 md:pb-14 lg:pb-20">
             <div className="container mx-auto px-4">
@@ -41,7 +44,7 @@ export function ContactsGlowCardSection() {
 
                     <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                         <Elements.Title
-                            title="Готові обговорити ваш логістичний проєкт?"
+                            title={t('Готові обговорити ваш логістичний проєкт?', 'Ready to discuss your logistics project?')}
                             type="h2"
                             className="max-w-3xl text-onlan-black"
                         />
@@ -51,7 +54,7 @@ export function ContactsGlowCardSection() {
                             variant="ghost"
                             className="mt-6 h-12 rounded-full border border-onlan-black/15 bg-transparent! px-6 font-semibold text-onlan-black shadow-none hover:bg-onlan-white/40! md:mt-8 md:h-14 md:px-8"
                         >
-                            Зв’язатися зараз
+                            {t('Зв’язатися зараз', 'Contact us now')}
                         </Elements.Button>
                     </div>
                 </div>

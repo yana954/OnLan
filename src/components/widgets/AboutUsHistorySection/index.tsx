@@ -2,12 +2,9 @@
 
 import { Fragment } from 'react';
 import { Elements } from '@/components/elements';
-import {
-    ABOUT_US_HISTORY_MILESTONES,
-    ABOUT_US_HISTORY_SECTION,
-    type HistoryMilestone,
-} from '@/content/aboutUsHistory';
+import { type HistoryMilestone } from '@/content/aboutUsHistory';
 import { clsx } from 'clsx';
+import { useContent } from '@/hooks/useContent';
 
 const BG_OPACITY_CLASS: Record<HistoryMilestone['bgOpacityPercent'], string> = {
     20: 'bg-onlan-blue/20',
@@ -23,6 +20,7 @@ function milestoneTextClass(opacity: HistoryMilestone['bgOpacityPercent']) {
 }
 
 export const AboutUsHistorySection = () => {
+    const c = useContent();
     const sectionId = 'about-us-history-heading';
 
     return (
@@ -35,14 +33,14 @@ export const AboutUsHistorySection = () => {
                     <div className="size-2 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            {ABOUT_US_HISTORY_SECTION.eyebrow}
+                            {c.aboutHistorySection.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={sectionId}
-                    title={ABOUT_US_HISTORY_SECTION.heading}
+                    title={c.aboutHistorySection.heading}
                     type="h2"
                     className="mt-6 mx-auto max-w-4xl text-balance text-center text-onlan-black"
                 />
@@ -50,7 +48,7 @@ export const AboutUsHistorySection = () => {
                 <div className="mx-auto mt-10 w-full max-w-[1200px] lg:mt-14">
                     <div className="mx-auto w-full max-w-[1200px]">
                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-0">
-                            {ABOUT_US_HISTORY_MILESTONES.map((m) => (
+                            {c.aboutHistory.map((m) => (
                                 <div
                                     key={m.year}
                                     className="flex min-w-0 flex-col items-stretch"
@@ -77,7 +75,7 @@ export const AboutUsHistorySection = () => {
                             className="mt-6 hidden w-full max-w-[1000px] items-center justify-center mx-auto md:mt-8 lg:flex"
                             role="presentation"
                         >
-                            {ABOUT_US_HISTORY_MILESTONES.map((m, i) => (
+                            {c.aboutHistory.map((m, i) => (
                                 <Fragment key={`yr-${m.year}`}>
                                     {i > 0 && (
                                         <div

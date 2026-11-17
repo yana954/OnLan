@@ -1,32 +1,34 @@
 import type { Metadata } from 'next';
+import { OG_LOCALE, localePath, type Lang } from '@/lib/i18n';
 import type { PageSeo } from '@/lib/routes';
 import {
     IS_INDEXABLE_ENVIRONMENT,
     OG_IMAGE,
-    SITE_LOCALE,
     SITE_NAME,
     SITE_URL_OBJECT,
     absoluteUrl,
 } from '@/lib/site';
 
-const DEFAULT_SITE_DESCRIPTION =
-    'Вантажні перевезення з Європи, Азії та США: авто, море, авіа, залізниця. Митне оформлення «під ключ» і єдиний менеджер на маршруті.';
+const DEFAULT_SITE_DESCRIPTION: Record<Lang, string> = {
+    uk: 'Вантажні перевезення з Європи, Азії та США: авто, море, авіа, залізниця. Митне оформлення «під ключ» і єдиний менеджер на маршруті.',
+    en: 'Freight from Europe, Asia and the USA to Ukraine: road, sea, air, rail. Turnkey customs clearance and one manager along the route.',
+};
 
 /**
  * The social card is the same brand asset on every page, so its alt text
  * describes the image rather than the page it happens to be attached to.
  */
-const OG_IMAGES = [
+const ogImages = (lang: Lang) => [
     {
         url: OG_IMAGE.path,
         width: OG_IMAGE.width,
         height: OG_IMAGE.height,
         type: OG_IMAGE.type,
-        alt: OG_IMAGE.alt,
+        alt: OG_IMAGE.alt[lang],
     },
 ];
 
-const TWITTER_IMAGES = [{ url: OG_IMAGE.path, alt: OG_IMAGE.alt }];
+const twitterImages = (lang: Lang) => [{ url: OG_IMAGE.path, alt: OG_IMAGE.alt[lang] }];
 
 /**
  * Robots directives. Anything outside production is kept out of the index
@@ -63,14 +65,14 @@ function createRobots(noIndex = false): Metadata['robots'] {
  * Site-wide defaults: `metadataBase`, icons, manifest and the fallback social
  * card. Page-level metadata always overrides title/description/canonical.
  */
-export function createRootMetadata(): Metadata {
+export function createRootMetadata(lang: Lang = 'uk'): Metadata {
     return {
         metadataBase: SITE_URL_OBJECT,
         title: {
             default: SITE_NAME,
             template: `%s | ${SITE_NAME}`,
         },
-        description: DEFAULT_SITE_DESCRIPTION,
+        description: DEFAULT_SITE_DESCRIPTION[lang],
         applicationName: SITE_NAME,
         manifest: '/site.webmanifest',
         formatDetection: { telephone: false },
@@ -84,18 +86,18 @@ export function createRootMetadata(): Metadata {
         },
         openGraph: {
             title: SITE_NAME,
-            description: DEFAULT_SITE_DESCRIPTION,
-            url: absoluteUrl('/'),
+            description: DEFAULT_SITE_DESCRIPTION[lang],
+            url: absoluteUrl(localePath(lang, '/')),
             siteName: SITE_NAME,
-            locale: SITE_LOCALE,
+            locale: OG_LOCALE[lang],
             type: 'website',
-            images: OG_IMAGES,
+            images: ogImages(lang),
         },
         twitter: {
             card: 'summary_large_image',
             title: SITE_NAME,
-            description: DEFAULT_SITE_DESCRIPTION,
-            images: TWITTER_IMAGES,
+            description: DEFAULT_SITE_DESCRIPTION[lang],
+            images: twitterImages(lang),
         },
     };
 }
@@ -105,8 +107,8 @@ export function createRootMetadata(): Metadata {
  * Twitter cards. Titles are absolute so the root template can never double the
  * brand name.
  */
-export function createPageMetadata(config: PageSeo): Metadata {
-    const pageUrl = absoluteUrl(config.path);
+export function createPageMetadata(config: PageSeo, lang: Lang = 'uk'): Metadata {
+    const pageUrl = absoluteUrl(localePath(lang, config.path));
 
     if (config.noIndex) {
         // Error/utility pages get no canonical and no social card: they are not
@@ -121,22 +123,31 @@ export function createPageMetadata(config: PageSeo): Metadata {
     return {
         title: { absolute: config.title },
         description: config.description,
-        alternates: { canonical: pageUrl },
+        alternates: {
+            canonical: pageUrl,
+            // Every page exists in both languages under the same logical path.
+            languages: {
+                uk: absoluteUrl(config.path),
+                en: absoluteUrl(localePath('en', config.path)),
+                'x-default': absoluteUrl(config.path),
+            },
+        },
         robots: createRobots(),
         openGraph: {
             title: config.title,
             description: config.description,
             url: pageUrl,
             siteName: SITE_NAME,
-            locale: SITE_LOCALE,
+            locale: OG_LOCALE[lang],
+            alternateLocale: OG_LOCALE[lang === 'en' ? 'uk' : 'en'],
             type: config.ogType ?? 'website',
-            images: OG_IMAGES,
+            images: ogImages(lang),
         },
         twitter: {
             card: 'summary_large_image',
             title: config.title,
             description: config.description,
-            images: TWITTER_IMAGES,
+            images: twitterImages(lang),
         },
     };
 }

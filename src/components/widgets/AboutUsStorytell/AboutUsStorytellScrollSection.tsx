@@ -1,24 +1,27 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { ABOUT_US_STORYTELL_SCROLL } from '@/content/aboutUsStorytell';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useContent } from '@/hooks/useContent';
 
 type StoryStep =
     | { id: string; type: 'quote' }
     | { id: string; type: 'subtitle' }
     | { id: string; type: 'paragraph'; text: string };
 
-const STORY_STEPS: StoryStep[] = [
-    { id: 'quote', type: 'quote' },
-    { id: 'subtitle', type: 'subtitle' },
-    ...ABOUT_US_STORYTELL_SCROLL.paragraphs.map((text, index) => ({
-        id: `paragraph-${index}`,
-        type: 'paragraph' as const,
-        text,
-    })),
-];
+function buildSteps(paragraphs: readonly string[]): StoryStep[] {
+    return [
+        { id: 'quote', type: 'quote' },
+        { id: 'subtitle', type: 'subtitle' },
+        ...paragraphs.map((text, index) => ({
+            id: `paragraph-${index}`,
+            type: 'paragraph' as const,
+            text,
+        })),
+    ];
+}
 
 function StoryStepContent({ step }: { step: StoryStep }) {
+    const { storytellScroll: ABOUT_US_STORYTELL_SCROLL } = useContent();
     if (step.type === 'quote') {
         return (
             <div className="flex flex-col items-center">
@@ -62,6 +65,8 @@ function StoryStepContent({ step }: { step: StoryStep }) {
 }
 
 export function AboutUsStorytellScrollSection() {
+    const { storytellScroll: ABOUT_US_STORYTELL_SCROLL } = useContent();
+    const STORY_STEPS = useMemo(() => buildSteps(ABOUT_US_STORYTELL_SCROLL.paragraphs), [ABOUT_US_STORYTELL_SCROLL]);
     const headingId = 'about-us-storytell-scroll-heading';
     const scrollAreaRef = useRef<HTMLDivElement>(null);
     const [activeStep, setActiveStep] = useState(0);

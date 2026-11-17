@@ -5,7 +5,7 @@ import Image from 'next/image';
 import LinesSvg from '@icons/Lines.svg';
 import { Elements } from '@elements/index.ts';
 import Title from '@/components/elements/Title';
-import { CONTACTS_QUOTE_FORM } from '@/content/contacts';
+import { useContent } from '@/hooks/useContent';
 
 const INPUT_WRAP_CLASS =
     'flex !h-[61px] min-h-[61px] items-center bg-onlan-white border-onlan-white';
@@ -13,6 +13,7 @@ const INPUT_WRAP_CLASS =
 const TEXTAREA_WRAP_CLASS = 'border-onlan-white bg-onlan-white';
 
 export function ContactsQuoteFormSection() {
+    const c = useContent();
     const headingId = 'contacts-quote-form-heading';
 
     const [name, setName] = useState('');
@@ -51,7 +52,7 @@ export function ContactsQuoteFormSection() {
                     <div className="relative z-10 w-full max-w-[900px] p-6 md:p-8 lg:p-10 xl:p-12">
                         <Title
                             id={headingId}
-                            title={CONTACTS_QUOTE_FORM.title}
+                            title={c.contactsQuoteForm.title}
                             type="h2"
                             className="w-full text-onlan-white text-[clamp(1.75rem,6vw,3.75rem)] leading-tight"
                         />
@@ -62,7 +63,7 @@ export function ContactsQuoteFormSection() {
                                     id="contacts-quote-name"
                                     name="name"
                                     type="text"
-                                    label={CONTACTS_QUOTE_FORM.fields.name}
+                                    label={c.contactsQuoteForm.fields.name}
                                     labelClassName="!text-onlan-white"
                                     required
                                     value={name}
@@ -75,7 +76,7 @@ export function ContactsQuoteFormSection() {
                                     id="contacts-quote-company"
                                     name="company"
                                     type="text"
-                                    label={CONTACTS_QUOTE_FORM.fields.company}
+                                    label={c.contactsQuoteForm.fields.company}
                                     labelClassName="!text-onlan-white"
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
@@ -90,7 +91,7 @@ export function ContactsQuoteFormSection() {
                                     id="contacts-quote-email"
                                     name="email"
                                     type="email"
-                                    label={CONTACTS_QUOTE_FORM.fields.email}
+                                    label={c.contactsQuoteForm.fields.email}
                                     labelClassName="!text-onlan-white"
                                     required
                                     value={email}
@@ -103,7 +104,7 @@ export function ContactsQuoteFormSection() {
                                     id="contacts-quote-phone"
                                     name="phone"
                                     type="tel"
-                                    label={CONTACTS_QUOTE_FORM.fields.phone}
+                                    label={c.contactsQuoteForm.fields.phone}
                                     labelClassName="!text-onlan-white"
                                     required
                                     value={phone}
@@ -117,7 +118,7 @@ export function ContactsQuoteFormSection() {
                             <Elements.Textarea
                                 id="contacts-quote-message"
                                 name="message"
-                                label={CONTACTS_QUOTE_FORM.fields.message}
+                                label={c.contactsQuoteForm.fields.message}
                                 labelClassName="!text-onlan-white"
                                 rows={5}
                                 value={message}
@@ -129,7 +130,7 @@ export function ContactsQuoteFormSection() {
 
                             <div className="flex flex-col gap-2">
                                 <label className="label relative inline-flex w-fit cursor-pointer !text-onlan-white hover:opacity-80">
-                                    {CONTACTS_QUOTE_FORM.fields.file}
+                                    {c.contactsQuoteForm.fields.file}
                                     <input
                                         type="file"
                                         name="attachment"
@@ -150,7 +151,7 @@ export function ContactsQuoteFormSection() {
                                 size="md"
                                 className="mt-2 h-12 w-full justify-center underline font-semibold sm:w-auto sm:min-w-[240px] lg:h-14"
                             >
-                                {CONTACTS_QUOTE_FORM.submit}
+                                {c.contactsQuoteForm.submit}
                             </Elements.Button>
                         </form>
                     </div>

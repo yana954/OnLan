@@ -1,5 +1,8 @@
 import { DIRECTIONS, type DirectionContent } from '@/content/directions';
+import { DIRECTIONS_EN } from '@/content/en/directions';
+import { SERVICES_EN } from '@/content/en/services';
 import { SERVICES, getServiceBySlug } from '@/content/services';
+import type { Lang } from '@/lib/i18n';
 import type { ServiceContent } from '@/types/Service.interface';
 import { SITE_NAME } from '@/lib/site';
 
@@ -85,23 +88,84 @@ export const NOT_FOUND_SEO: PageSeo = {
     noIndex: true,
 };
 
-const HOME_CRUMB: BreadcrumbItem = { name: HOME_SEO.name, path: HOME_SEO.path };
-const SERVICES_CRUMB: BreadcrumbItem = { name: SERVICES_SEO.name, path: SERVICES_SEO.path };
+export const HOME_SEO_EN: PageSeo = {
+    name: 'Home',
+    title: `Freight from Europe, Asia and the USA to Ukraine | ${SITE_NAME}`,
+    description:
+        'Freight from Europe, Asia and the USA to Ukraine: road, sea, air, rail. Turnkey customs clearance and one manager along the whole route.',
+    path: '/',
+};
+
+export const ABOUT_US_SEO_EN: PageSeo = {
+    name: 'About us',
+    title: `About the company — a logistics partner for business | ${SITE_NAME}`,
+    description:
+        'OnLan Logistic is a reliable logistics partner for business: 10+ years of experience in international, multimodal and air freight, plus our team and company values.',
+    path: '/about-us',
+};
+
+export const SERVICES_SEO_EN: PageSeo = {
+    name: 'Services',
+    title: `Logistics services: road, sea, air, rail | ${SITE_NAME}`,
+    description:
+        'All OnLan Logistic services in one place: road, sea, air and rail freight, oversized cargo, customs clearance and multimodal solutions.',
+    path: '/services',
+};
+
+export const CONTACTS_SEO_EN: PageSeo = {
+    name: 'Contacts',
+    title: `Contacts — phone, email and office in Vinnytsia | ${SITE_NAME}`,
+    description:
+        'Contact ONLAN Logistic: phone, email, head office in Vinnytsia and a quote request form. We reply during working hours, Mon–Fri 9:00–18:00 (Kyiv time).',
+    path: '/contacts',
+};
+
+export const NOT_FOUND_SEO_EN: PageSeo = {
+    name: 'Page not found',
+    title: `Page not found (404) | ${SITE_NAME}`,
+    description: 'This page does not exist. Go to the home page or choose the service you need.',
+    path: '/404',
+    noIndex: true,
+};
+
+/** Static page SEO by language, keyed by logical path. */
+export function getStaticSeo(lang: Lang): Record<string, PageSeo> {
+    const list =
+        lang === 'en'
+            ? [HOME_SEO_EN, ABOUT_US_SEO_EN, SERVICES_SEO_EN, CONTACTS_SEO_EN]
+            : [HOME_SEO, ABOUT_US_SEO, SERVICES_SEO, CONTACTS_SEO];
+    return Object.fromEntries(list.map((seo) => [seo.path, seo]));
+}
+
+const crumbs = (lang: Lang) => {
+    const seo = getStaticSeo(lang);
+    return {
+        home: { name: seo['/']!.name, path: '/' },
+        services: { name: seo['/services']!.name, path: '/services' },
+    };
+};
 
 /** Static, hand-authored routes. */
-export const STATIC_ROUTES: SiteRoute[] = [
-    { seo: HOME_SEO, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [] },
-    { seo: ABOUT_US_SEO, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [HOME_CRUMB] },
-    { seo: SERVICES_SEO, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [HOME_CRUMB] },
-    { seo: CONTACTS_SEO, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [HOME_CRUMB] },
-];
+export function getStaticRoutes(lang: Lang = 'uk'): SiteRoute[] {
+    const seo = getStaticSeo(lang);
+    const { home } = crumbs(lang);
+    return [
+        { seo: seo['/']!, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [] },
+        { seo: seo['/about-us']!, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [home] },
+        { seo: seo['/services']!, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [home] },
+        { seo: seo['/contacts']!, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [home] },
+    ];
+}
+
+export const STATIC_ROUTES: SiteRoute[] = getStaticRoutes('uk');
 
 export function directionPath(slug: string): string {
     return `/directions/${slug}`;
 }
 
 /** Metadata for one `/directions/[slug]` landing page. */
-export function createDirectionRoute(direction: DirectionContent): SiteRoute {
+export function createDirectionRoute(direction: DirectionContent, lang: Lang = 'uk'): SiteRoute {
+    const { home, services } = crumbs(lang);
     return {
         seo: {
             name: direction.title,
@@ -110,7 +174,7 @@ export function createDirectionRoute(direction: DirectionContent): SiteRoute {
             path: directionPath(direction.slug),
         },
         lastModified: CONTENT_LAST_MODIFIED,
-        breadcrumbs: [HOME_CRUMB, SERVICES_CRUMB],
+        breadcrumbs: [home, services],
     };
 }
 
@@ -119,7 +183,8 @@ export function servicePath(slug: string): string {
 }
 
 /** Metadata for one `/services/[slug]` page, derived from the service content. */
-export function createServiceSeo(service: ServiceContent): PageSeo {
+export function createServiceSeo(service: ServiceContent, lang: Lang = 'uk'): PageSeo {
+    void lang; // copy is already language-specific; kept for a symmetrical API
     return {
         name: service.title,
         title: service.seo?.title ?? `${service.title} — ${service.tagLabel} | ${SITE_NAME}`,
@@ -128,11 +193,12 @@ export function createServiceSeo(service: ServiceContent): PageSeo {
     };
 }
 
-export function createServiceRoute(service: ServiceContent): SiteRoute {
+export function createServiceRoute(service: ServiceContent, lang: Lang = 'uk'): SiteRoute {
+    const { home, services } = crumbs(lang);
     return {
-        seo: createServiceSeo(service),
+        seo: createServiceSeo(service, lang),
         lastModified: CONTENT_LAST_MODIFIED,
-        breadcrumbs: [HOME_CRUMB, SERVICES_CRUMB],
+        breadcrumbs: [home, services],
     };
 }
 
@@ -141,15 +207,15 @@ export function getServiceRouteBySlug(slug: string): SiteRoute | undefined {
     return service ? createServiceRoute(service) : undefined;
 }
 
-/** Every publicly indexable route on the site. */
-export function getIndexableRoutes(): SiteRoute[] {
+/** Every publicly indexable route for a language (logical paths). */
+export function getIndexableRoutes(lang: Lang = 'uk'): SiteRoute[] {
+    const services = lang === 'en' ? SERVICES_EN : SERVICES;
+    const directions = lang === 'en' ? DIRECTIONS_EN : DIRECTIONS;
     return [
-        ...STATIC_ROUTES,
-        ...SERVICES.map(createServiceRoute),
-        ...DIRECTIONS.map(createDirectionRoute),
-    ].filter(
-        (route) => !route.seo.noIndex,
-    );
+        ...getStaticRoutes(lang),
+        ...services.map((service) => createServiceRoute(service, lang)),
+        ...directions.map((direction) => createDirectionRoute(direction, lang)),
+    ].filter((route) => !route.seo.noIndex);
 }
 
 /** Breadcrumb trail including the current page, for schema + visible nav. */
@@ -157,9 +223,9 @@ export function getBreadcrumbTrail(route: SiteRoute): BreadcrumbItem[] {
     return [...route.breadcrumbs, { name: route.seo.name, path: route.seo.path }];
 }
 
-/** Looks up a static route by its canonical path. */
-export function getStaticRoute(path: string): SiteRoute {
-    const route = STATIC_ROUTES.find((item) => item.seo.path === path);
+/** Looks up a static route by its logical path. */
+export function getStaticRoute(path: string, lang: Lang = 'uk'): SiteRoute {
+    const route = getStaticRoutes(lang).find((item) => item.seo.path === path);
     if (!route) {
         throw new Error(`Unknown static route: ${path}`);
     }

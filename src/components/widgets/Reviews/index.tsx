@@ -2,15 +2,18 @@
 
 import { useCallback, useState } from 'react';
 import { LogoSection } from '@/assets/icons/LogoSection';
+import { useLang, useT } from '@/components/app/LangProvider';
 import girlPhoto from '@images/girl.webp';
 import menPhoto from '@images/men.webp';
 
-const REVIEWS: {
+type Review = {
     text: string;
     name: string;
     role: string;
     imageSrc: string;
-}[] = [
+};
+
+const REVIEWS_UK: Review[] = [
     {
         text: 'Ми шукали логістичного партнера, який розуміє наші внутрішні процеси та може адаптуватися під них.З OnLan ми це отримали: перевезення проходять чітко, а комунікація — на високому рівні.',
         name: 'Олександр',
@@ -37,6 +40,33 @@ const REVIEWS: {
     },
 ];
 
+const REVIEWS_EN: Review[] = [
+    {
+        text: 'We were looking for a logistics partner who understands our internal processes and can adapt to them. With OnLan we got exactly that: shipments run smoothly and communication is excellent.',
+        name: 'Oleksandr',
+        role: 'CEO of a manufacturing company (Kyiv)',
+        imageSrc: menPhoto,
+    },
+    {
+        text: 'We have worked with OnLan for over two years. The logistics team is always in touch, reacts quickly to changes and finds solutions even in difficult situations.',
+        name: 'Ivanna',
+        role: 'Head of Logistics (Odesa)',
+        imageSrc: girlPhoto,
+    },
+    {
+        text: 'A partner that ensures on-time delivery of both components and finished goods. A reliable solution for our business.',
+        name: 'Maryna',
+        role: 'Head of the Logistics Department (Kyiv)',
+        imageSrc: girlPhoto,
+    },
+    {
+        text: 'We have been working together for over a year — routes are clearly planned, there is transparency at every stage and quality support. Everything runs steadily.',
+        name: 'Ihor',
+        role: 'Carrier (Lutsk)',
+        imageSrc: menPhoto,
+    },
+];
+
 function ChevronIcon({ dir }: { dir: 'left' | 'right' }) {
     return (
         <svg
@@ -59,6 +89,9 @@ function ChevronIcon({ dir }: { dir: 'left' | 'right' }) {
 }
 
 export function Reviews() {
+    const lang = useLang();
+    const t = useT();
+    const REVIEWS = lang === 'en' ? REVIEWS_EN : REVIEWS_UK;
     const [index, setIndex] = useState(0);
     const total = REVIEWS.length;
 
@@ -84,7 +117,7 @@ export function Reviews() {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            відгуки
+                            {t('відгуки', 'reviews')}
                         </p>
                     </div>
                 </div>
@@ -95,9 +128,9 @@ export function Reviews() {
                             id="reviews-heading"
                             className="text-left text-2xl font-bold leading-tight text-onlan-black md:text-3xl lg:text-[56px] lg:leading-[1.1]"
                         >
-                            Що про нас говорять
+                            {t('Що про нас говорять', 'What our clients')}
                             <br />
-                            наші клієнти
+                            {t('наші клієнти', 'say about us')}
                         </h2>
                     </div>
 
@@ -162,7 +195,7 @@ export function Reviews() {
                                     type="button"
                                     onClick={goPrev}
                                     className="inline-flex size-11 items-center justify-center rounded-full border border-onlan-blue text-onlan-blue transition-colors hover:bg-onlan-lavender focus:outline-none focus-visible:ring-2 focus-visible:ring-onlan-blue focus-visible:ring-offset-2 md:size-12"
-                                    aria-label="Попередній відгук"
+                                    aria-label={t('Попередній відгук', 'Previous review')}
                                 >
                                     <ChevronIcon dir="left" />
                                 </button>
@@ -170,7 +203,7 @@ export function Reviews() {
                                     type="button"
                                     onClick={goNext}
                                     className="inline-flex size-11 items-center justify-center rounded-full border border-onlan-blue text-onlan-blue transition-colors hover:bg-onlan-lavender focus:outline-none focus-visible:ring-2 focus-visible:ring-onlan-blue focus-visible:ring-offset-2 md:size-12"
-                                    aria-label="Наступний відгук"
+                                    aria-label={t('Наступний відгук', 'Next review')}
                                 >
                                     <ChevronIcon dir="right" />
                                 </button>

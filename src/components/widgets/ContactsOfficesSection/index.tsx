@@ -1,9 +1,10 @@
 'use client';
 
 import { Elements } from '@/components/elements';
-import { CONTACTS_OFFICES_SECTION } from '@/content/contacts';
+import { useContent } from '@/hooks/useContent';
 
 export function ContactsOfficesSection() {
+    const c = useContent();
     const headingId = 'contacts-offices-heading';
 
     return (
@@ -13,30 +14,30 @@ export function ContactsOfficesSection() {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">
                         <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-onlan-black md:text-sm">
-                            {CONTACTS_OFFICES_SECTION.eyebrow}
+                            {c.contactsOffices.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={headingId}
-                    title={CONTACTS_OFFICES_SECTION.heading}
+                    title={c.contactsOffices.heading}
                     type="h2"
                     className="mx-auto mt-4 max-w-3xl text-center !text-[30px] text-onlan-black md:mt-6"
                 />
 
                 <address className="mt-5 text-center not-italic text-onlan-black md:mt-6">
                     <p className="text-base font-semibold md:text-lg">
-                        {CONTACTS_OFFICES_SECTION.officeTitle}
+                        {c.contactsOffices.officeTitle}
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-onlan-black/85 md:text-base">
-                        {CONTACTS_OFFICES_SECTION.address}
+                        {c.contactsOffices.address}
                     </p>
                 </address>
                 <div className="relative mt-8 h-[373px] overflow-hidden rounded-2xl md:mt-10">
                     <iframe
-                        title={CONTACTS_OFFICES_SECTION.officeTitle}
-                        src={CONTACTS_OFFICES_SECTION.mapEmbedUrl}
+                        title={c.contactsOffices.officeTitle}
+                        src={c.contactsOffices.mapEmbedUrl}
                         className="h-full w-full border-0"
                         loading="lazy"
                         allowFullScreen
@@ -64,10 +65,10 @@ export function ContactsOfficesSection() {
 
                             <div className="min-w-0">
                                 <p className="text-sm font-semibold text-onlan-black md:text-base">
-                                    {CONTACTS_OFFICES_SECTION.officeTitle}
+                                    {c.contactsOffices.officeTitle}
                                 </p>
                                 <p className="mt-1 text-xs leading-relaxed text-onlan-black/75 md:text-sm">
-                                    {CONTACTS_OFFICES_SECTION.address}
+                                    {c.contactsOffices.address}
                                 </p>
                             </div>
                         </div>

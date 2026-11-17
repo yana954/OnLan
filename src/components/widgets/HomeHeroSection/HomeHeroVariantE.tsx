@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { Link } from 'react-router';
+import { useLang, useT } from '@/components/app/LangProvider';
 import imgContainers from '@images/aboutUsNew/containers.webp';
 import imgPlane from '@images/aboutUsNew/plane.webp';
 import imgTruck from '@images/aboutUsNew/truck.webp';
@@ -11,43 +12,70 @@ import imgWarehouse from '@images/aboutUsNew/warehouse.webp';
 
 /** Напрямки. Тексти — з розділів «Послуги» та «Вантажі»; США — підтвердити з клієнтом. */
 const DIRECTIONS = [
-    {
-        key: 'asia',
-        label: 'Азія',
-        route: 'Китай · Туреччина → Україна',
-        text: 'Море, залізниця й авіа: меблі, електроніка, текстиль, товари для маркетплейсів.',
-        slug: 'china',
-        image: imgContainers,
-        alt: 'Контейнерний термінал',
-    },
-    {
-        key: 'usa',
-        label: 'США',
-        route: 'США → Україна',
-        text: 'Авіа для термінових партій і морські контейнери (FCL, LCL) з митним оформленням «під ключ».',
-        slug: 'usa',
-        image: imgPlane,
-        alt: 'Завантаження вантажу в літак',
-    },
-    {
-        key: 'europe',
-        label: 'Європа',
-        route: 'ЄС → Україна',
-        text: 'Повні (FTL) і збірні (LTL) вантажі, палети, рефрижератори — зі складів по всьому ЄС.',
-        slug: 'europe',
-        image: imgTruck,
-        alt: 'Вантажівка на трасі',
-    },
-    {
-        key: 'ukraine',
-        label: 'Україна',
-        route: 'По всій Україні',
-        text: 'Доставка від дверей до дверей і власний склад 2 000 м² у Вінниці.',
-        slug: 'ukraine',
-        image: imgWarehouse,
-        alt: 'Склад OnLan',
-    },
+    { key: 'asia', slug: 'china', image: imgContainers },
+    { key: 'usa', slug: 'usa', image: imgPlane },
+    { key: 'europe', slug: 'europe', image: imgTruck },
+    { key: 'ukraine', slug: 'ukraine', image: imgWarehouse },
 ] as const;
+
+type DirectionKey = (typeof DIRECTIONS)[number]['key'];
+
+type DirectionCopy = { label: string; route: string; text: string; alt: string };
+
+const COPY: Record<'uk' | 'en', Record<DirectionKey, DirectionCopy>> = {
+    uk: {
+        asia: {
+            label: 'Азія',
+            route: 'Китай · Туреччина → Україна',
+            text: 'Море, залізниця й авіа: меблі, електроніка, текстиль, товари для маркетплейсів.',
+            alt: 'Контейнерний термінал',
+        },
+        usa: {
+            label: 'США',
+            route: 'США → Україна',
+            text: 'Авіа для термінових партій і морські контейнери (FCL, LCL) з митним оформленням «під ключ».',
+            alt: 'Завантаження вантажу в літак',
+        },
+        europe: {
+            label: 'Європа',
+            route: 'ЄС → Україна',
+            text: 'Повні (FTL) і збірні (LTL) вантажі, палети, рефрижератори — зі складів по всьому ЄС.',
+            alt: 'Вантажівка на трасі',
+        },
+        ukraine: {
+            label: 'Україна',
+            route: 'По всій Україні',
+            text: 'Доставка від дверей до дверей і власний склад 2 000 м² у Вінниці.',
+            alt: 'Склад OnLan',
+        },
+    },
+    en: {
+        asia: {
+            label: 'Asia',
+            route: 'China · Turkey → Ukraine',
+            text: 'Sea, rail and air: furniture, electronics, textiles, marketplace goods.',
+            alt: 'Container terminal',
+        },
+        usa: {
+            label: 'USA',
+            route: 'USA → Ukraine',
+            text: 'Air for urgent shipments and sea containers (FCL, LCL) with turnkey customs clearance.',
+            alt: 'Cargo being loaded onto a plane',
+        },
+        europe: {
+            label: 'Europe',
+            route: 'EU → Ukraine',
+            text: 'Full (FTL) and groupage (LTL) loads, pallets, reefers — from warehouses across the EU.',
+            alt: 'Truck on the highway',
+        },
+        ukraine: {
+            label: 'Ukraine',
+            route: 'Across Ukraine',
+            text: 'Door-to-door delivery and our own 2,000 m² warehouse in Vinnytsia.',
+            alt: 'OnLan warehouse',
+        },
+    },
+};
 
 const ROTATE_MS = 5500;
 
@@ -99,6 +127,9 @@ const Flight = ({ animated }: { animated: boolean }) => {
 /** Варіант E: «Привеземо ваш товар будь-куди» — інтерактивний вибір напрямку (авто-перемикання до першого кліку). */
 export const HomeHeroVariantE = () => {
     const headingId = 'home-hero-heading-e';
+    const lang = useLang();
+    const t = useT();
+    const copy = COPY[lang];
     const [active, setActive] = useState(0);
     const [auto, setAuto] = useState(true);
     const [motion, setMotion] = useState(true);
@@ -114,7 +145,8 @@ export const HomeHeroVariantE = () => {
         return () => window.clearInterval(id);
     }, [auto]);
 
-    const current = DIRECTIONS[active];
+    const current = DIRECTIONS[active]!;
+    const currentCopy = copy[current.key];
 
     return (
         <section
@@ -132,25 +164,31 @@ export const HomeHeroVariantE = () => {
                         <span className="mb-4 flex items-center justify-center gap-2">
                             <span className="size-2 shrink-0 rounded-full bg-onlan-lime" aria-hidden />
                             <span className="rounded-full border border-onlan-blue/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-onlan-blue md:px-4 md:py-2 md:text-sm">
-                                Міжнародні вантажні перевезення
+                                {t('Міжнародні вантажні перевезення', 'International freight shipping')}
                                 <span className="sr-only">: </span>
                             </span>
                         </span>
-                        <span className="font-semibold">Привеземо ваш товар</span>{' '}
+                        <span className="font-semibold">{t('Привеземо ваш товар', 'We’ll bring your goods')}</span>{' '}
                         <span className="inline-block text-[1.12em] font-extrabold leading-none">
-                            будь-куди
+                            {t('будь-куди', 'anywhere')}
                         </span>
                     </h1>
                     <p
                         style={{ ['--d' as string]: '250ms' }}
                         className="hero-rise mx-auto mb-7 max-w-[720px] text-balance text-base font-medium leading-snug text-onlan-blue/80 md:text-lg"
                     >
-                        <span className="font-bold text-onlan-blue">Привеземо, розмитнимо й доставимо до дверей:</span> авто, море, авіа, залізниця. Оберіть напрямок — покажемо маршрут і орієнтовні терміни.
+                        <span className="font-bold text-onlan-blue">
+                            {t('Привеземо, розмитнимо й доставимо до дверей:', 'We ship, clear customs and deliver to your door:')}
+                        </span>{' '}
+                        {t(
+                            'авто, море, авіа, залізниця. Оберіть напрямок — покажемо маршрут і орієнтовні терміни.',
+                            'road, sea, air, rail. Choose a direction — we’ll show the route and approximate transit times.',
+                        )}
                     </p>
 
                     <div
                         role="tablist"
-                        aria-label="Напрямок доставки"
+                        aria-label={t('Напрямок доставки', 'Delivery direction')}
                         style={{ ['--d' as string]: '400ms' }}
                         className="hero-rise mx-auto flex max-w-2xl flex-wrap justify-center gap-2 md:gap-3"
                     >
@@ -175,7 +213,7 @@ export const HomeHeroVariantE = () => {
                             >
                                 <span className="inline-flex items-center gap-2">
                                     {i === active && <span className="size-2 rounded-full bg-onlan-lime" aria-hidden />}
-                                    {d.label}
+                                    {copy[d.key].label}
                                 </span>
                             </button>
                         ))}
@@ -192,7 +230,7 @@ export const HomeHeroVariantE = () => {
                         <Image
                             key={d.key}
                             src={d.image}
-                            alt={i === active ? d.alt : ''}
+                            alt={i === active ? copy[d.key].alt : ''}
                             fill
                             priority={i === 0}
                             loading={i === 0 ? undefined : 'eager'}
@@ -207,19 +245,19 @@ export const HomeHeroVariantE = () => {
 
                     <div key={current.key} className="hero-rise absolute inset-x-3 bottom-3 rounded-[20px] border border-onlan-lime/80 bg-onlan-blue/55 p-4 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-[14px] md:inset-x-auto md:bottom-8 md:left-8 md:max-w-[520px] md:rounded-[28px] md:p-6">
                         <p className="mb-2 inline-block rounded-full bg-onlan-lime px-3 py-1 text-xs font-bold text-onlan-black md:text-sm">
-                            {current.route}
+                            {currentCopy.route}
                         </p>
-                        <p className="mb-4 text-base font-semibold leading-snug text-onlan-white md:text-xl">{current.text}</p>
+                        <p className="mb-4 text-base font-semibold leading-snug text-onlan-white md:text-xl">{currentCopy.text}</p>
                         <div className="flex flex-col gap-2 sm:flex-row">
                             <Link to="/#contact" className="btn btn-lime btn-lg no-underline max-sm:w-full">
-                                Розрахувати доставку
+                                {t('Розрахувати доставку', 'Get a delivery quote')}
                                 <span aria-hidden>→</span>
                             </Link>
                             <Link
                                 to={`/directions/${current.slug}`}
                                 className="btn btn-lg border border-onlan-white bg-transparent text-onlan-white no-underline hover:bg-onlan-white/10 max-sm:w-full"
                             >
-                                Детальніше
+                                {t('Детальніше', 'Learn more')}
                             </Link>
                         </div>
                     </div>

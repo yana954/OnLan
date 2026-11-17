@@ -4,6 +4,8 @@ import type { AnchorHTMLAttributes, ComponentType, ReactNode } from 'react';
 import { useCallback, useMemo } from 'react';
 import NextLink from 'next/link';
 import { usePathname, useRouter, useSearchParams as useNextSearchParams } from 'next/navigation';
+import { useLang } from '@/components/app/LangProvider';
+import { isEnPath, localePath } from '@/lib/i18n';
 
 type PrimitiveSearchValue = string | number | boolean;
 type SearchValue = PrimitiveSearchValue | null | undefined | PrimitiveSearchValue[];
@@ -87,7 +89,11 @@ function normalizeSearchParams(nextInit: SetSearchParamsInput): URLSearchParams 
     return params;
 }
 
-export function Link({ to, children, replace, prefetch, scroll, ...rest }: LinkProps) {
+export function Link({ to: rawTo, children, replace, prefetch, scroll, ...rest }: LinkProps) {
+    const lang = useLang();
+    // Internal links are written as logical (Ukrainian) paths; English pages get `/en` prefixed.
+    const to = localePath(lang, rawTo);
+
     if (isExternalHref(to) || to.startsWith('#')) {
         return (
             <a href={to} {...rest}>
@@ -105,7 +111,8 @@ export function Link({ to, children, replace, prefetch, scroll, ...rest }: LinkP
 
 export function NavLink({ to, end, className, ...rest }: NavLinkProps) {
     const pathname = usePathname() ?? '/';
-    const targetPathname = useMemo(() => parsePathname(to), [to]);
+    const lang = useLang();
+    const targetPathname = useMemo(() => parsePathname(localePath(lang, to)), [to, lang]);
 
     const isActive = useMemo(() => {
         if (!targetPathname) return false;
@@ -127,9 +134,11 @@ export function NavLink({ to, end, className, ...rest }: NavLinkProps) {
 
 export function useNavigate() {
     const router = useRouter();
+    const lang = useLang();
 
     return useCallback(
-        (to: string, options?: NavigateOptions) => {
+        (rawTo: string, options?: NavigateOptions) => {
+            const to = isEnPath(rawTo) ? rawTo : localePath(lang, rawTo);
             if (isExternalHref(to)) {
                 if (typeof window !== 'undefined') {
                     if (options?.replace) {
@@ -148,7 +157,7 @@ export function useNavigate() {
             }
             router.push(to, { scroll });
         },
-        [router]
+        [router, lang]
     );
 }
 

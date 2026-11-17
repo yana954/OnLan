@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Elements } from '@/components/elements';
 import type { ServiceContent } from '@/types/Service.interface';
+import { useT } from '@/components/app/LangProvider';
 
 interface ServiceFaqProps {
     service: ServiceContent;
 }
 
 export const ServiceFaq = ({ service }: ServiceFaqProps) => {
+    const t = useT();
     const headingId = `service-faq-${service.slug}`;
     const sectionRef = useRef<HTMLElement>(null);
     const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -71,7 +73,7 @@ export const ServiceFaq = ({ service }: ServiceFaqProps) => {
                 >
                     <Elements.Title
                         id={headingId}
-                        title="Часті запитання"
+                        title={t('Часті запитання', 'Frequently asked questions')}
                         type="h2"
                         className="mx-auto mt-4 max-w-3xl text-balance text-center text-onlan-black md:mt-6"
                     />

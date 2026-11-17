@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Elements } from '@/components/elements';
 import type { ServiceContent } from '@/types/Service.interface';
+import { useT } from '@/components/app/LangProvider';
 
 interface ServiceProcessProps {
     service: ServiceContent;
@@ -67,6 +68,7 @@ function ProcessStepItem({ number, title, description, index }: ProcessStepItemP
 }
 
 export const ServiceProcess = ({ service }: ServiceProcessProps) => {
+    const t = useT();
     const headingId = `service-process-${service.slug}`;
 
     if (!service.process.length) {
@@ -83,14 +85,14 @@ export const ServiceProcess = ({ service }: ServiceProcessProps) => {
                     <div className="size-2 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            Як ми працюємо
+                            {t('Як ми працюємо', 'How we work')}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={headingId}
-                    title="Етапи роботи над вашим вантажем"
+                    title={t('Етапи роботи над вашим вантажем', 'Stages of handling your cargo')}
                     type="h2"
                     className="mt-6 max-w-4xl text-balance text-onlan-black"
                 />

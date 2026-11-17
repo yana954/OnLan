@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { Elements } from '@/components/elements';
-import { CONTACTS_FAQ_SECTION } from '@/content/contacts';
+import { useContent } from '@/hooks/useContent';
 
 export function ContactsFaqSection() {
+    const c = useContent();
     const headingId = 'contacts-faq-heading';
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -15,20 +16,20 @@ export function ContactsFaqSection() {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">
                         <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-onlan-black md:text-sm">
-                            {CONTACTS_FAQ_SECTION.eyebrow}
+                            {c.contactsFaq.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={headingId}
-                    title={CONTACTS_FAQ_SECTION.heading}
+                    title={c.contactsFaq.heading}
                     type="h2"
                     className="mx-auto mt-4 max-w-3xl text-center text-onlan-black md:mt-6"
                 />
 
                 <ul className="mx-auto mt-8 w-full max-w-5xl md:mt-10">
-                    {CONTACTS_FAQ_SECTION.items.map((question, index) => {
+                    {c.contactsFaq.items.map((question, index) => {
                         const isOpen = openIndex === index;
                         const panelId = `${headingId}-panel-${index}`;
                         const buttonId = `${headingId}-button-${index}`;
@@ -76,7 +77,7 @@ export function ContactsFaqSection() {
                                     className="pb-5 pr-16 md:pb-6"
                                 >
                                     <p className="text-sm leading-relaxed text-onlan-black/85 md:text-base">
-                                        {CONTACTS_FAQ_SECTION.placeholderAnswer}
+                                        {c.contactsFaq.placeholderAnswer}
                                     </p>
                                 </div>
                             </li>

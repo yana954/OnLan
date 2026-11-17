@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Elements } from '@/components/elements';
 import type { ServiceContent } from '@/types/Service.interface';
+import { useT } from '@/components/app/LangProvider';
 
 interface ServiceBenefitsProps {
     service: ServiceContent;
@@ -66,6 +67,7 @@ function BenefitStoryItem({ title, description }: BenefitStoryItemProps) {
 }
 
 export const ServiceBenefits = ({ service }: ServiceBenefitsProps) => {
+    const t = useT();
     const headingId = `service-benefits-${service.slug}`;
 
     if (!service.benefits.length) {
@@ -82,14 +84,14 @@ export const ServiceBenefits = ({ service }: ServiceBenefitsProps) => {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">
                         <p className="text-left text-xs font-semibold uppercase tracking-[0.14em] text-onlan-black md:text-sm">
-                            Переваги
+                            {t('Переваги', 'Benefits')}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={headingId}
-                    title="Чому це працює саме так"
+                    title={t('Чому це працює саме так', 'Why it works this way')}
                     type="h2"
                     className="mt-4 max-w-3xl text-balance text-2xl text-onlan-black md:mt-6 md:text-3xl lg:mt-8 lg:text-4xl"
                 />

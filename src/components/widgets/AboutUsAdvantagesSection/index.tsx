@@ -3,12 +3,10 @@
 import Image from 'next/image';
 import advantageIcon from '@/assets/icons/AboutUsAdvantageIcon.svg';
 import { Elements } from '@/components/elements';
-import {
-    ABOUT_US_ADVANTAGES,
-    ABOUT_US_ADVANTAGES_SECTION,
-} from '@/content/aboutUsAdvantages';
+import { useContent } from '@/hooks/useContent';
 
 export const AboutUsAdvantagesSection = () => {
+    const c = useContent();
     const sectionId = 'about-us-advantages-heading';
 
     return (
@@ -21,21 +19,21 @@ export const AboutUsAdvantagesSection = () => {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">
                         <p className="text-left text-xs font-semibold uppercase tracking-[0.14em] text-onlan-black md:text-sm">
-                            {ABOUT_US_ADVANTAGES_SECTION.eyebrow}
+                            {c.aboutAdvantagesSection.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={sectionId}
-                    title={ABOUT_US_ADVANTAGES_SECTION.heading}
+                    title={c.aboutAdvantagesSection.heading}
                     type="h2"
                     className="mx-auto mt-4 max-w-4xl text-balance text-center text-2xl text-onlan-black md:mt-6 md:text-3xl lg:mt-8 lg:text-4xl"
                 />
 
                 {/* Mobile: 1 col · Tablet: 2 col · Desktop: 3 col */}
                 <ul className="mx-auto mt-8 grid w-full max-w-[1200px] list-none grid-cols-1 gap-4 md:mt-10 md:grid-cols-2 md:gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-6 xl:gap-8">
-                    {ABOUT_US_ADVANTAGES.map((item) => (
+                    {c.aboutAdvantages.map((item) => (
                         <li key={item.title}>
                             <article className="relative h-full rounded-xl border border-onlan-black/10 bg-onlan-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:rounded-2xl md:p-6 lg:p-8">
                                 <div

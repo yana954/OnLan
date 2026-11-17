@@ -4,11 +4,14 @@ import Image from 'next/image';
 import { ContactsHeroShape } from '@/assets/icons/ContactsHeroShape';
 import menPhoto from '@/assets/images/men.webp';
 import { Elements } from '@/components/elements';
-import { CONTACTS_HERO } from '@/content/contacts';
+import { useContent } from '@/hooks/useContent';
+import { useT } from '@/components/app/LangProvider';
 
 const HERO_CIRCLE_KEYS = ['phone', 'email', 'location', 'linkedin'] as const;
 
 export function ContactsHeroSection() {
+    const c = useContent();
+    const t = useT();
     const headingId = 'contacts-hero-heading';
 
     return (
@@ -28,14 +31,14 @@ export function ContactsHeroSection() {
                     <div className="flex flex-wrap items-center gap-5">
                         <Elements.Title
                             id={headingId}
-                            title={CONTACTS_HERO.title}
+                            title={c.contactsHero.title}
                             type="h1"
                             className="font-bold text-[clamp(1.75rem,7vw,3.75rem)] leading-[1.05] text-onlan-black"
                         />
 
                         <ul
                             className="flex list-none items-center"
-                            aria-label="Способи зв’язку"
+                            aria-label={t('Способи зв’язку', 'Ways to get in touch')}
                         >
                             {HERO_CIRCLE_KEYS.map((key, index) => (
                                 <li
@@ -59,7 +62,7 @@ export function ContactsHeroSection() {
                     </div>
 
                     <Elements.Title
-                        title={CONTACTS_HERO.brandTitle}
+                        title={c.contactsHero.brandTitle}
                         type="p"
                         className="font-bold text-[clamp(1.75rem,7vw,3.75rem)] leading-[1.05] text-onlan-black"
                         highlights={[
@@ -69,7 +72,7 @@ export function ContactsHeroSection() {
                     />
 
                     <p className="mt-4 max-w-lg text-sm leading-relaxed text-onlan-black/85 md:mt-5 md:text-base lg:text-lg">
-                        {CONTACTS_HERO.description}
+                        {c.contactsHero.description}
                     </p>
                 </div>
             </div>

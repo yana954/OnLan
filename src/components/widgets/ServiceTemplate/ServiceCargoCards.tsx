@@ -24,7 +24,8 @@ import {
 } from 'react-icons/fa6';
 import type { ComponentType } from 'react';
 import type { ServiceCargoCardIcon } from '@/content/serviceCargoCards';
-import { SERVICE_CARGO_SECTIONS } from '@/content/serviceCargoCards';
+import { useContent } from '@/hooks/useContent';
+import { useT } from '@/components/app/LangProvider';
 import {
     SERVICE_CARGO_IMAGE_FALLBACK,
     SERVICE_CARGO_IMAGES,
@@ -147,7 +148,9 @@ function renderCargoHeading(heading: string, highlight: string) {
 }
 
 export const ServiceCargoCards = ({ service }: ServiceCargoCardsProps) => {
-    const section = SERVICE_CARGO_SECTIONS[service.slug];
+    const t = useT();
+    const { cargoSections } = useContent();
+    const section = cargoSections[service.slug];
     const headingId = `service-cargo-cards-${service.slug}`;
 
     if (!section) {
@@ -188,7 +191,7 @@ export const ServiceCargoCards = ({ service }: ServiceCargoCardsProps) => {
                     to="/#contact"
                     className="mt-10 inline-flex w-full items-center justify-center rounded-[10px] bg-onlan-lime px-10 py-4 text-base font-extrabold text-onlan-black transition-all hover:-translate-y-0.5 hover:opacity-90 sm:w-auto md:mt-11"
                 >
-                    Розрахувати вартість
+                    {t('Розрахувати вартість', 'Calculate the cost')}
                 </Link>
             </div>
         </section>

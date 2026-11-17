@@ -1,8 +1,10 @@
+'use client';
+
 import { Link } from 'react-router';
 import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhone } from 'react-icons/fa6';
 import footerBackground from '@/assets/images/FooterBackground.webp';
-import { DIRECTIONS } from '@/content/directions';
-import { SERVICES } from '@/content/services';
+import { useT } from '@/components/app/LangProvider';
+import { useContent } from '@/hooks/useContent';
 import Description from '@/components/elements/Description';
 import { LogoFooter } from '@/assets/icons/LogoFooter';
 
@@ -13,7 +15,6 @@ const SOCIAL_HREF = {
 } as const;
 
 const CONTACT = {
-    location: 'Вінниця, Україна',
     email: 'maryna_onopenko@onlan.com.ua',
     phoneDisplay: '+380 98 659 16 71',
     phoneTel: '+380986591671',
@@ -32,6 +33,9 @@ const sectionLinksClass =
     'mt-4 flex flex-col gap-3 text-sm font-normal md:text-base';
 
 export const Footer = () => {
+    const t = useT();
+    const { services, directions } = useContent();
+    const location = t('Вінниця, Україна', 'Vinnytsia, Ukraine');
     const currentYear = new Date().getFullYear();
 
     return (
@@ -60,13 +64,16 @@ export const Footer = () => {
                                 })
                             }
                         >
-                            <span className="sr-only">ONLAN — на головну</span>
+                            <span className="sr-only">{t('ONLAN — на головну', 'ONLAN — home')}</span>
                             <div className="[&_path]:fill-onlan-white [&_path]:transition-colors group-hover:[&_path]:fill-onlan-lime">
                                 <LogoFooter className="h-auto w-full" />
                             </div>
                         </Link>
                         <Description
-                            description="Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну. Митне оформлення, страхування, єдиний менеджер на маршруті."
+                            description={t(
+                                'Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну. Митне оформлення, страхування, єдиний менеджер на маршруті.',
+                                'International logistics for business: delivery from Europe, Asia and the USA to Ukraine. Customs clearance, insurance, one manager along the route.',
+                            )}
                             type="small"
                             className="mt-5 w-full max-w-full text-onlan-white/90 md:mt-6"
                         />
@@ -77,7 +84,7 @@ export const Footer = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={socialIconClass}
-                                aria-label="ONLAN у Instagram"
+                                aria-label={t('ONLAN в Instagram', 'ONLAN on Instagram')}
                             >
                                 <FaInstagram className="size-4.5" aria-hidden />
                             </a>
@@ -86,7 +93,7 @@ export const Footer = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={socialIconClass}
-                                aria-label="ONLAN у LinkedIn"
+                                aria-label={t('ONLAN у LinkedIn', 'ONLAN on LinkedIn')}
                             >
                                 <FaLinkedinIn className="size-4.5" aria-hidden />
                             </a>
@@ -96,30 +103,30 @@ export const Footer = () => {
                     <div className="grid min-w-0 flex-1 grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-6 lg:pl-10 xl:gap-8">
                         <nav aria-labelledby="footer-nav-heading">
                             <h3 id="footer-nav-heading" className={sectionTitleClass}>
-                                Навігація
+                                {t('Навігація', 'Navigation')}
                             </h3>
                             <div className={sectionLinksClass}>
                                 <Link to="/" className={linkClass}>
-                                    Головна
+                                    {t('Головна', 'Home')}
                                 </Link>
                                 <Link to="/about-us" className={linkClass}>
-                                    Про нас
+                                    {t('Про нас', 'About us')}
                                 </Link>
                                 <Link to="/services" className={linkClass}>
-                                    Послуги
+                                    {t('Послуги', 'Services')}
                                 </Link>
                                 <Link to="/contacts" className={linkClass}>
-                                    Контакти
+                                    {t('Контакти', 'Contacts')}
                                 </Link>
                             </div>
                         </nav>
 
                         <nav aria-labelledby="footer-services-heading">
                             <h3 id="footer-services-heading" className={sectionTitleClass}>
-                                Напрямки перевезень
+                                {t('Напрямки перевезень', 'Shipping services and routes')}
                             </h3>
                             <div className={sectionLinksClass}>
-                                {SERVICES.map((service) => (
+                                {services.map((service) => (
                                     <Link
                                         key={service.slug}
                                         to={`/services/${service.slug}`}
@@ -128,7 +135,7 @@ export const Footer = () => {
                                         {service.title}
                                     </Link>
                                 ))}
-                                {DIRECTIONS.map((direction) => (
+                                {directions.map((direction) => (
                                     <Link
                                         key={direction.slug}
                                         to={`/directions/${direction.slug}`}
@@ -141,11 +148,11 @@ export const Footer = () => {
                         </nav>
 
                         <address className="not-italic min-w-0 max-w-full md:col-span-2 lg:col-span-1">
-                            <h3 className={sectionTitleClass}>Контакти</h3>
+                            <h3 className={sectionTitleClass}>{t('Контакти', 'Contacts')}</h3>
                             <div
                                 className={`${sectionLinksClass} not-italic text-onlan-white/90`}
                             >
-                                <p className="min-w-0 wrap-break-word">{CONTACT.location}</p>
+                                <p className="min-w-0 wrap-break-word">{location}</p>
                                 <a
                                     href={`mailto:${CONTACT.email}`}
                                     className={`${linkClass} flex min-w-0 max-w-full items-center gap-2 overflow-x-auto`}
@@ -178,14 +185,14 @@ export const Footer = () => {
 
                 <div className="mt-6 flex flex-col gap-4 text-sm leading-snug text-white/70 md:mt-8 md:flex-row md:items-center md:justify-between md:text-base lg:mt-10">
                     <p className="text-center md:text-left">
-                        © {currentYear} ONLAN. Усі права захищені.
+                        © {currentYear} ONLAN. {t('Усі права захищені.', 'All rights reserved.')}
                     </p>
                     <div className="flex items-center justify-center gap-6 md:justify-end">
                         <Link to="/services" className={`${linkClass} text-center text-sm md:text-base`}>
-                            Послуги
+                            {t('Послуги', 'Services')}
                         </Link>
                         <Link to="/contacts" className={`${linkClass} text-center text-sm md:text-base`}>
-                            Контакти
+                            {t('Контакти', 'Contacts')}
                         </Link>
                     </div>
                 </div>

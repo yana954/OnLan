@@ -6,19 +6,30 @@ import { Link } from 'react-router';
 import { Elements } from '@elements/index.ts';
 import WhyChooseUsImage from '@images/WhyChooseUs.webp';
 import Title from '@/components/elements/Title';
+import { useLang, useT } from '@/components/app/LangProvider';
 
-const reasons: { num: string; lines: string[] }[] = [
-    { num: '01', lines: ['Контроль на кожному етапі'] },
-    { num: '02', lines: ['Перевірка документів до відправки'] },
-    { num: '03', lines: ['Пряма комунікація з усіма учасниками'] },
-    { num: '04', lines: ['Оперативне реагування в дорозі'] },
-    { num: '05', lines: ['Прозорість для клієнта'] },
-    { num: '06', lines: ['Комплексний супровід доставки'] },
-];
+type Reason = { num: string; lines: string[] };
+
+const REASONS: Record<'uk' | 'en', Reason[]> = {
+    uk: [
+        { num: '01', lines: ['Контроль на кожному етапі'] },
+        { num: '02', lines: ['Перевірка документів до відправки'] },
+        { num: '03', lines: ['Пряма комунікація з усіма учасниками'] },
+        { num: '04', lines: ['Оперативне реагування в дорозі'] },
+        { num: '05', lines: ['Прозорість для клієнта'] },
+        { num: '06', lines: ['Комплексний супровід доставки'] },
+    ],
+    en: [
+        { num: '01', lines: ['Control at every stage'] },
+        { num: '02', lines: ['Document checks before dispatch'] },
+        { num: '03', lines: ['Direct communication with everyone involved'] },
+        { num: '04', lines: ['Quick response on the road'] },
+        { num: '05', lines: ['Transparency for the client'] },
+        { num: '06', lines: ['End-to-end delivery support'] },
+    ],
+};
 
 const columnLeftNums = new Set(['01', '03', '05']);
-const columnLeft = reasons.filter((r) => columnLeftNums.has(r.num));
-const columnRight = reasons.filter((r) => !columnLeftNums.has(r.num));
 
 function useCountUp(target: number, active: boolean, durationMs = 2000) {
     const [value, setValue] = useState(0);
@@ -50,6 +61,7 @@ function useCountUp(target: number, active: boolean, durationMs = 2000) {
 }
 
 function WhyChooseUsStats() {
+    const t = useT();
     const wrapRef = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(false);
 
@@ -90,7 +102,7 @@ function WhyChooseUsStats() {
                     {clientsPct}%
                 </span>
                 <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-blue sm:text-lg md:text-xl lg:text-3xl xl:text-[60px]">
-                    Задоволених клієнтів
+                    {t('Задоволених клієнтів', 'Satisfied clients')}
                 </p>
             </div>
 
@@ -105,14 +117,14 @@ function WhyChooseUsStats() {
                     {cargoPct}%
                 </span>
                 <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-lime sm:text-lg md:text-xl lg:text-3xl xl:text-[60px]">
-                    Вантажів проходить без затримок
+                    {t('Вантажів проходить без затримок', 'Shipments delivered without delays')}
                 </p>
             </div>
         </div>
     );
 }
 
-function ReasonItem({ item }: { item: (typeof reasons)[number] }) {
+function ReasonItem({ item }: { item: Reason }) {
     return (
         <li className="flex items-center gap-3 sm:gap-4 md:gap-5">
             <span
@@ -133,6 +145,12 @@ function ReasonItem({ item }: { item: (typeof reasons)[number] }) {
 }
 
 export const WhyChooseUsSection = () => {
+    const lang = useLang();
+    const t = useT();
+    const reasons = REASONS[lang];
+    const columnLeft = reasons.filter((r) => columnLeftNums.has(r.num));
+    const columnRight = reasons.filter((r) => !columnLeftNums.has(r.num));
+
     return (
         <section className="w-full py-10" aria-labelledby="why-choose-heading">
             <div className="container mx-auto flex flex-col items-start px-4">
@@ -140,19 +158,19 @@ export const WhyChooseUsSection = () => {
                     <div className="w-2 h-2 bg-onlan-lime rounded-full"></div>
                     <div className="py-2 px-4 border border-onlan-black rounded-full">
                         <p className="w-full text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            Переваги
+                            {t('Переваги', 'Advantages')}
                         </p>
                     </div>
                 </div>
 
                 <div className="mt-6 flex w-full flex-col gap-10 md:mt-8 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
                     <div className="mx-auto w-full max-w-[400px] rounded-2xl md:mx-0">
-                        <Image src={WhyChooseUsImage} alt="Автотранспорт для доставки вантажів ONLAN" width={400} height={800} className='w-full h-full object-cover object-center rounded-2xl' />
+                        <Image src={WhyChooseUsImage} alt={t('Автотранспорт для доставки вантажів ONLAN', 'ONLAN truck for cargo delivery')} width={400} height={800} className='w-full h-full object-cover object-center rounded-2xl' />
                     </div>
                     <div className="min-w-0 flex-1">
                         <Title
                             id="why-choose-heading"
-                            title="Як ми вирішуємо ці проблеми"
+                            title={t('Як ми вирішуємо ці проблеми', 'How we solve these problems')}
                             type="h2"
                             className="mt-2 w-full min-w-0 max-w-none text-left text-xl! font-bold! leading-snug! text-onlan-black md:mt-3 md:text-2xl! lg:text-4xl! xl:text-[60px]!"
                         />
@@ -176,7 +194,7 @@ export const WhyChooseUsSection = () => {
                                     size="md"
                                     className="h-12 w-full justify-center whitespace-nowrap sm:w-auto lg:h-14 lg:px-9"
                                 >
-                                    <span className="text-base font-semibold md:text-lg">Розрахувати вартість →</span>
+                                    <span className="text-base font-semibold md:text-lg">{t('Розрахувати вартість →', 'Get a quote →')}</span>
                                 </Elements.Button>
                             </Link>
                         </div>

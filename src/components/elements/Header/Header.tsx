@@ -2,77 +2,87 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLang, useT } from '@/components/app/LangProvider';
+import { useContent } from '@/hooks/useContent';
+import { stripLang, switchLangPath } from '@/lib/i18n';
 import Button from '@elements/Button/Button';
 import Icon from '@elements/Icon/Icon';
 import menuIcon from '@/assets/icons/menu.svg';
 import closeIcon from '@/assets/icons/close.svg';
 import OnlanLogo from '@/assets/icons/Onlan.svg';
-import { SERVICES } from '@/content/services';
 import { useViewportMode } from '@/hooks/useViewportMode';
 
 const SCROLL_TOP_THRESHOLD = 56;
 const SCROLL_DIRECTION_DELTA = 8;
 
-type SiteLang = 'UA' | 'EN';
+const langLinkClass = 'min-w-11 rounded-md px-2 py-2 text-center text-sm text-onlan-black transition-colors';
 
-const langButtonClass =
-    'min-w-11 rounded-md px-2 py-2 text-sm text-onlan-black transition-colors';
-
+/**
+ * Language switch: real links to the same page in the other language, so it
+ * works without JS and crawlers can follow it (hreflang counterpart).
+ */
 function LangSwitch() {
-    const [lang, setLang] = useState<SiteLang>('UA');
-    const otherLang: SiteLang = lang === 'UA' ? 'EN' : 'UA';
+    const lang = useLang();
+    const t = useT();
+    const pathname = usePathname() ?? '/';
+    const otherLang = lang === 'uk' ? 'en' : 'uk';
+    const otherHref = switchLangPath(pathname, otherLang);
+    const ukHref = switchLangPath(pathname, 'uk');
+    const enHref = switchLangPath(pathname, 'en');
 
     return (
         <>
-            {/* Tablet + narrow desktop: one label, click toggles language */}
-            <button
-                type="button"
-                className={`${langButtonClass} font-semibold xl:hidden`}
-                aria-label={`Мова: ${lang}. Натисніть, щоб перемкнути на ${otherLang}`}
-                onClick={() => setLang(otherLang)}
+            {/* Tablet + narrow desktop: one label, click switches language */}
+            <NextLink
+                href={otherHref}
+                hrefLang={otherLang}
+                className={`${langLinkClass} font-semibold xl:hidden`}
+                aria-label={t(
+                    'Мова: UA. Перейти на англійську версію',
+                    'Language: EN. Switch to the Ukrainian version',
+                )}
             >
-                {lang}
-            </button>
+                {lang === 'uk' ? 'UA' : 'EN'}
+            </NextLink>
 
             {/* Wide desktop: both options visible */}
             <div
                 className="hidden items-center gap-2 xl:flex"
                 role="group"
-                aria-label="Мова сайту"
+                aria-label={t('Мова сайту', 'Site language')}
             >
-                <button
-                    type="button"
-                    className={`${langButtonClass} ${
-                        lang === 'UA' ? 'font-semibold' : 'font-medium'
-                    }`}
-                    aria-current={lang === 'UA' ? 'true' : undefined}
-                    onClick={() => setLang('UA')}
+                <NextLink
+                    href={ukHref}
+                    hrefLang="uk"
+                    className={`${langLinkClass} ${lang === 'uk' ? 'font-semibold' : 'font-medium'}`}
+                    aria-current={lang === 'uk' ? 'true' : undefined}
                 >
                     UA
-                </button>
-                <button
-                    type="button"
-                    className={`${langButtonClass} ${
-                        lang === 'EN' ? 'font-semibold' : 'font-medium'
-                    }`}
-                    aria-current={lang === 'EN' ? 'true' : undefined}
-                    onClick={() => setLang('EN')}
+                </NextLink>
+                <NextLink
+                    href={enHref}
+                    hrefLang="en"
+                    className={`${langLinkClass} ${lang === 'en' ? 'font-semibold' : 'font-medium'}`}
+                    aria-current={lang === 'en' ? 'true' : undefined}
                 >
                     EN
-                </button>
+                </NextLink>
             </div>
         </>
     );
 }
 
 function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
+    const t = useT();
+    const { services } = useContent();
     const [isOpen, setIsOpen] = useState(false);
-    const pathname = usePathname();
+    const pathname = stripLang(usePathname() ?? '/');
     const wrapperRef = useRef<HTMLDivElement>(null);
     const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const isOnServicesPage = pathname?.startsWith('/services') ?? false;
+    const isOnServicesPage = pathname.startsWith('/services');
 
     useEffect(() => {
         if (!isOpen) return;
@@ -128,7 +138,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
                 aria-expanded={isOpen}
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                Послуги
+                {t('Послуги', 'Services')}
                 <svg
                     width="12"
                     height="12"
@@ -151,7 +161,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
             {isOpen && (
                 <div
                     role="menu"
-                    aria-label="Послуги"
+                    aria-label={t('Послуги', 'Services')}
                     className="absolute left-1/2 top-full z-50 mt-2.5 w-[min(92vw,420px)] -translate-x-1/2 rounded-2xl border border-onlan-black/8 bg-onlan-white/96 p-1.5 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.2)] backdrop-blur-md"
                 >
                     <ul className="flex flex-col gap-0.5">
@@ -167,11 +177,11 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
                                     pathname === '/services' ? 'bg-onlan-lavender/35' : ''
                                 }`}
                             >
-                                Усі послуги
+                                {t('Усі послуги', 'All services')}
                                 <span aria-hidden>→</span>
                             </Link>
                         </li>
-                        {SERVICES.map((service) => {
+                        {services.map((service) => {
                             const href = `/services/${service.slug}`;
                             const isActive = pathname === href;
                             return (
@@ -216,8 +226,10 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 function MobileServicesGroup({ onClose }: { onClose: () => void }) {
+    const t = useT();
+    const { services } = useContent();
     const [isOpen, setIsOpen] = useState(false);
-    const pathname = usePathname();
+    const pathname = stripLang(usePathname() ?? '/');
 
     return (
         <div className="flex w-full flex-col items-center">
@@ -227,7 +239,7 @@ function MobileServicesGroup({ onClose }: { onClose: () => void }) {
                 onClick={() => setIsOpen((prev) => !prev)}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue"
             >
-                Послуги
+                {t('Послуги', 'Services')}
                 <svg
                     width="12"
                     height="12"
@@ -256,11 +268,11 @@ function MobileServicesGroup({ onClose }: { onClose: () => void }) {
                                 pathname === '/services' ? 'bg-onlan-lavender/35' : ''
                             }`}
                         >
-                            Усі послуги
+                            {t('Усі послуги', 'All services')}
                             <span aria-hidden>→</span>
                         </Link>
                     </li>
-                    {SERVICES.map((service) => {
+                    {services.map((service) => {
                         const href = `/services/${service.slug}`;
                         const isActive = pathname === href;
 
@@ -298,6 +310,7 @@ function MobileServicesGroup({ onClose }: { onClose: () => void }) {
 }
 
 export function Header() {
+    const t = useT();
     const viewportMode = useViewportMode();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [headerBarVisible, setHeaderBarVisible] = useState(true);
@@ -409,7 +422,7 @@ export function Header() {
                     <Link
                         to="/"
                         className="shrink-0 text-xl font-bold"
-                        aria-label="OnLan Logistic — на головну"
+                        aria-label={t('OnLan Logistic — на головну', 'OnLan Logistic — home')}
                         onClick={closeMenu}
                     >
                         <Icon src={OnlanLogo} className="h-10 w-10" />
@@ -430,7 +443,7 @@ export function Header() {
                         <Link
                             to="/"
                             className="shrink-0 text-xl font-bold"
-                            aria-label="OnLan Logistic — на головну"
+                            aria-label={t('OnLan Logistic — на головну', 'OnLan Logistic — home')}
                             onClick={closeMenu}
                         >
                             <Icon
@@ -442,26 +455,26 @@ export function Header() {
 
                     <nav
                         className="flex shrink-0 items-center justify-center gap-3 px-2 text-sm uppercase lg:gap-5 lg:px-4 lg:text-base"
-                        aria-label="Основна навігація"
+                        aria-label={t('Основна навігація', 'Main navigation')}
                     >
                         <Link
                             to="/"
                             className="whitespace-nowrap px-1 py-2 text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-2"
                         >
-                            Головна
+                            {t('Головна', 'Home')}
                         </Link>
                         <Link
                             to="/about-us"
                             className="whitespace-nowrap px-1 py-2 text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-2"
                         >
-                            Про Нас
+                            {t('Про Нас', 'About us')}
                         </Link>
                         <ServicesDropdown />
                             <Link
                                 to="/contacts"
                                 className="whitespace-nowrap px-1 py-2 text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-2"
                             >
-                                Контакти
+                                {t('Контакти', 'Contacts')}
                             </Link>
                     </nav>
 
@@ -474,8 +487,8 @@ export function Header() {
                                 className="whitespace-nowrap"
                             >
                                 {viewportMode === 'desktop'
-                                    ? 'Зв\'язатись з нами'
-                                    : 'Зв\'язок'}
+                                    ? t('Зв\'язатись з нами', 'Get in touch')
+                                    : t('Зв\'язок', 'Contact')}
                             </Button>
                         </Link>
                         <div className="shrink-0">
@@ -486,14 +499,14 @@ export function Header() {
 
                 {/* Mobile: collapsible menu */}
                 {isMenuOpen && (
-                    <nav className="relative mt-4 pb-5 md:hidden" aria-label="Основна навігація">
+                    <nav className="relative mt-4 pb-5 md:hidden" aria-label={t('Основна навігація', 'Main navigation')}>
                         <div className="flex flex-col gap-4 pt-4 mt-[10px] items-center">
                             <Link
                                 to="/"
                                 className="px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue text-center"
                                 onClick={closeMenu}
                             >
-                                Головна
+                                {t('Головна', 'Home')}
                             </Link>
 
                             <Link
@@ -501,7 +514,7 @@ export function Header() {
                                 className="px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue text-center"
                                 onClick={closeMenu}
                             >
-                                Про Нас
+                                {t('Про Нас', 'About us')}
                             </Link>
 
                             <MobileServicesGroup onClose={closeMenu} />
@@ -511,7 +524,7 @@ export function Header() {
                                 className="px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue text-center"
                                 onClick={closeMenu}
                             >
-                                Контакти
+                                {t('Контакти', 'Contacts')}
                             </Link>
 
                             <div className="flex w-full flex-row items-stretch gap-3 pt-2">
@@ -522,7 +535,7 @@ export function Header() {
                                         size="md"
                                         className="w-full"
                                     >
-                                        Зв&apos;язатись з нами
+                                        {t('Зв\'язатись з нами', 'Get in touch')}
                                     </Button>
                                 </Link>
                                 <div className="flex items-center">

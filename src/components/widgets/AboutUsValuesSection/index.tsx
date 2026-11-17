@@ -10,11 +10,8 @@ import {
 import { MdOutlineVisibility } from 'react-icons/md';
 import valuesArc from '@/assets/icons/AboutUsValuesArc.svg';
 import { Elements } from '@/components/elements';
-import {
-    ABOUT_US_VALUES,
-    ABOUT_US_VALUES_SECTION,
-    type AboutUsValueIconKey,
-} from '@/content/aboutUsValues';
+import { type AboutUsValueIconKey } from '@/content/aboutUsValues';
+import { useContent } from '@/hooks/useContent';
 
 const VALUE_ICONS: Record<
     AboutUsValueIconKey,
@@ -27,6 +24,7 @@ const VALUE_ICONS: Record<
 };
 
 export const AboutUsValuesSection = () => {
+    const c = useContent();
     const sectionId = 'about-us-values-heading';
 
     return (
@@ -39,20 +37,20 @@ export const AboutUsValuesSection = () => {
                     <div className="size-2 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            {ABOUT_US_VALUES_SECTION.eyebrow}
+                            {c.aboutValuesSection.eyebrow}
                         </p>
                     </div>
                 </div>
 
                 <Elements.Title
                     id={sectionId}
-                    title={ABOUT_US_VALUES_SECTION.heading}
+                    title={c.aboutValuesSection.heading}
                     type="h2"
                     className="mt-6 mx-auto max-w-4xl text-balance text-center text-onlan-black"
                 />
 
                 <ul className="mx-auto mt-10 grid w-full max-w-[1200px] list-none grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:mt-12 lg:gap-8">
-                    {ABOUT_US_VALUES.map((item) => {
+                    {c.aboutValues.map((item) => {
                         const Icon = VALUE_ICONS[item.icon];
                         return (
                             <li key={item.title} className="flex">

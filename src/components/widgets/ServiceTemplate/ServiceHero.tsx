@@ -6,6 +6,7 @@ import type { BreadcrumbItem } from '@/lib/routes';
 import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import { Elements } from '@/components/elements';
 import { SERVICE_STEP_BACKGROUND_BY_SLUG } from '@/components/widgets/ServicesHowItWorksSection/serviceStepBackgrounds';
+import { useT } from '@/components/app/LangProvider';
 
 interface ServiceHeroProps {
     service: ServiceContent;
@@ -13,6 +14,7 @@ interface ServiceHeroProps {
 }
 
 export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
+    const t = useT();
     const backgroundImageSrc = SERVICE_STEP_BACKGROUND_BY_SLUG[service.slug];
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -78,9 +80,9 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     id={`service-hero-name-${service.slug}`}
                                     name="name"
                                     type="text"
-                                    label="Ваше ім’я"
+                                    label={t('Ваше ім’я', 'Your name')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder="Ваше ім’я"
+                                    placeholder={t('Ваше ім’я', 'Your name')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -90,9 +92,9 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     id={`service-hero-phone-${service.slug}`}
                                     name="phone"
                                     type="tel"
-                                    label="Номер телефону"
+                                    label={t('Номер телефону', 'Phone number')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder="Номер телефону"
+                                    placeholder={t('Номер телефону', 'Phone number')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -102,9 +104,9 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     id={`service-hero-route-${service.slug}`}
                                     name="route"
                                     type="text"
-                                    label="Маршрут"
+                                    label={t('Маршрут', 'Route')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder="Маршрут"
+                                    placeholder={t('Маршрут', 'Route')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -114,9 +116,9 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     id={`service-hero-weight-${service.slug}`}
                                     name="weight"
                                     type="text"
-                                    label="Вага / м³"
+                                    label={t('Вага / м³', 'Weight / m³')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder="Вага / м³"
+                                    placeholder={t('Вага / м³', 'Weight / m³')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -129,7 +131,7 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                 size="md"
                                 className="mt-6 h-12 w-full justify-center font-semibold lg:h-14"
                             >
-                                Замовити прорахунок
+                                {t('Замовити прорахунок', 'Request a quote')}
                             </Elements.Button>
                         </form>
                     </div>

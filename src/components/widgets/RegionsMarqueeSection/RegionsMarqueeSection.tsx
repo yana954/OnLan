@@ -1,12 +1,11 @@
-const REGIONS = [
-    'Китай',
-    'Туреччина',
-    'Кавказ',
-    'Близька Азія',
-    'Європа',
-    'США',
-    'Велика Британія',
-] as const;
+'use client';
+
+import { useLang, useT } from '@/components/app/LangProvider';
+
+const REGIONS = {
+    uk: ['Китай', 'Туреччина', 'Кавказ', 'Близька Азія', 'Європа', 'США', 'Велика Британія'],
+    en: ['China', 'Turkey', 'Caucasus', 'Middle East', 'Europe', 'USA', 'United Kingdom'],
+} as const;
 
 /** Відстань між назвами регіонів */
 const BETWEEN_REGIONS = 'gap-x-10 md:gap-x-14 lg:gap-x-16';
@@ -15,12 +14,13 @@ const DOT_TO_LABEL = 'gap-x-2.5 md:gap-x-3';
 const STRIP_END_PAD = 'pr-12 md:pr-16 lg:pr-20';
 
 function MarqueeStrip({ idSuffix }: { idSuffix: 'a' | 'b' }) {
+    const lang = useLang();
     return (
         <ul
             className={`flex shrink-0 items-center ${BETWEEN_REGIONS} ${STRIP_END_PAD}`}
             aria-hidden={idSuffix === 'b'}
         >
-            {REGIONS.map((label) => (
+            {REGIONS[lang].map((label) => (
                 <li
                     key={`${idSuffix}-${label}`}
                     className={`flex shrink-0 items-center ${DOT_TO_LABEL}`}
@@ -38,10 +38,12 @@ function MarqueeStrip({ idSuffix }: { idSuffix: 'a' | 'b' }) {
 }
 
 export function RegionsMarqueeSection() {
+    const t = useT();
+
     return (
         <section
             className="relative w-full overflow-hidden border-y border-onlan-lavender/45 bg-onlan-white"
-            aria-label="Напрямки доставки"
+            aria-label={t('Напрямки доставки', 'Delivery regions')}
         >
             {/* Вертикальні відступи як у контентних блоків сайту */}
             <div className="relative py-8 md:py-10 lg:py-12">

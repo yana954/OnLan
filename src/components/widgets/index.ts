@@ -1,5 +1,4 @@
-import { HomeHeroSection } from './HomeHeroSection/HomeHeroSection';
-import { HomeHeroVariants } from './HomeHeroSection/HomeHeroVariants';
+import { HomeHeroVariantE as HomeHero } from './HomeHeroSection/HomeHeroVariantE';
 import { AboutUsNew } from './AboutUsNew';
 import { WhyChooseUsSection } from './WhyChooseUsSection/WhyChooseUsSection';
 import { ServicesHowItWorksSection } from './ServicesHowItWorksSection/ServicesHowItWorksSection';
@@ -28,8 +27,7 @@ import {
 } from './ServiceTemplate';
 
 export const Widgets = {
-    HomeHeroSection,
-    HomeHeroVariants,
+    HomeHero,
     RegionsMarqueeSection,
     AboutUsNew,
     WhyChooseUsSection,

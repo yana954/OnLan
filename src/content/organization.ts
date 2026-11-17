@@ -1,4 +1,6 @@
 import { CONTACTS_ADDRESS, CONTACTS_PRIMARY } from '@/content/contacts';
+import { CONTACTS_ADDRESS_EN } from '@/content/en/contacts';
+import type { Lang } from '@/lib/i18n';
 import { SITE_NAME } from '@/lib/site';
 
 /**
@@ -23,3 +25,14 @@ export const ORGANIZATION = {
     openingHours: 'Mo-Fr 09:00-18:00',
     sameAs: [] as string[],
 } as const;
+
+const ORGANIZATION_EN = {
+    ...ORGANIZATION,
+    description:
+        'International logistics for business: delivery from Europe, Asia and the USA to Ukraine, customs clearance, cargo insurance. Operating since 2012, Vinnytsia.',
+    address: CONTACTS_ADDRESS_EN,
+};
+
+export function getOrganization(lang: Lang) {
+    return lang === 'en' ? ORGANIZATION_EN : ORGANIZATION;
+}
