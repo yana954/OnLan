@@ -51,11 +51,44 @@ const DIRECTIONS = [
 
 const ROTATE_MS = 5500;
 
+/** Орбіта навколо заголовка: літачок летить по еліпсу (SMIL, масштабується з заголовком). */
+const ORBIT_PATH = 'M 500 20 A 490 180 0 1 1 499.9 20 Z';
+
+const Orbit = ({ animated }: { animated: boolean }) => (
+    <svg
+        viewBox="0 0 1000 400"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[132%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 max-md:hidden"
+        aria-hidden
+    >
+        <path d={ORBIT_PATH} fill="none" stroke="#bacf02" strokeWidth="2.5" strokeDasharray="3 12" strokeLinecap="round" transform="translate(0 20)" />
+        <g transform="translate(0 20)">
+            <g>
+                <g transform="scale(2.2)">
+                    <path d="M 14 0 C 14 -3 8 -4 2 -4 L -10 -4 L -13 -8 L -15 -8 L -13 0 L -15 8 L -13 8 L -10 4 L 2 4 C 8 4 14 3 14 0 Z" fill="#2c358c" />
+                    <path d="M 3 -3 L -7 -19 L -10 -19 L -5 -3 Z M 3 3 L -7 19 L -10 19 L -5 3 Z" fill="#2c358c" />
+                    <circle cx="9" cy="0" r="1.4" fill="#d5e82d" />
+                </g>
+                {animated ? (
+                    <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" path={ORBIT_PATH} />
+                ) : (
+                    <animateMotion dur="1s" fill="freeze" rotate="auto" path={ORBIT_PATH} keyPoints="0.1;0.1" keyTimes="0;1" calcMode="linear" />
+                )}
+            </g>
+        </g>
+    </svg>
+);
+
+
 /** Варіант E: «Привеземо ваш товар будь-куди» — інтерактивний вибір напрямку (авто-перемикання до першого кліку). */
 export const HomeHeroVariantE = () => {
     const headingId = 'home-hero-heading-e';
     const [active, setActive] = useState(0);
     const [auto, setAuto] = useState(true);
+    const [motion, setMotion] = useState(true);
+
+    useEffect(() => {
+        setMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }, []);
 
     useEffect(() => {
         if (!auto) return;
@@ -72,7 +105,8 @@ export const HomeHeroVariantE = () => {
             aria-labelledby={headingId}
         >
             <div className="container relative mx-auto px-4 pb-10 pt-10 md:pb-14 md:pt-14 min-[1200px]:pt-12">
-                <div className="mx-auto max-w-4xl text-center">
+                <div className="relative isolate mx-auto max-w-4xl text-center">
+                    <Orbit animated={motion} />
                     <p
                         style={{ ['--d' as string]: '0ms' }}
                         className="hero-rise mb-3 text-xs font-bold uppercase tracking-[0.14em] text-onlan-blue/70 md:text-sm"
