@@ -11,8 +11,8 @@
  * Behaviour
  * ---------
  * 1. Waits for `window.load` (all images, fonts, scripts ready).
- * 2. Honours `MIN_DURATION` so the overlay never disappears in a
- *    perceptible flash on instant page loads.
+ * 2. Honours `MIN_DURATION` (~1.1s) so the overlay never disappears in a
+ *    flash. Repeat visits in the same session (sessionStorage) skip it.
  * 3. Adds the `is-hidden` class to trigger the CSS exit transition, then
  *    leaves the node in the DOM (no `removeChild`) so React’s internal
  *    tree stays consistent — the overlay stays inert via `visibility`,
@@ -27,10 +27,11 @@ export const PRELOADER_INIT_SCRIPT = `(function () {
     'use strict';
 
     var PRELOADER_ID = 'site-preloader';
-    var MIN_DURATION = 2000;
-    var EXIT_DURATION = 700;
+    var MIN_DURATION = 1100;
+    var EXIT_DURATION = 600;
     var HIDDEN_CLASS = 'is-hidden';
 
+    var SEEN_KEY = 'onlan-preloader-seen';
     var startedAt = Date.now();
     var pageLoaded = false;
     var finished = false;
@@ -51,6 +52,7 @@ export const PRELOADER_INIT_SCRIPT = `(function () {
             return;
         }
 
+        try { window.sessionStorage.setItem(SEEN_KEY, '1'); } catch (_) {}
         el.classList.add(HIDDEN_CLASS);
         el.setAttribute('aria-hidden', 'true');
 
@@ -70,6 +72,15 @@ export const PRELOADER_INIT_SCRIPT = `(function () {
         pageLoaded = true;
         tryFinish();
     }
+
+    // Repeat visit in this session: skip the overlay entirely.
+    try {
+        if (window.sessionStorage.getItem(SEEN_KEY)) {
+            MIN_DURATION = 0;
+            var seenEl = document.getElementById(PRELOADER_ID);
+            if (seenEl) seenEl.classList.add('is-instant', 'is-hidden');
+        }
+    } catch (_) {}
 
     if (document.readyState === 'complete') {
         onPageLoaded();
