@@ -2,118 +2,140 @@
 
 import Image from 'next/image';
 import { Link } from 'react-router';
-import heroImage from '@images/onlan-hero-logistics.webp';
+import clsx from 'clsx';
+import imgAir from '@images/Avia.webp';
+import imgSea from '@images/Morski.webp';
+import imgRoad from '@images/MultiModals.webp';
 import { HOME_HERO } from '@/content/homeHero';
 
-const iconClassName =
-    'size-5 fill-none stroke-onlan-blue stroke-2 [stroke-linecap:round] [stroke-linejoin:round]';
+type ModeKey = (typeof HOME_HERO.modes)[number]['key'];
 
-function ManagerIcon() {
-    return (
-        <svg viewBox="0 0 24 24" className={iconClassName} aria-hidden>
-            <path d="M12 12C14.76 12 17 9.76 17 7C17 4.24 14.76 2 12 2C9.24 2 7 4.24 7 7C7 9.76 9.24 12 12 12Z" />
-            <path d="M4 21C4 17.69 7.58 15 12 15C16.42 15 20 17.69 20 21" />
-        </svg>
-    );
-}
+const MODE_IMAGES: Record<ModeKey, string> = {
+    sea: imgSea,
+    air: imgAir,
+    road: imgRoad,
+};
 
-function ClockIcon() {
-    return (
-        <svg viewBox="0 0 24 24" className={iconClassName} aria-hidden>
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 7V12L15 15" />
-        </svg>
-    );
-}
-
-function ShieldIcon() {
-    return (
-        <svg viewBox="0 0 24 24" className={iconClassName} aria-hidden>
-            <path d="M12 3L19 6V11C19 16 15.5 19.5 12 21C8.5 19.5 5 16 5 11V6L12 3Z" />
-        </svg>
-    );
-}
-
-const ADVANTAGE_ICONS = {
-    manager: ManagerIcon,
-    support: ClockIcon,
-    predictable: ShieldIcon,
-} as const;
+/** Морський блок займає обидва ряди, решта — по одному. */
+const MODE_LAYOUT: Record<ModeKey, string> = {
+    sea: 'row-span-2',
+    air: '',
+    road: '',
+};
 
 export const HomeHeroSection = () => {
     const headingId = 'home-hero-heading';
 
     return (
         <section
-            className="w-full bg-onlan-white min-[1200px]:h-[calc(100dvh-96px)]"
+            className="relative w-full overflow-hidden bg-onlan-blue min-[1200px]:flex min-[1200px]:min-h-[calc(100dvh-96px)] min-[1200px]:items-center"
             aria-labelledby={headingId}
         >
-            <div className="container mx-auto flex h-full px-4 py-10 min-[1200px]:items-center min-[1200px]:py-6">
-                <div className="grid w-full items-center gap-10 min-[1200px]:grid-cols-[0.85fr_1.15fr] min-[1200px]:gap-10">
+            {/* Декор: м’яке сяйво лайму та точкова сітка — лише кольори палітри */}
+            <div className="pointer-events-none absolute inset-0" aria-hidden>
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage:
+                            'radial-gradient(60rem 36rem at 100% 0%, color-mix(in srgb, var(--onlan-lime) 14%, transparent), transparent 70%)',
+                    }}
+                />
+                <div
+                    className="absolute inset-0 opacity-60"
+                    style={{
+                        backgroundImage:
+                            'radial-gradient(circle, color-mix(in srgb, var(--onlan-lavender) 22%, transparent) 1px, transparent 1px)',
+                        backgroundSize: '28px 28px',
+                        maskImage: 'linear-gradient(to bottom right, black, transparent 70%)',
+                        WebkitMaskImage: 'linear-gradient(to bottom right, black, transparent 70%)',
+                    }}
+                />
+            </div>
+
+            <div className="container relative z-1 mx-auto px-4 py-12 md:py-16 min-[1200px]:py-10">
+                <div className="grid w-full items-center gap-10 min-[1200px]:grid-cols-[1.05fr_0.95fr] min-[1200px]:gap-14">
                     <div className="min-w-0">
-                        <div className="mb-4 inline-flex rounded-full bg-onlan-blue/12 px-4 py-2 text-sm font-bold text-onlan-blue">
+                        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-onlan-lime/40 bg-onlan-white/10 px-4 py-2 text-sm font-bold tracking-wide text-onlan-lime backdrop-blur-sm">
+                            <span className="size-2 rounded-full bg-onlan-lime" aria-hidden />
                             {HOME_HERO.badge}
                         </div>
 
                         <h1
                             id={headingId}
-                            className="mb-4 text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-onlan-black"
+                            className="mb-5 text-[clamp(2.25rem,4.2vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-onlan-white"
                         >
                             {HOME_HERO.titleLines[0]}
                             <br />
                             {HOME_HERO.titleLines[1]}
                             <br />
-                            <span className="text-onlan-blue">{HOME_HERO.titleHighlight}</span>
+                            <span className="text-onlan-lime">{HOME_HERO.titleHighlight}</span>
                         </h1>
 
-                        <p className="mb-5 max-w-[520px] text-base font-medium leading-snug text-[#33395f] min-[1200px]:text-[17px] min-[1200px]:leading-[1.4]">
+                        <p className="mb-8 max-w-[540px] text-base font-medium leading-snug text-onlan-lavender min-[1200px]:text-lg min-[1200px]:leading-[1.4]">
                             {HOME_HERO.description}
                         </p>
 
-                        <Link
-                            to="/#contact"
-                            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-onlan-blue px-6 text-base font-bold text-onlan-white no-underline transition-colors hover:bg-onlan-blue/90 min-[768px]:w-auto min-[768px]:px-8"
-                        >
-                            {HOME_HERO.cta}
-                            <span aria-hidden>→</span>
-                        </Link>
+                        <div className="flex flex-col gap-3 sm:flex-row">
+                            <Link to="/#contact" className="btn btn-lime btn-lg no-underline max-sm:w-full sm:btn-xl">
+                                {HOME_HERO.cta}
+                                <span aria-hidden>→</span>
+                            </Link>
+                            <Link
+                                to="/services"
+                                className="btn btn-lg border border-onlan-white/40 bg-transparent text-onlan-white no-underline hover:border-onlan-white hover:bg-onlan-white/10 max-sm:w-full sm:btn-xl"
+                            >
+                                {HOME_HERO.secondaryCta}
+                            </Link>
+                        </div>
 
-                        <ul className="mt-6 grid max-w-[560px] list-none gap-5 sm:grid-cols-2 min-[1200px]:mt-8 min-[1200px]:grid-cols-3 min-[1200px]:gap-4">
-                            {HOME_HERO.advantages.map((advantage) => {
-                                const Icon = ADVANTAGE_ICONS[advantage.key];
-
-                                return (
-                                    <li key={advantage.key} className="flex items-start gap-2.5">
-                                        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-onlan-blue/8">
-                                            <Icon />
-                                        </span>
-                                        <div>
-                                            <strong className="mb-0.5 block text-sm font-extrabold text-onlan-blue">
-                                                {advantage.title}
-                                            </strong>
-                                            <p className="m-0 text-[13px] leading-snug text-[#2f3150]">
-                                                {advantage.description}
-                                            </p>
-                                        </div>
-                                    </li>
-                                );
-                            })}
+                        <ul className="mt-10 grid max-w-[600px] list-none grid-cols-3 gap-3 border-t md:gap-4 border-onlan-lavender/25 pt-6 min-[1200px]:mt-12">
+                            {HOME_HERO.advantages.map((advantage) => (
+                                <li key={advantage.key}>
+                                    <strong className="mb-1 block text-base font-extrabold leading-tight text-onlan-lime md:text-2xl">
+                                        {advantage.title}
+                                    </strong>
+                                    <p className="m-0 text-xs leading-snug text-onlan-lavender md:text-sm">
+                                        {advantage.description}
+                                    </p>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    <div className="relative min-h-0 min-[1200px]:flex min-[1200px]:h-full min-[1200px]:items-center">
-                        <div className="relative w-full overflow-hidden rounded-[24px] bg-[#f4f7ff] min-[1200px]:max-h-[calc(100dvh-128px)]">
-                            <Image
-                                src={heroImage}
-                                alt="Міжнародна логістика OnLan"
-                                width={1200}
-                                height={720}
-                                className="block h-auto w-full object-contain"
-                                priority
-                                sizes="(max-width: 1200px) 100vw, 58vw"
-                            />
-                        </div>
-                    </div>
+                    <ul className="m-0 grid h-[22rem] list-none grid-cols-2 grid-rows-2 gap-3 p-0 sm:h-[30rem] md:gap-4 min-[1200px]:h-[min(35rem,calc(100dvh-14rem))]">
+                        {HOME_HERO.modes.map((mode, index) => (
+                            <li
+                                key={mode.key}
+                                className={clsx(
+                                    'relative overflow-hidden rounded-[20px] bg-onlan-black md:rounded-[28px]',
+                                    MODE_LAYOUT[mode.key],
+                                )}
+                            >
+                                <Link
+                                    to={`/services/${mode.slug}`}
+                                    className="group absolute inset-0 block no-underline"
+                                    aria-label={`${mode.label}: детальніше про послугу`}
+                                >
+                                    <Image
+                                        src={MODE_IMAGES[mode.key]}
+                                        alt={mode.alt}
+                                        fill
+                                        priority={index === 0}
+                                        sizes="(max-width: 1200px) 50vw, 28vw"
+                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                    <span
+                                        className="absolute inset-0 bg-linear-to-t from-onlan-black/60 via-onlan-black/0 to-onlan-black/0"
+                                        aria-hidden
+                                    />
+                                    <span className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-onlan-lime px-4 py-2 text-sm font-bold text-onlan-black transition-colors group-hover:bg-onlan-white md:bottom-4 md:left-4 md:text-base">
+                                        {mode.label}
+                                        <span aria-hidden>→</span>
+                                    </span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </section>
