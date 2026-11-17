@@ -27,7 +27,7 @@ export const HomeHeroVariantB = () => {
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover object-center"
+                className="hero-kenburns object-cover object-center"
                 aria-hidden
             />
             <div
@@ -40,7 +40,8 @@ export const HomeHeroVariantB = () => {
                     <div className="min-w-0">
                         <h1
                             id={headingId}
-                            className="mb-5 text-[clamp(2.25rem,4.2vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-onlan-white"
+                            style={{ ["--d" as string]: "100ms" }}
+                            className="hero-rise mb-5 text-[clamp(2.25rem,4.2vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-onlan-white"
                         >
                             {HOME_HERO.titleLines[0]}
                             <br />
@@ -48,16 +49,16 @@ export const HomeHeroVariantB = () => {
                             <br />
                             <span className="text-onlan-lime">{HOME_HERO.titleHighlight}</span>
                         </h1>
-                        <p className="mb-8 max-w-[540px] text-base font-medium leading-snug text-onlan-lavender min-[1200px]:text-lg min-[1200px]:leading-[1.4]">
+                        <p style={{ ["--d" as string]: "250ms" }} className="hero-rise mb-8 max-w-[540px] text-base font-medium leading-snug text-onlan-lavender min-[1200px]:text-lg min-[1200px]:leading-[1.4]">
                             {HOME_HERO.description}
                         </p>
-                        <div className="flex flex-col gap-3 sm:flex-row">
+                        <div style={{ ["--d" as string]: "400ms" }} className="hero-rise flex flex-col gap-3 sm:flex-row">
                             <Link to="/#contact" className="btn btn-lime btn-lg no-underline max-sm:w-full sm:btn-xl">
                                 {HOME_HERO.cta}
                                 <span aria-hidden>→</span>
                             </Link>
                         </div>
-                        <ul className="mt-10 grid max-w-[600px] list-none grid-cols-3 gap-3 border-t border-onlan-lavender/25 pt-6 md:gap-4">
+                        <ul style={{ ["--d" as string]: "550ms" }} className="hero-rise mt-10 grid max-w-[600px] list-none grid-cols-3 gap-3 border-t border-onlan-lavender/25 pt-6 md:gap-4">
                             {HOME_HERO.facts.map((fact) => (
                                 <li key={fact.key}>
                                     <strong className="mb-1 block text-base font-extrabold leading-tight text-onlan-lime md:text-2xl">
@@ -71,17 +72,18 @@ export const HomeHeroVariantB = () => {
 
                     <nav
                         aria-label="Способи доставки"
-                        className="rounded-[20px] border border-onlan-lime bg-onlan-white/10 p-4 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-[17px] md:rounded-[28px] md:p-6"
+                        style={{ ["--d" as string]: "350ms" }}
+                        className="hero-rise rounded-[20px] border border-onlan-lime bg-onlan-white/10 p-4 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-[17px] md:rounded-[28px] md:p-6"
                     >
                         <p className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-onlan-lime">
                             Оберіть спосіб доставки
                         </p>
                         <ul className="m-0 list-none p-0">
-                            {PICKED.map((service) => (
-                                <li key={service.slug} className="border-t border-onlan-lavender/25 first:border-t-0">
+                            {PICKED.map((service, i) => (
+                                <li key={service.slug} style={{ ["--d" as string]: `${600 + i * 120}ms` }} className="hero-rise border-t border-onlan-lavender/25 first:border-t-0">
                                     <Link
                                         to={`/services/${service.slug}`}
-                                        className="group flex items-center gap-4 rounded-xl px-2 py-4 no-underline transition-colors hover:bg-onlan-white/10"
+                                        className="hero-sweep group flex items-center gap-4 rounded-xl px-2 py-4 no-underline transition-colors hover:bg-onlan-white/10"
                                     >
                                         <span className="text-sm font-bold text-onlan-lime">{service.number}</span>
                                         <span className="min-w-0 flex-1">

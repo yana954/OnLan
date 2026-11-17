@@ -848,3 +848,32 @@
     }
 
 }
+
+/* ===== Hero motion (prototype) ===== */
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-kenburns {
+    from { transform: scale(1.12); }
+    to { transform: scale(1); }
+}
+@keyframes hero-reveal {
+    from { clip-path: inset(0 100% 0 0 round 36px); }
+    to { clip-path: inset(0 0 0 0 round 36px); }
+}
+@keyframes hero-sweep {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+.hero-rise { opacity: 0; animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation-delay: var(--d, 0ms); }
+.hero-kenburns { animation: hero-kenburns 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.hero-reveal { animation: hero-reveal 1.3s cubic-bezier(0.77, 0, 0.175, 1) 0.2s both; }
+.hero-sweep {
+    background-image: linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--onlan-lime) 45%, transparent) 50%, transparent 65%);
+    background-size: 200% 100%;
+    animation: hero-sweep 4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-rise, .hero-kenburns, .hero-reveal, .hero-sweep { animation: none; opacity: 1; transform: none; clip-path: none; }
+}

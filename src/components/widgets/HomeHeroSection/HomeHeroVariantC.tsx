@@ -21,7 +21,8 @@ export const HomeHeroVariantC = () => {
                 <div className="mx-auto max-w-5xl text-center">
                     <h1
                         id={headingId}
-                        className="mb-5 text-[clamp(2.25rem,4.6vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-onlan-blue"
+                        style={{ ["--d" as string]: "100ms" }}
+                        className="hero-rise mb-5 text-[clamp(2.25rem,4.6vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-onlan-blue"
                     >
                         {HOME_HERO.titleLines[0]} {HOME_HERO.titleLines[1]}
                         <br />
@@ -29,10 +30,10 @@ export const HomeHeroVariantC = () => {
                             {HOME_HERO.titleHighlight}
                         </span>
                     </h1>
-                    <p className="mx-auto mb-8 max-w-[640px] text-base font-medium leading-snug text-onlan-blue md:text-lg">
+                    <p style={{ ["--d" as string]: "250ms" }} className="hero-rise mx-auto mb-8 max-w-[640px] text-base font-medium leading-snug text-onlan-blue md:text-lg">
                         {HOME_HERO.description}
                     </p>
-                    <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                    <div style={{ ["--d" as string]: "400ms" }} className="hero-rise flex flex-col justify-center gap-3 sm:flex-row">
                         <Link to="/#contact" className="btn btn-primary btn-lg no-underline max-sm:w-full sm:btn-xl">
                             {HOME_HERO.cta}
                             <span aria-hidden>→</span>
@@ -46,14 +47,14 @@ export const HomeHeroVariantC = () => {
                     </div>
                 </div>
 
-                <div className="relative mt-10 h-[17rem] overflow-hidden rounded-[24px] md:h-[26rem] md:rounded-[36px] min-[1200px]:h-[min(28rem,calc(100dvh-32rem))] min-[1200px]:min-h-[20rem]">
+                <div className="hero-reveal relative mt-10 h-[17rem] overflow-hidden rounded-[24px] md:h-[26rem] md:rounded-[36px] min-[1200px]:h-[min(28rem,calc(100dvh-32rem))] min-[1200px]:min-h-[20rem]">
                     <Image
                         src={imgTruck}
                         alt={HOME_HERO.modes[0].alt}
                         fill
                         priority
                         sizes="100vw"
-                        className="object-cover object-[60%_55%]"
+                        className="hero-kenburns object-cover object-[60%_55%]"
                     />
                 </div>
 
@@ -61,7 +62,8 @@ export const HomeHeroVariantC = () => {
                     {HOME_HERO.facts.map((fact, index) => (
                         <li
                             key={fact.key}
-                            className={`rounded-2xl p-3 shadow-card md:rounded-3xl md:p-6 ${FACT_STYLES[index]}`}
+                            style={{ ["--d" as string]: `${1100 + index * 150}ms` }}
+                            className={`hero-rise rounded-2xl p-3 shadow-card md:rounded-3xl md:p-6 ${FACT_STYLES[index]}`}
                         >
                             <strong className="block text-lg font-extrabold leading-tight md:text-3xl">
                                 {fact.value}
