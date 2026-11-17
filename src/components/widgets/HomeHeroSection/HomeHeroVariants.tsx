@@ -5,6 +5,7 @@ import { HomeHeroSection } from './HomeHeroSection';
 import { HomeHeroVariantB } from './HomeHeroVariantB';
 import { HomeHeroVariantC } from './HomeHeroVariantC';
 import { HomeHeroVariantD } from './HomeHeroVariantD';
+import { HomeHeroVariantE } from './HomeHeroVariantE';
 
 /** ПРОТОТИП: перемикач варіантів hero (?variant=A|B|C). Прибрати після вибору переможця. */
 const VARIANTS = [
@@ -12,6 +13,7 @@ const VARIANTS = [
     { key: 'B', name: 'Фото-фон + меню доставки', Component: HomeHeroVariantB },
     { key: 'C', name: 'Світлий + кінематографічне фото', Component: HomeHeroVariantC },
     { key: 'D', name: 'Синій + фура їде (SVG-анімація)', Component: HomeHeroVariantD },
+    { key: 'E', name: 'Обери напрямок (інтерактив)', Component: HomeHeroVariantE },
 ] as const;
 
 type VariantKey = (typeof VARIANTS)[number]['key'];
