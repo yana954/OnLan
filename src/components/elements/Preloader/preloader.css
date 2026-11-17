@@ -1,0 +1,300 @@
+/* =========================================================================
+   ONLAN LOGISTICS PRELOADER
+   White canvas, dotted world map, dashed transport route with truck / ship /
+   plane riding the arc, OnLan wordmark + loading progress.
+   Keeps the `#site-preloader` + `.is-hidden` contract for preloader-init.ts.
+   ========================================================================= */
+
+:root {
+    --preloader-blue: #2c358c;
+    --preloader-blue-soft: #5962d6;
+    --preloader-white: #ffffff;
+    --preloader-min-duration: 2000ms;
+    --preloader-exit-duration: 700ms;
+    --preloader-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@supports selector(:has(*)) {
+    html:has(#site-preloader:not(.is-hidden)),
+    html:has(#site-preloader:not(.is-hidden)) body {
+        overflow: hidden !important;
+        height: 100% !important;
+        touch-action: none;
+        overscroll-behavior: none;
+    }
+}
+
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--preloader-white);
+    pointer-events: auto;
+    contain: layout paint style;
+    transition:
+        opacity var(--preloader-exit-duration) ease,
+        visibility 0s linear var(--preloader-exit-duration);
+    will-change: opacity;
+}
+
+.preloader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ---- Stage: holds map (behind), route, and centre column ---------------- */
+.preloader__stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(1080px, 92vw);
+    animation: preloader-rise 0.8s var(--preloader-ease-out) both;
+}
+
+@keyframes preloader-rise {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Dotted world map -------------------------------------------------- */
+.preloader__map-svg {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 132%;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ---- Route arc + icons ------------------------------------------------- */
+.preloader__route-svg {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* Faint, evenly dotted baseline arc */
+.preloader__arc--base {
+    stroke-opacity: 0.4;
+}
+
+/* Bright dash that travels along the whole route (pathLength normalised to 100) */
+.preloader__arc--flow {
+    stroke-opacity: 0.95;
+    animation: preloader-comet 2.6s linear infinite;
+}
+
+@keyframes preloader-comet {
+    from {
+        stroke-dashoffset: 100;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Endpoint halos */
+.preloader__halo {
+    fill-opacity: 0.06;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: preloader-halo 2.4s ease-in-out infinite;
+}
+
+.preloader__halo--right {
+    animation-delay: 1.2s;
+}
+
+@keyframes preloader-halo {
+    0%,
+    100% {
+        transform: scale(0.82);
+        fill-opacity: 0.05;
+    }
+    50% {
+        transform: scale(1.12);
+        fill-opacity: 0.09;
+    }
+}
+
+/* Floating transport icons (placement lives on the parent <g>, so the float
+   transform here is purely a vertical bob that composes with it). */
+.preloader__veh {
+    animation: preloader-float 2.9s ease-in-out infinite;
+    will-change: transform;
+}
+
+.preloader__veh--truck {
+    animation-duration: 2.8s;
+}
+
+.preloader__veh--ship {
+    animation-duration: 3.2s;
+}
+
+.preloader__veh--plane {
+    animation-duration: 2.5s;
+    animation-delay: 0.25s;
+}
+
+@keyframes preloader-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ---- Centre column: logo, text, progress ------------------------------ */
+.preloader__center {
+    position: relative;
+    z-index: 2;
+    /* Lift up into the arc opening (percentage is relative to stage width). */
+    margin-top: -12%;
+    width: min(320px, 78%);
+    text-align: center;
+}
+
+.preloader__logo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto clamp(28px, 5vh, 48px);
+    filter: drop-shadow(0 14px 26px rgba(44, 53, 140, 0.14));
+}
+
+.preloader__loading-text {
+    margin: 0 0 22px;
+    color: var(--preloader-blue);
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    animation: preloader-text-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes preloader-text-breathe {
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* One-way progress: fill advances left → right once and holds (~90%).
+   Never shrinks or bounces back. Timing matches MIN_DURATION (~2s). */
+.preloader__progress {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    height: 5px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(44, 53, 140, 0.12);
+}
+
+.preloader__progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--preloader-blue), var(--preloader-blue-soft));
+    animation: preloader-progress-load var(--preloader-min-duration) var(--preloader-ease-out) forwards;
+}
+
+.preloader__progress-dot {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--preloader-blue-soft);
+    box-shadow: 0 0 12px rgba(89, 98, 214, 0.45);
+    transform: translate(-50%, -50%);
+    animation: preloader-progress-dot-load var(--preloader-min-duration) var(--preloader-ease-out) forwards;
+}
+
+@keyframes preloader-progress-load {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 90%;
+    }
+}
+
+@keyframes preloader-progress-dot-load {
+    from {
+        left: 0%;
+    }
+    to {
+        left: 90%;
+    }
+}
+
+/* ---- Responsive ------------------------------------------------------- */
+@media (max-width: 640px) {
+    .preloader__stage {
+        width: 94vw;
+    }
+
+    .preloader__map-svg {
+        width: 150%;
+    }
+
+    .preloader__center {
+        margin-top: -10%;
+        width: min(240px, 70%);
+    }
+}
+
+/* ---- Reduced motion --------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .preloader__stage,
+    .preloader__arc--flow,
+    .preloader__halo,
+    .preloader__veh,
+    .preloader__loading-text,
+    .preloader__progress-fill,
+    .preloader__progress-dot {
+        animation: none !important;
+    }
+
+    .preloader__arc--flow {
+        display: none;
+    }
+
+    .preloader__loading-text {
+        opacity: 1;
+    }
+
+    .preloader__progress-fill {
+        width: 90%;
+    }
+
+    .preloader__progress-dot {
+        left: 90%;
+    }
+}
