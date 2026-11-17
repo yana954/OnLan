@@ -1,6 +1,6 @@
 /**
- * Fullscreen logistics preloader — dotted world map, dashed transport route
- * with truck / ship / plane icons riding the arc, the OnLan wordmark, and a
+ * Fullscreen logistics preloader — dotted world map, dotted route with a plane
+ * flying along the arc and leaving a comet trail, the OnLan wordmark, and a
  * loading progress bar. Server-rendered for an instant first paint.
  *
  * Init timing is handled by the inlined `PRELOADER_INIT_SCRIPT` (see
@@ -38,7 +38,7 @@ export function Preloader() {
                             height={126}
                         />
 
-                        <p className="preloader__loading-text">Завантаження...</p>
+                        <p className="preloader__loading-text">Привеземо ваш товар будь-куди</p>
 
                         <div className="preloader__progress" aria-hidden>
                             <div className="preloader__progress-fill" />

@@ -9,6 +9,7 @@
     --preloader-blue: #2c358c;
     --preloader-blue-soft: #5962d6;
     --preloader-white: #ffffff;
+    --preloader-lime: #d5e82d;
     --preloader-min-duration: 2000ms;
     --preloader-exit-duration: 700ms;
     --preloader-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -91,25 +92,7 @@
     overflow: visible;
 }
 
-/* Faint, evenly dotted baseline arc */
-.preloader__arc--base {
-    stroke-opacity: 0.4;
-}
-
-/* Bright dash that travels along the whole route (pathLength normalised to 100) */
-.preloader__arc--flow {
-    stroke-opacity: 0.95;
-    animation: preloader-comet 2.6s linear infinite;
-}
-
-@keyframes preloader-comet {
-    from {
-        stroke-dashoffset: 100;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
-}
+/* Plane + comet trail are animated in PreloaderRoute.tsx (SMIL, one shared clock). */
 
 /* Endpoint halos */
 .preloader__halo {
@@ -135,36 +118,6 @@
     }
 }
 
-/* Floating transport icons (placement lives on the parent <g>, so the float
-   transform here is purely a vertical bob that composes with it). */
-.preloader__veh {
-    animation: preloader-float 2.9s ease-in-out infinite;
-    will-change: transform;
-}
-
-.preloader__veh--truck {
-    animation-duration: 2.8s;
-}
-
-.preloader__veh--ship {
-    animation-duration: 3.2s;
-}
-
-.preloader__veh--plane {
-    animation-duration: 2.5s;
-    animation-delay: 0.25s;
-}
-
-@keyframes preloader-float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
 /* ---- Centre column: logo, text, progress ------------------------------ */
 .preloader__center {
     position: relative;
@@ -186,7 +139,12 @@
 .preloader__loading-text {
     margin: 0 0 22px;
     color: var(--preloader-blue);
-    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    white-space: nowrap;
+    position: relative;
+    left: 50%;
+    width: max-content;
+    transform: translateX(-50%);
     font-weight: 700;
     letter-spacing: 0.01em;
     animation: preloader-text-breathe 2.4s ease-in-out infinite;
@@ -219,7 +177,7 @@
     width: 0%;
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, var(--preloader-blue), var(--preloader-blue-soft));
+    background: var(--preloader-blue);
     animation: preloader-progress-load var(--preloader-min-duration) var(--preloader-ease-out) forwards;
 }
 
@@ -230,8 +188,9 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--preloader-blue-soft);
-    box-shadow: 0 0 12px rgba(89, 98, 214, 0.45);
+    background: var(--preloader-lime);
+    border: 2px solid var(--preloader-blue);
+    box-shadow: 0 0 14px rgba(213, 232, 45, 0.7);
     transform: translate(-50%, -50%);
     animation: preloader-progress-dot-load var(--preloader-min-duration) var(--preloader-ease-out) forwards;
 }
@@ -273,16 +232,18 @@
 /* ---- Reduced motion --------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
     .preloader__stage,
-    .preloader__arc--flow,
     .preloader__halo,
-    .preloader__veh,
     .preloader__loading-text,
     .preloader__progress-fill,
     .preloader__progress-dot {
         animation: none !important;
     }
 
-    .preloader__arc--flow {
+    .preloader__trail {
+        display: none;
+    }
+
+    .preloader__plane {
         display: none;
     }
 
