@@ -21,7 +21,10 @@ type VariantKey = (typeof VARIANTS)[number]['key'];
 const isVariantKey = (value: string | null): value is VariantKey => VARIANTS.some((v) => v.key === value);
 
 export const HomeHeroVariants = () => {
-    const [variant, setVariant] = useState<VariantKey>('A');
+    const [variant, setVariant] = useState<VariantKey>(() => {
+        const initial = process.env.NEXT_PUBLIC_HERO_VARIANT ?? null;
+        return isVariantKey(initial) ? initial : 'A';
+    });
 
     useEffect(() => {
         const fromUrl = new URLSearchParams(window.location.search).get('variant');
