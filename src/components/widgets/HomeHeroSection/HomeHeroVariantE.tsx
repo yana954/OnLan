@@ -51,12 +51,12 @@ const DIRECTIONS = [
 
 const ROTATE_MS = 5500;
 
-/** Тривалість прольоту в секундах (змінити тут). Після нього літачок вилітає з екрана, слід зникає. */
+/** Тривалість прольоту в секундах (змінити тут). Після нього літачок вилітає з екрана; слід за ним навмисно не малюється, щоб було чисто. */
 const FLIGHT_SECONDS = 11;
 
 /** Хаотична траєкторія в координатах viewBox 1000×400: заліт, петлі навколо заголовка, виліт угору праворуч. */
 const FLIGHT_PATH =
-    'M -140 380 C 80 390 140 60 300 90 S 520 340 650 230 S 580 10 430 70 S 240 370 430 330 S 880 390 890 190 S 700 20 640 120 S 940 310 1180 -140';
+    'M -140 360 C 60 380 120 120 260 100 S 470 330 640 300 S 960 330 900 160 S 640 -10 460 40 S 300 200 520 -40 S 900 60 1180 -160';
 
 const Flight = ({ animated }: { animated: boolean }) => {
     if (!animated) {
@@ -69,19 +69,6 @@ const Flight = ({ animated }: { animated: boolean }) => {
             className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[124%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 overflow-visible max-md:hidden"
             aria-hidden
         >
-            <defs>
-                <mask id="flight-reveal" maskUnits="userSpaceOnUse" x="-200" y="-200" width="1500" height="800">
-                    <path d={FLIGHT_PATH} pathLength="1" fill="none" stroke="#fff" strokeWidth="14" strokeDasharray="1" strokeDashoffset="1">
-                        <animate attributeName="stroke-dashoffset" from="1" to="0" dur={`${FLIGHT_SECONDS}s`} fill="freeze" />
-                    </path>
-                </mask>
-            </defs>
-            <g>
-                <g mask="url(#flight-reveal)">
-                    <path d={FLIGHT_PATH} fill="none" stroke="#bacf02" strokeWidth="2.5" strokeDasharray="3 12" strokeLinecap="round" />
-                </g>
-                <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.92;1" dur={`${FLIGHT_SECONDS + 1.5}s`} fill="freeze" />
-            </g>
             <g>
                 <g transform="scale(2.2)">
                     <path d="M 14 0 C 14 -3 8 -4 2 -4 L -10 -4 L -13 -8 L -15 -8 L -13 0 L -15 8 L -13 8 L -10 4 L 2 4 C 8 4 14 3 14 0 Z" fill="#2c358c" />
