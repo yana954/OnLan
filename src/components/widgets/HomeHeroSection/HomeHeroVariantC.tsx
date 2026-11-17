@@ -57,14 +57,14 @@ export const HomeHeroVariantC = () => {
                     </div>
                 </div>
 
-                <div className="hero-reveal relative mt-8 h-[15rem] overflow-hidden rounded-[24px] shadow-[0_24px_48px_-24px_rgba(44,53,140,0.45)] md:h-[22rem] md:rounded-[36px] min-[1200px]:h-[min(24rem,calc(100dvh-31rem))] min-[1200px]:min-h-[18rem]">
+                <div className="hero-reveal relative mx-auto mt-8 h-[15rem] max-w-5xl overflow-hidden rounded-[24px] shadow-[0_24px_48px_-24px_rgba(44,53,140,0.45)] md:h-[26rem] md:rounded-[36px] min-[1200px]:h-[30rem]">
                     <Image
                         src={imgTruck}
                         alt={HOME_HERO.modes[0].alt}
                         fill
                         priority
                         sizes="100vw"
-                        className="hero-kenburns object-cover object-[60%_55%]"
+                        className="hero-kenburns object-cover object-[55%_60%]"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-onlan-blue/55 via-transparent to-transparent" aria-hidden />
                     <ul className="absolute left-3 top-3 m-0 flex list-none flex-wrap gap-2 p-0 md:left-6 md:top-6">
