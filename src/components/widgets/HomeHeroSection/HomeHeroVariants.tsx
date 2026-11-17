@@ -23,7 +23,7 @@ const isVariantKey = (value: string | null): value is VariantKey => VARIANTS.som
 export const HomeHeroVariants = () => {
     const [variant, setVariant] = useState<VariantKey>(() => {
         const initial = process.env.NEXT_PUBLIC_HERO_VARIANT ?? null;
-        return isVariantKey(initial) ? initial : 'A';
+        return isVariantKey(initial) ? initial : 'E';
     });
 
     useEffect(() => {

@@ -51,7 +51,7 @@ const DIRECTIONS = [
 
 const ROTATE_MS = 5500;
 
-/** Тривалість прольоту в секундах (змінити тут). Після нього літачок вилітає з екрана; слід за ним навмисно не малюється, щоб було чисто. */
+/** Тривалість прольоту в секундах (змінити тут). Після нього літачок вилітає з екрана; за ним тягнеться лише короткий м’який шлейф, що зникає разом із ним. */
 const FLIGHT_SECONDS = 11;
 
 /** Хаотична траєкторія в координатах viewBox 1000×400: заліт, петлі навколо заголовка, виліт угору праворуч. */
@@ -69,6 +69,20 @@ const Flight = ({ animated }: { animated: boolean }) => {
             className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[124%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 overflow-visible max-md:hidden"
             aria-hidden
         >
+            {/* М'який шлейф-«комета»: коротка смуга за літачком, не залишає слідів на сторінці */}
+            <path
+                d={FLIGHT_PATH}
+                pathLength="1"
+                fill="none"
+                stroke="#2c358c"
+                strokeOpacity="0.28"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray="0.16 2"
+                strokeDashoffset="0.16"
+            >
+                <animate attributeName="stroke-dashoffset" from="0.16" to="-1" dur={`${FLIGHT_SECONDS}s`} fill="freeze" />
+            </path>
             <g>
                 <g transform="scale(2.2)">
                     <path d="M 14 0 C 14 -3 8 -4 2 -4 L -10 -4 L -13 -8 L -15 -8 L -13 0 L -15 8 L -13 8 L -10 4 L 2 4 C 8 4 14 3 14 0 Z" fill="#2c358c" />
