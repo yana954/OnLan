@@ -877,3 +877,17 @@
 @media (prefers-reduced-motion: reduce) {
     .hero-rise, .hero-kenburns, .hero-reveal, .hero-sweep { animation: none; opacity: 1; transform: none; clip-path: none; }
 }
+
+/* ===== Hero truck scene (prototype) ===== */
+@keyframes scene-scroll { from { background-position-x: 0; } to { background-position-x: -1200px; } }
+@keyframes scene-road { from { background-position-x: 0; } to { background-position-x: -120px; } }
+@keyframes truck-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes wheel-spin { to { transform: rotate(-360deg); } }
+.scene-far { animation: scene-scroll 60s linear infinite; }
+.scene-near { animation: scene-scroll 24s linear infinite; }
+.scene-road { animation: scene-road 0.9s linear infinite; }
+.truck-bob { animation: truck-bob 0.5s ease-in-out infinite; }
+.wheel-spin { transform-box: fill-box; transform-origin: center; animation: wheel-spin 0.7s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+    .scene-far, .scene-near, .scene-road, .truck-bob, .wheel-spin { animation: none; }
+}

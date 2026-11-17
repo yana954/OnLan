@@ -4,12 +4,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { HomeHeroSection } from './HomeHeroSection';
 import { HomeHeroVariantB } from './HomeHeroVariantB';
 import { HomeHeroVariantC } from './HomeHeroVariantC';
+import { HomeHeroVariantD } from './HomeHeroVariantD';
 
 /** ПРОТОТИП: перемикач варіантів hero (?variant=A|B|C). Прибрати після вибору переможця. */
 const VARIANTS = [
     { key: 'A', name: 'Синій + фото-сітка', Component: HomeHeroSection },
     { key: 'B', name: 'Фото-фон + меню доставки', Component: HomeHeroVariantB },
     { key: 'C', name: 'Світлий + кінематографічне фото', Component: HomeHeroVariantC },
+    { key: 'D', name: 'Синій + фура їде (SVG-анімація)', Component: HomeHeroVariantD },
 ] as const;
 
 type VariantKey = (typeof VARIANTS)[number]['key'];

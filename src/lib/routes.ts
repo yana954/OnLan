@@ -16,7 +16,7 @@ import { SITE_NAME } from '@/lib/site';
  * date rather than `new Date()` — otherwise every rebuild would claim that all
  * pages changed.
  */
-const CONTENT_LAST_MODIFIED = '2026-08-20';
+const CONTENT_LAST_MODIFIED = '2026-11-17';
 
 export type BreadcrumbItem = {
     name: string;
@@ -46,7 +46,7 @@ export type SiteRoute = {
 
 export const HOME_SEO: PageSeo = {
     name: 'Головна',
-    title: `Міжнародні вантажні перевезення з Європи, Китаю та США | ${SITE_NAME}`,
+    title: `Міжнародні вантажні перевезення з Європи, Азії та США | ${SITE_NAME}`,
     description:
         'Логістика для бізнесу, що рухається швидко: авто, море, авіа та залізниця, митне оформлення за 24 години, повний контроль маршруту та нульові затримки.',
     path: '/',
