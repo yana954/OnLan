@@ -1,8 +1,9 @@
 import { Link } from '@/lib/router';
 import Breadcrumbs from '@/components/elements/Breadcrumbs';
+import { DIRECTIONS } from '@/content/directions';
 import { SERVICES } from '@/content/services';
 import type { BreadcrumbItem } from '@/lib/routes';
-import { servicePath } from '@/lib/routes';
+import { directionPath, servicePath } from '@/lib/routes';
 
 type Props = {
     breadcrumbs: BreadcrumbItem[];
@@ -73,6 +74,20 @@ export default function ServicesPage({ breadcrumbs }: Props) {
                                         <span aria-hidden>→</span>
                                     </Link>
                                 </article>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <h2 className="mt-12 text-2xl font-bold text-onlan-black md:text-3xl">Напрямки доставки</h2>
+                    <ul className="mt-5 flex list-none flex-wrap gap-3 p-0">
+                        {DIRECTIONS.map((direction) => (
+                            <li key={direction.slug}>
+                                <Link
+                                    to={directionPath(direction.slug)}
+                                    className="inline-block rounded-full bg-onlan-lime px-5 py-2.5 text-sm font-semibold text-onlan-black no-underline hover:opacity-90 md:text-base"
+                                >
+                                    {direction.title}
+                                </Link>
                             </li>
                         ))}
                     </ul>

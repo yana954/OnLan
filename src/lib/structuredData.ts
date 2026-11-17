@@ -131,6 +131,9 @@ export function createBreadcrumbNode(pagePath: string, trail: BreadcrumbItem[]):
     };
 }
 
+/** Географія з бігучого рядка регіонів на головній. */
+const SERVICE_AREA = ['Україна', 'Європа', 'Азія', 'США', 'Велика Британія'].map((name) => ({ '@type': 'Place', name }));
+
 export function createServiceNode(service: ServiceContent, imagePath?: string): JsonLdNode {
     const url = absoluteUrl(`/services/${service.slug}`);
 
@@ -141,6 +144,7 @@ export function createServiceNode(service: ServiceContent, imagePath?: string): 
         serviceType: service.tagLabel,
         description: service.lead,
         provider: organizationRef,
+        areaServed: SERVICE_AREA,
         url,
         mainEntityOfPage: { '@id': nodeId(`/services/${service.slug}`, 'webpage') },
     };

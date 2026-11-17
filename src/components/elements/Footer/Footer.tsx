@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhone } from 'react-icons/fa6';
 import footerBackground from '@/assets/images/FooterBackground.webp';
+import { DIRECTIONS } from '@/content/directions';
 import { SERVICES } from '@/content/services';
 import Description from '@/components/elements/Description';
 import { LogoFooter } from '@/assets/icons/LogoFooter';
@@ -65,7 +66,7 @@ export const Footer = () => {
                             </div>
                         </Link>
                         <Description
-                            description="Міжнародна логістика для бізнесу: доставка з Європи, Китаю та США в Україну. Митниця, страхування та підтримка 24/7."
+                            description="Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну. Митне оформлення, страхування, єдиний менеджер на маршруті."
                             type="small"
                             className="mt-5 w-full max-w-full text-onlan-white/90 md:mt-6"
                         />
@@ -125,6 +126,15 @@ export const Footer = () => {
                                         className={linkClass}
                                     >
                                         {service.title}
+                                    </Link>
+                                ))}
+                                {DIRECTIONS.map((direction) => (
+                                    <Link
+                                        key={direction.slug}
+                                        to={`/directions/${direction.slug}`}
+                                        className={linkClass}
+                                    >
+                                        {direction.title}
                                     </Link>
                                 ))}
                             </div>

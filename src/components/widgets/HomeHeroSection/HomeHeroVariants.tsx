@@ -60,7 +60,7 @@ export const HomeHeroVariants = () => {
     return (
         <>
             <Current />
-            {process.env.NODE_ENV !== 'production' && (
+            {(process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_SEO_INDEXING === 'false') && (
                 <div className="fixed bottom-4 left-1/2 z-[100] flex -translate-x-1/2 items-center gap-3 rounded-full bg-onlan-black px-3 py-2 text-onlan-white shadow-actions">
                     <button type="button" aria-label="Попередній варіант" onClick={() => step(-1)} className="px-2">
                         ←

@@ -36,6 +36,6 @@ export const ABOUT_US_VALUES: AboutUsValueItem[] = [
         icon: 'growth',
         title: 'Підтримка',
         description:
-            '24/7, навіть у святкові дні.',
+            'На зв’язку протягом усього маршруту.',
     },
 ];

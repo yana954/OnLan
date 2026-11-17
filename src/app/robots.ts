@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { IS_INDEXABLE_ENVIRONMENT, SITE_URL, absoluteUrl } from '@/lib/site';
+import { IS_INDEXABLE_ENVIRONMENT, absoluteUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
@@ -30,8 +30,19 @@ export default function robots(): MetadataRoute.Robots {
                 userAgent: '*',
                 allow: '/',
             },
+            // Явний дозвіл для AI-пошуку та асистентів (відповіді з цитуванням сайту).
+            {
+                userAgent: [
+                    'GPTBot',
+                    'OAI-SearchBot',
+                    'ChatGPT-User',
+                    'ClaudeBot',
+                    'PerplexityBot',
+                    'Google-Extended',
+                ],
+                allow: '/',
+            },
         ],
         sitemap: absoluteUrl('/sitemap.xml'),
-        host: SITE_URL,
     };
 }

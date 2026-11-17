@@ -1,3 +1,4 @@
+import { DIRECTIONS, type DirectionContent } from '@/content/directions';
 import { SERVICES, getServiceBySlug } from '@/content/services';
 import type { ServiceContent } from '@/types/Service.interface';
 import { SITE_NAME } from '@/lib/site';
@@ -46,9 +47,9 @@ export type SiteRoute = {
 
 export const HOME_SEO: PageSeo = {
     name: 'Головна',
-    title: `Міжнародні вантажні перевезення з Європи, Азії та США | ${SITE_NAME}`,
+    title: `Вантажні перевезення з Європи, Азії та США | ${SITE_NAME}`,
     description:
-        'Логістика для бізнесу, що рухається швидко: авто, море, авіа та залізниця, митне оформлення за 24 години, повний контроль маршруту та нульові затримки.',
+        'Вантажні перевезення з Європи, Азії та США: авто, море, авіа, залізниця. Митне оформлення «під ключ» і єдиний менеджер на всьому маршруті.',
     path: '/',
 };
 
@@ -62,7 +63,7 @@ export const ABOUT_US_SEO: PageSeo = {
 
 export const SERVICES_SEO: PageSeo = {
     name: 'Послуги',
-    title: `Послуги логістики: авто, море, авіа, залізниця, митниця | ${SITE_NAME}`,
+    title: `Послуги логістики: авто, море, авіа, залізниця | ${SITE_NAME}`,
     description:
         'Усі напрямки OnLan Logistic в одному місці: автомобільні, морські, авіа- та залізничні перевезення, негабарит, митне оформлення й мультимодальні рішення.',
     path: '/services',
@@ -95,6 +96,24 @@ export const STATIC_ROUTES: SiteRoute[] = [
     { seo: CONTACTS_SEO, lastModified: CONTENT_LAST_MODIFIED, breadcrumbs: [HOME_CRUMB] },
 ];
 
+export function directionPath(slug: string): string {
+    return `/directions/${slug}`;
+}
+
+/** Metadata for one `/directions/[slug]` landing page. */
+export function createDirectionRoute(direction: DirectionContent): SiteRoute {
+    return {
+        seo: {
+            name: direction.title,
+            title: direction.seo.title,
+            description: direction.seo.description,
+            path: directionPath(direction.slug),
+        },
+        lastModified: CONTENT_LAST_MODIFIED,
+        breadcrumbs: [HOME_CRUMB, SERVICES_CRUMB],
+    };
+}
+
 export function servicePath(slug: string): string {
     return `/services/${slug}`;
 }
@@ -124,7 +143,11 @@ export function getServiceRouteBySlug(slug: string): SiteRoute | undefined {
 
 /** Every publicly indexable route on the site. */
 export function getIndexableRoutes(): SiteRoute[] {
-    return [...STATIC_ROUTES, ...SERVICES.map(createServiceRoute)].filter(
+    return [
+        ...STATIC_ROUTES,
+        ...SERVICES.map(createServiceRoute),
+        ...DIRECTIONS.map(createDirectionRoute),
+    ].filter(
         (route) => !route.seo.noIndex,
     );
 }

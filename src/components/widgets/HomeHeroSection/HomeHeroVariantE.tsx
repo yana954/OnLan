@@ -16,7 +16,7 @@ const DIRECTIONS = [
         label: 'Азія',
         route: 'Китай · Туреччина → Україна',
         text: 'Море, залізниця й авіа: меблі, електроніка, текстиль, товари для маркетплейсів.',
-        slug: 'sea-container',
+        slug: 'china',
         image: imgContainers,
         alt: 'Контейнерний термінал',
     },
@@ -25,7 +25,7 @@ const DIRECTIONS = [
         label: 'США',
         route: 'США → Україна',
         text: 'Авіа для термінових партій і морські контейнери (FCL, LCL) з митним оформленням «під ключ».',
-        slug: 'air',
+        slug: 'usa',
         image: imgPlane,
         alt: 'Завантаження вантажу в літак',
     },
@@ -34,7 +34,7 @@ const DIRECTIONS = [
         label: 'Європа',
         route: 'ЄС → Україна',
         text: 'Повні (FTL) і збірні (LTL) вантажі, палети, рефрижератори — зі складів по всьому ЄС.',
-        slug: 'automotive',
+        slug: 'europe',
         image: imgTruck,
         alt: 'Вантажівка на трасі',
     },
@@ -43,7 +43,7 @@ const DIRECTIONS = [
         label: 'Україна',
         route: 'По всій Україні',
         text: 'Доставка від дверей до дверей і власний склад 2 000 м² у Вінниці.',
-        slug: 'automotive',
+        slug: 'ukraine',
         image: imgWarehouse,
         alt: 'Склад OnLan',
     },
@@ -107,17 +107,15 @@ export const HomeHeroVariantE = () => {
             <div className="container relative mx-auto px-4 pb-10 pt-10 md:pb-14 md:pt-20 min-[1200px]:pt-16">
                 <div className="relative isolate mx-auto max-w-4xl text-center">
                     <Orbit animated={motion} />
-                    <p
-                        style={{ ['--d' as string]: '0ms' }}
-                        className="hero-rise mb-3 text-xs font-bold uppercase tracking-[0.14em] text-onlan-blue/70 md:text-sm"
-                    >
-                        Міжнародні вантажні перевезення
-                    </p>
                     <h1
                         id={headingId}
                         style={{ ['--d' as string]: '100ms' }}
                         className="hero-rise mb-3 text-[clamp(2rem,4.8vw,3.75rem)] font-extrabold leading-[1.06] tracking-[-0.03em] text-onlan-blue"
                     >
+                        <span className="mb-3 block text-xs font-bold uppercase tracking-[0.14em] text-onlan-blue/70 md:text-sm">
+                            Міжнародні вантажні перевезення
+                            <span className="sr-only">: </span>
+                        </span>
                         Привеземо ваш товар{' '}
                         <span className="inline-block">
                             будь-куди
@@ -194,7 +192,7 @@ export const HomeHeroVariantE = () => {
                                 <span aria-hidden>→</span>
                             </Link>
                             <Link
-                                to={`/services/${current.slug}`}
+                                to={`/directions/${current.slug}`}
                                 className="btn btn-lg border border-onlan-white bg-transparent text-onlan-white no-underline hover:bg-onlan-white/10 max-sm:w-full"
                             >
                                 Детальніше

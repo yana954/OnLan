@@ -15,7 +15,7 @@ export const ORGANIZATION = {
     /** Brand spelling used in the UI */
     alternateName: 'ONLAN Logistic',
     description:
-        'Міжнародна логістика для бізнесу: доставка з Європи, Китаю та США в Україну, митне оформлення, страхування та підтримка 24/7.',
+        'Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну, митне оформлення, страхування. Працюємо з 2012 року, Вінниця.',
     email: CONTACTS_PRIMARY.email,
     telephone: CONTACTS_PRIMARY.phone,
     address: CONTACTS_ADDRESS,
