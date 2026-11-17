@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(ellipse 60% 55% at 50% 48%, #ffffff 0%, #f6f7fd 55%, #e9ebf9 100%);
+    background: #ffffff;
     pointer-events: auto;
     contain: layout paint style;
     transition:
