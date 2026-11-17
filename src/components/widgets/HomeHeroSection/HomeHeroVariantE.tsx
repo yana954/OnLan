@@ -129,9 +129,12 @@ export const HomeHeroVariantE = () => {
                         style={{ ['--d' as string]: '100ms' }}
                         className="hero-rise mb-3 text-[clamp(2rem,4.8vw,3.75rem)] font-extrabold leading-[1.06] tracking-[-0.03em] text-onlan-blue"
                     >
-                        <span className="mb-3 block text-xs font-bold uppercase tracking-[0.14em] text-onlan-blue/70 md:text-sm">
-                            Міжнародні вантажні перевезення
-                            <span className="sr-only">: </span>
+                        <span className="mb-4 flex items-center justify-center gap-2">
+                            <span className="size-2 shrink-0 rounded-full bg-onlan-lime" aria-hidden />
+                            <span className="rounded-full border border-onlan-blue/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-onlan-blue md:px-4 md:py-2 md:text-sm">
+                                Міжнародні вантажні перевезення
+                                <span className="sr-only">: </span>
+                            </span>
                         </span>
                         <span className="font-semibold">Привеземо ваш товар</span>{' '}
                         <span className="inline-block text-[1.12em] font-extrabold leading-none">
@@ -140,9 +143,9 @@ export const HomeHeroVariantE = () => {
                     </h1>
                     <p
                         style={{ ['--d' as string]: '250ms' }}
-                        className="hero-rise mb-6 text-base font-medium text-onlan-blue/80 md:text-lg"
+                        className="hero-rise mx-auto mb-7 max-w-[720px] text-balance text-base font-medium leading-snug text-onlan-blue/80 md:text-lg"
                     >
-                        Оберіть напрямок — покажемо маршрут, орієнтовні терміни та що входить у доставку
+                        <span className="font-bold text-onlan-blue">Привеземо, розмитнимо й доставимо до дверей:</span> авто, море, авіа, залізниця. Оберіть напрямок — покажемо маршрут і орієнтовні терміни.
                     </p>
 
                     <div
@@ -166,11 +169,14 @@ export const HomeHeroVariantE = () => {
                                 className={clsx(
                                     'rounded-full border px-5 py-2.5 text-base font-bold transition-all md:px-7 md:py-3 md:text-lg',
                                     i === active
-                                        ? 'border-onlan-blue bg-onlan-blue text-onlan-white shadow-[0_8px_20px_-8px_rgba(44,53,140,0.6)]'
-                                        : 'border-onlan-blue/30 bg-onlan-white text-onlan-blue hover:border-onlan-blue',
+                                        ? 'border-onlan-blue bg-onlan-blue text-onlan-white shadow-[0_10px_24px_-8px_rgba(44,53,140,0.65)]'
+                                        : 'border-onlan-blue/25 bg-onlan-white text-onlan-blue hover:border-onlan-blue hover:bg-onlan-lavender/50',
                                 )}
                             >
-                                {d.label}
+                                <span className="inline-flex items-center gap-2">
+                                    {i === active && <span className="size-2 rounded-full bg-onlan-lime" aria-hidden />}
+                                    {d.label}
+                                </span>
                             </button>
                         ))}
                     </div>
@@ -196,9 +202,9 @@ export const HomeHeroVariantE = () => {
                             )}
                         />
                     ))}
-                    <div className="absolute inset-0 bg-linear-to-t from-onlan-blue/90 via-onlan-blue/25 to-transparent md:bg-linear-to-tr md:from-onlan-blue/90 md:via-onlan-blue/35 md:to-transparent" aria-hidden />
+                    <div className="absolute inset-0 bg-linear-to-t from-onlan-blue/70 via-transparent to-transparent" aria-hidden />
 
-                    <div key={current.key} className="hero-rise absolute inset-x-4 bottom-4 md:inset-x-8 md:bottom-8 md:max-w-[560px]">
+                    <div key={current.key} className="hero-rise absolute inset-x-3 bottom-3 rounded-[20px] border border-onlan-lime/80 bg-onlan-blue/55 p-4 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-[14px] md:inset-x-auto md:bottom-8 md:left-8 md:max-w-[520px] md:rounded-[28px] md:p-6">
                         <p className="mb-2 inline-block rounded-full bg-onlan-lime px-3 py-1 text-xs font-bold text-onlan-black md:text-sm">
                             {current.route}
                         </p>
