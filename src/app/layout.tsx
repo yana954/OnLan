@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import './globals.css';
 import ClientShell from '@/components/app/ClientShell';
 import JsonLd from '@/components/app/JsonLd';
-import { Preloader } from '@/components/elements/Preloader';
 import { createRootMetadata } from '@/lib/seo';
 import { SITE_LANG, THEME_COLOR } from '@/lib/site';
 import { createGraph, createOrganizationNode, createWebsiteNode } from '@/lib/structuredData';
@@ -24,7 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang={SITE_LANG} className={`${EUkraine.variable} ${EUkraine.className}`}>
             <body>
-                <Preloader />
+                {/* Preloader is parked for now (components/elements/Preloader); re-enable: <Preloader /> */}
                 <JsonLd data={siteJsonLd} />
                 <ClientShell>{children}</ClientShell>
             </body>

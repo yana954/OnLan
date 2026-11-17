@@ -195,6 +195,7 @@ export const HomeHeroVariantE = () => {
                             alt={i === active ? d.alt : ''}
                             fill
                             priority={i === 0}
+                            loading={i === 0 ? undefined : 'eager'}
                             sizes="100vw"
                             className={clsx(
                                 'object-cover transition-all duration-1000 ease-out',
