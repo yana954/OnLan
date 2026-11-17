@@ -51,33 +51,49 @@ const DIRECTIONS = [
 
 const ROTATE_MS = 5500;
 
-/** Орбіта навколо заголовка: літачок летить по еліпсу (SMIL, масштабується з заголовком). */
-const ORBIT_PATH = 'M 500 5 A 495 195 0 1 1 499.9 5 Z';
+/** Тривалість прольоту в секундах (змінити тут). Після нього літачок вилітає з екрана, слід зникає. */
+const FLIGHT_SECONDS = 11;
 
-const Orbit = ({ animated }: { animated: boolean }) => (
-    <svg
-        viewBox="0 0 1000 400"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[124%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 max-md:hidden"
-        aria-hidden
-    >
-        <path d={ORBIT_PATH} fill="none" stroke="#bacf02" strokeWidth="2.5" strokeDasharray="3 12" strokeLinecap="round" />
-        <g>
+/** Хаотична траєкторія в координатах viewBox 1000×400: заліт, петлі навколо заголовка, виліт угору праворуч. */
+const FLIGHT_PATH =
+    'M -140 380 C 80 390 140 60 300 90 S 520 340 650 230 S 580 10 430 70 S 240 370 430 330 S 880 390 890 190 S 700 20 640 120 S 940 310 1180 -140';
+
+const Flight = ({ animated }: { animated: boolean }) => {
+    if (!animated) {
+        return null;
+    }
+
+    return (
+        <svg
+            viewBox="0 0 1000 400"
+            className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[124%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 overflow-visible max-md:hidden"
+            aria-hidden
+        >
+            <defs>
+                <mask id="flight-reveal" maskUnits="userSpaceOnUse" x="-200" y="-200" width="1500" height="800">
+                    <path d={FLIGHT_PATH} pathLength="1" fill="none" stroke="#fff" strokeWidth="14" strokeDasharray="1" strokeDashoffset="1">
+                        <animate attributeName="stroke-dashoffset" from="1" to="0" dur={`${FLIGHT_SECONDS}s`} fill="freeze" />
+                    </path>
+                </mask>
+            </defs>
+            <g>
+                <g mask="url(#flight-reveal)">
+                    <path d={FLIGHT_PATH} fill="none" stroke="#bacf02" strokeWidth="2.5" strokeDasharray="3 12" strokeLinecap="round" />
+                </g>
+                <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.92;1" dur={`${FLIGHT_SECONDS + 1.5}s`} fill="freeze" />
+            </g>
             <g>
                 <g transform="scale(2.2)">
                     <path d="M 14 0 C 14 -3 8 -4 2 -4 L -10 -4 L -13 -8 L -15 -8 L -13 0 L -15 8 L -13 8 L -10 4 L 2 4 C 8 4 14 3 14 0 Z" fill="#2c358c" />
                     <path d="M 3 -3 L -7 -19 L -10 -19 L -5 -3 Z M 3 3 L -7 19 L -10 19 L -5 3 Z" fill="#2c358c" />
                     <circle cx="9" cy="0" r="1.4" fill="#d5e82d" />
                 </g>
-                {animated ? (
-                    <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" path={ORBIT_PATH} />
-                ) : (
-                    <animateMotion dur="1s" fill="freeze" rotate="auto" path={ORBIT_PATH} keyPoints="0.1;0.1" keyTimes="0;1" calcMode="linear" />
-                )}
+                <animateMotion dur={`${FLIGHT_SECONDS}s`} rotate="auto" path={FLIGHT_PATH} fill="freeze" />
+                <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.99;1" dur={`${FLIGHT_SECONDS}s`} fill="freeze" />
             </g>
-        </g>
-    </svg>
-);
-
+        </svg>
+    );
+};
 
 /** Варіант E: «Привеземо ваш товар будь-куди» — інтерактивний вибір напрямку (авто-перемикання до першого кліку). */
 export const HomeHeroVariantE = () => {
@@ -106,7 +122,7 @@ export const HomeHeroVariantE = () => {
         >
             <div className="container relative mx-auto px-4 pb-10 pt-10 md:pb-14 md:pt-20 min-[1200px]:pt-16">
                 <div className="relative isolate mx-auto max-w-4xl text-center">
-                    <Orbit animated={motion} />
+                    <Flight animated={motion} />
                     <h1
                         id={headingId}
                         style={{ ['--d' as string]: '100ms' }}
@@ -116,8 +132,8 @@ export const HomeHeroVariantE = () => {
                             Міжнародні вантажні перевезення
                             <span className="sr-only">: </span>
                         </span>
-                        Привеземо ваш товар{' '}
-                        <span className="inline-block">
+                        <span className="font-semibold">Привеземо ваш товар</span>{' '}
+                        <span className="inline-block text-[1.12em] font-extrabold leading-none">
                             будь-куди
                         </span>
                     </h1>
@@ -125,7 +141,7 @@ export const HomeHeroVariantE = () => {
                         style={{ ['--d' as string]: '250ms' }}
                         className="hero-rise mb-6 text-base font-medium text-onlan-blue/80 md:text-lg"
                     >
-                        Обери напрямок — покажемо, як це працює
+                        Оберіть напрямок — покажемо маршрут, орієнтовні терміни та що входить у доставку
                     </p>
 
                     <div
