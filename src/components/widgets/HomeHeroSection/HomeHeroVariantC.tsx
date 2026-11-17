@@ -18,7 +18,7 @@ export const HomeHeroVariantC = () => {
 
     return (
         <section
-            className="relative w-full overflow-hidden bg-linear-to-b from-onlan-lavender/45 via-onlan-white to-onlan-white"
+            className="relative w-full overflow-hidden bg-onlan-white"
             aria-labelledby={headingId}
         >
 
