@@ -13,7 +13,7 @@ export function PreloaderRoute() {
     return (
         <svg
             className="preloader__route-svg"
-            viewBox="0 0 1000 360"
+            viewBox="0 0 1000 370"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
@@ -48,6 +48,11 @@ export function PreloaderRoute() {
                 <circle className="preloader__halo preloader__halo--right" r="30" fill="#2C358C" />
                 <circle r="15" fill="#ffffff" stroke="#2C358C" strokeOpacity="0.18" strokeWidth="1.5" />
                 <circle r="6.5" fill="#D5E82D" stroke="#2C358C" strokeWidth="2" />
+            </g>
+
+            <g fontFamily="inherit" fontWeight="700" fontSize="17" fill="#2C358C" textAnchor="middle" letterSpacing="1.5">
+                <text x="60" y="352" fillOpacity="0.6">СВІТ</text>
+                <text x="940" y="352">УКРАЇНА</text>
             </g>
 
             <g className="preloader__plane">
