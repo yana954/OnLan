@@ -11,8 +11,6 @@ const FACT_STYLES = [
     'bg-onlan-white text-onlan-blue',
 ] as const;
 
-const DOTS =
-    'radial-gradient(circle, color-mix(in srgb, var(--onlan-blue) 14%, transparent) 1.5px, transparent 1.5px)';
 
 /** Варіант C: світлий, по центру, кінематографічне фото, чипи видів доставки та картки-цифри на краю фото. */
 export const HomeHeroVariantC = () => {
@@ -23,11 +21,6 @@ export const HomeHeroVariantC = () => {
             className="relative w-full overflow-hidden bg-linear-to-b from-onlan-lavender/45 via-onlan-white to-onlan-white"
             aria-labelledby={headingId}
         >
-            <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-[420px] opacity-70 [mask-image:linear-gradient(to_bottom,black,transparent)]"
-                style={{ backgroundImage: DOTS, backgroundSize: '24px 24px' }}
-                aria-hidden
-            />
 
             <div className="container relative mx-auto px-4 pt-10 md:pt-14 min-[1200px]:pt-12">
                 <div className="mx-auto max-w-5xl text-center">
@@ -40,11 +33,7 @@ export const HomeHeroVariantC = () => {
                             {HOME_HERO.titleLines[0]} {HOME_HERO.titleLines[1]}
                         </span>
                         <br />
-                        <span className="relative inline-block text-onlan-blue">
-                            <span
-                                className="absolute inset-x-[-0.15em] bottom-[0.06em] -z-1 h-[0.42em] -skew-x-6 rounded-md bg-onlan-lime"
-                                aria-hidden
-                            />
+                        <span className="inline-block text-onlan-blue">
                             {HOME_HERO.titleHighlight}
                         </span>
                     </h1>

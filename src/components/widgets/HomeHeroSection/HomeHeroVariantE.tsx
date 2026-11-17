@@ -85,11 +85,7 @@ export const HomeHeroVariantE = () => {
                         className="hero-rise mb-3 text-[clamp(2rem,4.8vw,3.75rem)] font-extrabold leading-[1.06] tracking-[-0.03em] text-onlan-blue"
                     >
                         Привеземо ваш товар{' '}
-                        <span className="relative inline-block">
-                            <span
-                                className="absolute inset-x-[-0.12em] bottom-[0.06em] -z-1 h-[0.42em] -skew-x-6 rounded-md bg-onlan-lime"
-                                aria-hidden
-                            />
+                        <span className="inline-block">
                             будь-куди
                         </span>
                     </h1>
