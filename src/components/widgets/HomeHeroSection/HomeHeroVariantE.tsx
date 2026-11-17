@@ -52,16 +52,16 @@ const DIRECTIONS = [
 const ROTATE_MS = 5500;
 
 /** Орбіта навколо заголовка: літачок летить по еліпсу (SMIL, масштабується з заголовком). */
-const ORBIT_PATH = 'M 500 20 A 490 180 0 1 1 499.9 20 Z';
+const ORBIT_PATH = 'M 500 5 A 495 195 0 1 1 499.9 5 Z';
 
 const Orbit = ({ animated }: { animated: boolean }) => (
     <svg
         viewBox="0 0 1000 400"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[132%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 max-md:hidden"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-1 h-[124%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 max-md:hidden"
         aria-hidden
     >
-        <path d={ORBIT_PATH} fill="none" stroke="#bacf02" strokeWidth="2.5" strokeDasharray="3 12" strokeLinecap="round" transform="translate(0 20)" />
-        <g transform="translate(0 20)">
+        <path d={ORBIT_PATH} fill="none" stroke="#bacf02" strokeWidth="2.5" strokeDasharray="3 12" strokeLinecap="round" />
+        <g>
             <g>
                 <g transform="scale(2.2)">
                     <path d="M 14 0 C 14 -3 8 -4 2 -4 L -10 -4 L -13 -8 L -15 -8 L -13 0 L -15 8 L -13 8 L -10 4 L 2 4 C 8 4 14 3 14 0 Z" fill="#2c358c" />
@@ -104,7 +104,7 @@ export const HomeHeroVariantE = () => {
             className="relative w-full overflow-hidden bg-onlan-white"
             aria-labelledby={headingId}
         >
-            <div className="container relative mx-auto px-4 pb-10 pt-10 md:pb-14 md:pt-14 min-[1200px]:pt-12">
+            <div className="container relative mx-auto px-4 pb-10 pt-10 md:pb-14 md:pt-20 min-[1200px]:pt-16">
                 <div className="relative isolate mx-auto max-w-4xl text-center">
                     <Orbit animated={motion} />
                     <p
@@ -165,7 +165,7 @@ export const HomeHeroVariantE = () => {
                     id="dir-panel"
                     role="tabpanel"
                     aria-labelledby={`dir-tab-${current.key}`}
-                    className="hero-reveal relative mt-8 h-[20rem] overflow-hidden rounded-[24px] shadow-[0_24px_48px_-24px_rgba(44,53,140,0.45)] md:h-[26rem] md:rounded-[36px] min-[1200px]:h-[min(27rem,calc(100dvh-27rem))] min-[1200px]:min-h-[20rem]"
+                    className="hero-reveal relative mt-8 md:mt-14 h-[20rem] overflow-hidden rounded-[24px] shadow-[0_24px_48px_-24px_rgba(44,53,140,0.45)] md:h-[26rem] md:rounded-[36px] min-[1200px]:h-[min(27rem,calc(100dvh-27rem))] min-[1200px]:min-h-[20rem]"
                 >
                     {DIRECTIONS.map((d, i) => (
                         <Image
