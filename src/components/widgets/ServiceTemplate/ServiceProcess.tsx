@@ -92,7 +92,7 @@ export const ServiceProcess = ({ service }: ServiceProcessProps) => {
 
                 <Elements.Title
                     id={headingId}
-                    title={t('Етапи роботи над вашим вантажем', 'Stages of handling your cargo')}
+                    title={t('Етапи роботи з вашим вантажем', 'Stages of working on your cargo')}
                     type="h2"
                     className="mt-6 max-w-4xl text-balance text-onlan-black"
                 />

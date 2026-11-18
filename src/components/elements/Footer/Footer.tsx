@@ -71,8 +71,8 @@ export const Footer = () => {
                         </Link>
                         <Description
                             description={t(
-                                'Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну. Митне оформлення, страхування, єдиний менеджер на маршруті.',
-                                'International logistics for business: delivery from Europe, Asia and the USA to Ukraine. Customs clearance, insurance, one manager along the route.',
+                                'Міжнародна логістика для бізнесу. Доставка вантажів по всьому світу, митне оформлення, страхування та супровід 24/7.',
+                                'International logistics for business. Worldwide cargo delivery, customs clearance, insurance and 24/7 support.',
                             )}
                             type="small"
                             className="mt-5 w-full max-w-full text-onlan-white/90 md:mt-6"

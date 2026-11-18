@@ -51,20 +51,40 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                             {service.title}
                         </h1>
 
+                        {service.heroTagline && (
+                            <p className="mt-5 max-w-[640px] text-balance text-xl font-semibold leading-snug text-white md:mt-6 md:text-2xl">
+                                {service.heroTagline}
+                            </p>
+                        )}
+
                         <p className="mt-5 max-w-[640px] text-base font-light leading-7 text-onlan-lavender md:mt-6 md:text-lg md:leading-8">
                             {service.lead}
                         </p>
 
                         {service.highlights.length > 0 && (
                             <ul className="mt-7 flex w-full max-w-[720px] flex-wrap gap-3 md:mt-8">
-                                {service.highlights.map((item) => (
-                                    <li
-                                        key={item}
-                                        className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium leading-snug text-white backdrop-blur-sm md:text-base"
-                                    >
-                                        {item}
-                                    </li>
-                                ))}
+                                {service.highlights.map((item, index) => {
+                                    const note = service.highlightNotes?.[index];
+                                    return (
+                                        <li
+                                            key={item}
+                                            className={`border border-white/20 bg-white/10 text-white backdrop-blur-sm ${
+                                                note
+                                                    ? 'flex w-full flex-col gap-0.5 rounded-2xl px-4 py-3 sm:w-[calc(50%-0.375rem)]'
+                                                    : 'inline-flex rounded-full px-4 py-2 text-sm font-medium leading-snug md:text-base'
+                                            }`}
+                                        >
+                                            {note ? (
+                                                <>
+                                                    <span className="text-sm font-semibold leading-snug md:text-base">{item}</span>
+                                                    <span className="text-sm font-light leading-snug text-onlan-lavender">{note}</span>
+                                                </>
+                                            ) : (
+                                                item
+                                            )}
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         )}
                     </div>

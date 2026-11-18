@@ -13,7 +13,7 @@ const TEXT: Record<string, ServiceText> = {
         tagLabel: 'Road freight',
         title: 'Road freight',
         description:
-            'FTL and LTL across Ukraine and Europe: full and groupage trucks, route tracking and agreed unloading times for your business.',
+            'FTL and LTL shipping on international routes. We match the vehicle to your cargo type, plan the route and monitor delivery all the way.',
         lead: 'Fast road freight between Ukraine and Europe with full control at every stage: FTL and LTL, curtain-siders, reefers and isothermal trucks. GPS tracking, a clear schedule and a personal route manager.',
         highlights: [
             'FTL and LTL shipments with firmly agreed delivery times',
@@ -21,20 +21,23 @@ const TEXT: Record<string, ServiceText> = {
             'Real-time GPS tracking',
             'CMR insurance',
         ],
+        benefitsHeading: 'Why choose ONLAN for road freight',
         benefits: [
-            { title: 'Transparent pricing', description: 'A fixed rate per route with no hidden costs.' },
             {
-                title: 'A route built around your SLA',
-                description: 'We arrange direct trips, transshipment or cargo consolidation.',
+                title: 'A wide choice of vehicles',
+                description: 'From light-duty vans to curtain-siders, reefers, container trucks and tankers.',
             },
             {
-                title: 'Control on every kilometre',
-                description: 'GPS tracking and prompt updates on your cargo status.',
+                title: 'Own and partner fleet',
+                description: 'A broad network of carriers for fast, flexible shipment organisation.',
             },
             {
-                title: 'Documents without delays',
-                description:
-                    'We check CMRs, invoices and packing lists before loading to avoid problems at customs.',
+                title: 'Complex cargo — handled',
+                description: 'ADR, temperature-controlled, high-value and container cargo.',
+            },
+            {
+                title: 'Wide geography',
+                description: 'Ukraine, Europe, Turkey and other international routes.',
             },
         ],
         process: [
@@ -42,25 +45,46 @@ const TEXT: Record<string, ServiceText> = {
                 number: '01',
                 title: 'Request and quote',
                 description:
-                    'We receive the cargo and route details and send you a rate and delivery time on the day you get in touch.',
+                    'We receive the cargo and route details, calculate the cost and agree the shipping terms.',
             },
             {
                 number: '02',
-                title: 'Choosing the truck',
-                description:
-                    'We select the right vehicle type (curtain-sider, reefer, isothermal or ADR) and agree the shipping terms and delivery times.',
+                title: 'Organising the shipment',
+                description: 'We select the vehicle and agree the pickup date, route and loading details.',
             },
             {
                 number: '03',
-                title: 'Loading and control',
+                title: 'Loading and dispatch',
                 description:
-                    'We oversee the truck’s arrival, check the documents and the loading process and take photos of the cargo. We track the route by GPS and react quickly to any change on the road.',
+                    'We oversee the truck’s arrival and check the CMR and accompanying documents. If needed, we get photos of the loaded cargo.',
             },
             {
                 number: '04',
-                title: 'Customs and delivery',
+                title: 'Control and delivery',
                 description:
-                    'We oversee border crossing, accompany the delivery and confirm completion with CMR documents.',
+                    'We track the shipment along the route, keep you informed on its status and coordinate the truck’s arrival for unloading.',
+            },
+        ],
+        cases: [
+            {
+                title: 'Turkey → Ukraine: T1 cleared in 1 day',
+                situation:
+                    'Three curtain-sider trucks carrying equipment, up to 22 t each, stood idle in Turkey for five days because the supplier could not arrange the T1 transit declaration.',
+                solution:
+                    'OnLan brought in its partner broker in Turkey, who quickly arranged the T1 and prepared the trucks for onward transit.',
+                result:
+                    'An issue that had gone unresolved for five days was closed in one. All three trucks continued their journey to Ukraine.',
+                takeaway: '5 days of downtime → 1 day to resolve',
+            },
+            {
+                title: 'Italy → Ukraine: when a groupage shipment became urgent',
+                situation:
+                    'A client ordered a batch of components from Italy to Kyiv as part of a groupage load. After loading, it turned out the cargo had to reach customs clearance by a fixed date. Had the critical deadline been known in advance, a separate truck would have been sent straight away.',
+                solution:
+                    'We did not change the whole international delivery. After crossing the border at Krakovets, the groupage truck arrived in Lviv, where the cargo was promptly transferred at an OnLan partner warehouse. We then arranged a separate truck that took the cargo straight to the client’s customs point without waiting for other drop-offs.',
+                result:
+                    'The cargo arrived on time, and the client did not have to pay for a separate truck over the whole route.',
+                takeaway: 'We changed the logistics mid-journey — and kept both the deadline and the budget.',
             },
         ],
         cargoTypes: [
@@ -112,33 +136,52 @@ const TEXT: Record<string, ServiceText> = {
         title: 'Sea and container freight',
         description:
             'FCL and LCL from key ports, work with different container types and a handover to last-mile road delivery.',
-        lead: 'Sea freight from China, Southeast Asia, Turkey and Europe. FCL and LCL with leading lines, full control of booking, ports and door delivery.',
+        heroTagline: 'Global routes. Precision in every detail.',
+        lead: 'We organise FCL and LCL shipments through the world’s key ports, coordinating the entire logistics chain: ocean freight, port handling, customs procedures and onward delivery by road or rail.',
         highlights: [
-            'Booking with top shipping lines',
-            "20' / 40' / 40'HC • Reefer • Out-of-gauge cargo (OOG)",
-            'Full logistics support: port → customer warehouse',
-            'Port coverage: Odesa, Chornomorsk, Rotterdam, Koper, Gdańsk, Constanța',
+            'FCL • LCL',
+            '20′ • 40′ • 40′HC • Reefer • OOG',
+            'Port-to-Port • Port-to-Door • Door-to-Door',
+            'Multimodal logistics',
         ],
+        highlightNotes: [
+            'Full and groupage container shipments',
+            'Standard and specialised container solutions',
+            'Flexible delivery schemes',
+            'Sea • rail • road',
+        ],
+        benefitsHeading: 'Why choose ONLAN?',
         benefits: [
             {
-                title: 'FCL and LCL for your volume',
+                title: 'FCL and LCL to match your cargo',
                 description:
-                    'We choose the rate and line for the real volume of your cargo, with no overpaying for “air” in the container.',
+                    'Full and groupage container shipping — we choose the format based on volume, weight, route and budget.',
             },
             {
-                title: 'Predictable transit times',
+                title: 'Direct shipping line rates',
                 description:
-                    'We follow current line schedules, fix the ETA and tell you about any change immediately.',
+                    'We work with leading container lines and compare the available routes, transit times and freight terms for your specific shipment.',
             },
             {
-                title: 'Documents handled',
+                title: 'ETD, ETA and free time control',
                 description:
-                    'Bill of Lading, packing list, invoice, certificates of origin — we prepare and check them together with you.',
+                    'We follow the schedule, the container’s movement and ETA changes, and monitor demurrage/detention terms and the available free time.',
             },
             {
-                title: 'Road delivery and customs coordination',
+                title: 'Container delivery to the final point',
                 description:
-                    'Road haulage from port to warehouse and customs coordination without container downtime.',
+                    'We arrange the onward leg from the port by road or rail — within one logistics solution.',
+            },
+        ],
+        cases: [
+            {
+                title: 'How switching from CIF to FOB optimised sea freight from Vietnam',
+                situation:
+                    'A client regularly imported frozen seafood from Vietnam in reefer containers on CIF terms. They came to ONLAN for delivery of a container from a European port to Ukraine. During the first shipment it turned out that, because of limited free time, document delays and extra port charges, the real logistics cost was far above the original estimate.',
+                solution:
+                    'We proposed switching to FOB and took control of ocean freight from the port of departure. We chose the best line terms, checked the documents in advance and prepared the inland delivery before the container arrived.',
+                result:
+                    'The client got a predictable cost structure and control of the whole route, and handed ONLAN their next container shipments.',
             },
         ],
         process: [

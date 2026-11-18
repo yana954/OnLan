@@ -16,6 +16,15 @@ export type ServiceFaqItem = {
     answer: string;
 };
 
+export type ServiceCase = {
+    title: string;
+    situation: string;
+    solution: string;
+    result: string;
+    /** One-line takeaway shown under the story */
+    takeaway?: string;
+};
+
 export type ServiceContent = {
     /** URL segment for `/services/[slug]` */
     slug: string;
@@ -32,6 +41,14 @@ export type ServiceContent = {
     iconId: ServiceIconId;
     /** Hero highlights (check-mark list under the lead) */
     highlights: string[];
+    /** Optional second line for each highlight (same order as `highlights`) */
+    highlightNotes?: string[];
+    /** Optional bold line between the h1 and the lead */
+    heroTagline?: string;
+    /** Optional override for the benefits section heading */
+    benefitsHeading?: string;
+    /** Real customer cases; the section shows a placeholder while empty */
+    cases?: ServiceCase[];
     benefits: ServiceBenefit[];
     process: ServiceProcessStep[];
     /** Cargo types / directions chips */

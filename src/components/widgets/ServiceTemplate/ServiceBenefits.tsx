@@ -91,7 +91,7 @@ export const ServiceBenefits = ({ service }: ServiceBenefitsProps) => {
 
                 <Elements.Title
                     id={headingId}
-                    title={t('Чому це працює саме так', 'Why it works this way')}
+                    title={service.benefitsHeading ?? t('Що робить нашу логістику ефективною:', 'What makes our logistics effective:')}
                     type="h2"
                     className="mt-4 max-w-3xl text-balance text-2xl text-onlan-black md:mt-6 md:text-3xl lg:mt-8 lg:text-4xl"
                 />
