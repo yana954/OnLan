@@ -20,7 +20,7 @@ export type ServiceCase = {
     title: string;
     situation: string;
     solution: string;
-    result: string;
+    result?: string;
     /** One-line takeaway shown under the story */
     takeaway?: string;
 };

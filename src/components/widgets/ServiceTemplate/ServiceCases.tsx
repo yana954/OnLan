@@ -82,10 +82,12 @@ export const ServiceCases = ({ service }: ServiceCasesProps) => {
                                         <dt className="font-semibold text-onlan-blue">{t('Рішення', 'Solution')}</dt>
                                         <dd className="mt-1">{item.solution}</dd>
                                     </div>
-                                    <div>
-                                        <dt className="font-semibold text-onlan-blue">{t('Результат', 'Result')}</dt>
-                                        <dd className="mt-1">{item.result}</dd>
-                                    </div>
+                                    {item.result && (
+                                        <div>
+                                            <dt className="font-semibold text-onlan-blue">{t('Результат', 'Result')}</dt>
+                                            <dd className="mt-1">{item.result}</dd>
+                                        </div>
+                                    )}
                                 </dl>
                                 {item.takeaway && (
                                     <p className="mt-6 rounded-xl bg-onlan-lime px-4 py-3 text-base font-semibold leading-snug text-onlan-black">

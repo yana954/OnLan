@@ -183,6 +183,15 @@ const TEXT: Record<string, ServiceText> = {
                 result:
                     'The client got a predictable cost structure and control of the whole route, and handed ONLAN their next container shipments.',
             },
+            {
+                title: 'How changing the arrival port avoided a delivery delay',
+                situation:
+                    'A client imported industrial equipment from China in a 40′HC container. After departure it became clear that, because of congestion at the planned port and changes to the shipping line’s schedule, onward delivery to Ukraine could be seriously delayed.',
+                solution:
+                    'We proposed an alternative route through another European port, agreed a new logistics scheme and arranged the container’s onward delivery to Ukraine in advance.',
+                result:
+                    'We minimised the delay and kept control of the entire route — from ocean freight to final delivery.',
+            },
         ],
         process: [
             {
@@ -258,60 +267,79 @@ const TEXT: Record<string, ServiceText> = {
         tagLabel: 'Air',
         title: 'Air freight',
         description:
-            'Accelerated delivery for urgent consignments and high-value cargo — direct flights and minimal handling time at hubs.',
-        lead: 'Air delivery for urgent and high-value cargo. Direct and consolidated flights from Europe, Asia and the USA. Minimal hub handling time and real-time status confirmation.',
+            'Fast international delivery of urgent and valuable cargo. Optimal air routes, customs clearance and control at every stage.',
+        lead: 'Air delivery of urgent and high-value cargo from China, the USA, India, European and other countries to Ukraine. Direct and consolidated flights, optimal routes and cargo control at every stage of the journey.',
         highlights: [
             'Express and General Cargo',
-            'Special handling approvals for DGR, high-value goods, pharma, IT equipment',
-            'Door-to-door with a road leg',
-            'Constant flight and AWB status monitoring',
+            'DGR and special cargo',
+            'Airport-to-Airport • Door-to-Door',
+            'Flight and AWB status tracking',
         ],
+        benefitsHeading: 'Why businesses trust ONLAN with air freight',
         benefits: [
             {
-                title: 'Speed as the main KPI',
+                title: 'Speed for critical deadlines',
                 description:
-                    'We work in windows where every hour counts: product launches, production-line replacements, healthcare.',
+                    'We organise air delivery when time is decisive: for manufacturing, pharma, electronics and urgent supplies.',
             },
             {
-                title: 'Flexible schemes',
+                title: 'Flexible routes',
                 description:
-                    'Direct flight, consolidation, charter — we choose the solution for your real urgency and budget.',
+                    'Direct and consolidated flights and, if needed, charter solutions. We choose the route to fit your deadlines, budget and cargo.',
             },
             {
                 title: 'DGR and special cargo',
                 description:
-                    'Document preparation and packing for dangerous, temperature-controlled and high-value cargo.',
+                    'We arrange the carriage of dangerous, temperature-controlled and high-value cargo in line with air freight requirements.',
             },
             {
-                title: 'Transparent status',
+                title: 'Control at every stage',
                 description:
-                    'We confirm the AWB, report status by stage and notify you of any deviation from the plan.',
+                    'We monitor the shipment status by AWB and the key stages of the route, and promptly tell you about any changes.',
             },
         ],
         process: [
             {
                 number: '01',
-                title: 'Preliminary assessment',
+                title: 'Calculation and routing',
                 description:
-                    'We clarify weight, dimensions, value and temperature requirements, then calculate the rate and the best flight.',
+                    'We clarify the cargo, weight, dimensions, deadlines and special requirements, choose the route and calculate the air freight cost.',
             },
             {
                 number: '02',
-                title: 'Booking and documents',
+                title: 'Booking and preparation for departure',
                 description:
-                    'We book space on the flight and prepare the AWB, invoice, packing list and permits (DGR if needed).',
+                    'We book space on the flight and check the documents and airline requirements. If needed, we arrange cargo pickup and delivery to the airport.',
             },
             {
                 number: '03',
-                title: 'Hub and transfer',
+                title: 'Air carriage and control',
                 description:
-                    'We oversee handling at the hub and transfers between aircraft, minimising idle time between flights.',
+                    'We oversee cargo acceptance at the airport, departure and transit connections. We track the shipment by AWB and report the key statuses.',
             },
             {
                 number: '04',
-                title: 'Handover to the consignee',
+                title: 'Arrival and delivery to the consignee',
                 description:
-                    'Customs clearance at the destination airport and a road leg to the warehouse door or pickup point.',
+                    'We coordinate cargo handling at the destination airport, customs clearance and, if needed, door delivery to the consignee.',
+            },
+        ],
+        cases: [
+            {
+                title: 'The cargo was offloaded from the planned flight. ONLAN found an alternative the very next day',
+                situation:
+                    'An urgent batch of electronic components from China was due to fly to Ukraine on the agreed route. Space on the flight was booked and the cargo had been delivered to the airport. Before departure the airline said some cargo would be moved to the next flight because of lack of space on board, and our shipment was affected too. The airline’s next flight was several days away, and for the client waiting meant missing the agreed delivery dates.',
+                solution:
+                    'We did not wait for the next flight. We checked other airlines’ departures and found a way to send the cargo the following day. The ONLAN team rebooked the shipment, coordinated the handover to the new carrier and checked the documents for the new route. We handled all the changes with agents and airlines.',
+            },
+            {
+                title: 'Part of the cargo wasn’t ready. How ONLAN avoided delaying the whole shipment',
+                situation:
+                    'Before an air shipment from the USA, the supplier said part of the order would be ready later. Waiting meant losing the booked flight and changing the delivery dates for the whole consignment.',
+                solution:
+                    'We split the shipment: the ready part went on the original booking, and for the rest we immediately arranged dispatch on the nearest optimal flight.',
+                result:
+                    'The main cargo arrived on the agreed dates, and the rest was delivered as a separate shipment — without delaying the whole consignment.',
             },
         ],
         cargoTypes: [
@@ -362,59 +390,74 @@ const TEXT: Record<string, ServiceText> = {
         tagLabel: 'Rail',
         title: 'Rail freight',
         description:
-            'Container and wagon shipments, routes from Europe and Asia with a clear schedule and coordination at track gauge changes.',
-        lead: 'Container and wagon rail freight from Europe and Asia. Stable transit times, large volumes and reliable coordination at track-gauge interchanges.',
+            'From the rail terminal to your business’s door. International container and wagon freight with comprehensive support.',
+        lead: 'International rail freight of container and wagon cargo from China, Asia and Europe to Ukraine. We organise the route, terminal handling, customs transit and delivery of the cargo to the final consignee.',
         highlights: [
-            'China — Europe container trains',
-            'Boxcars, flatcars, tank cars, fittings',
-            'Work with border stations and terminals',
-            'Documentary support at 1520/1435 interchanges',
+            'Container shipping China — Europe — Ukraine',
+            'Covered wagons • flatcars • tank cars',
+            'Multimodal delivery: rail + road',
+            'Terminals • transshipment • customs transit',
         ],
+        benefitsHeading: 'Rail delivery under control at every stage',
         benefits: [
             {
-                title: 'Volume without losing control',
+                title: 'Large-volume shipments',
                 description:
-                    'Convenient for regular large shipments: materials, raw materials, finished goods.',
+                    'We organise delivery of raw materials, materials and finished goods in containers and wagons.',
             },
             {
-                title: 'Predictable schedule',
+                title: 'Supply planning',
                 description:
-                    'Regular routes and fixed windows let you plan warehouse and production.',
+                    'We agree the dispatch schedule, track the cargo and tell you about changes to arrival times.',
             },
             {
-                title: 'Route economics',
-                description: 'Often cheaper than road on long legs and faster than sea on Asian routes.',
+                title: 'Transparent cost',
+                description:
+                    'We calculate the cost of carriage, terminal handling and any necessary extra services in advance.',
             },
             {
-                title: 'Coordination at interchanges',
-                description:
-                    'We close documentary and technical questions at transshipment points between rail systems.',
+                title: 'Delivery to your warehouse',
+                description: 'We coordinate transshipment, document preparation and customs clearance.',
             },
         ],
         process: [
             {
                 number: '01',
-                title: 'Route calculation',
+                title: 'Request and agreeing terms',
                 description:
-                    'We analyse departure and destination stations, transshipment points and the wagon or container type.',
+                    'We receive the cargo details and the origin and destination points, then agree the route, cost and delivery times.',
             },
             {
                 number: '02',
-                title: 'Booking and loading',
+                title: 'Preparation and dispatch',
                 description:
-                    'We book rolling stock and coordinate its placement and loading supervision at the station.',
+                    'We order wagons or containers and agree the loading date and place. We prepare the rail consignment notes.',
             },
             {
                 number: '03',
-                title: 'Transit and interchanges',
+                title: 'Carriage and cargo release',
                 description:
-                    'We accompany the train’s movement and coordinate handover between railway administrations and transshipment terminals.',
+                    'We accompany the shipment to the destination station. We agree the receipt of the cargo and its removal from the station or terminal.',
+            },
+        ],
+        cases: [
+            {
+                title: 'The right wagons weren’t available on the route. ONLAN changed the departure station',
+                situation:
+                    'For a large batch of raw materials, the client needed a specific type of wagon. At the planned station there was no free rolling stock on the required dates, and waiting would have changed the delivery dates.',
+                solution:
+                    'We checked neighbouring stations, found available rolling stock and rebuilt the cargo supply. Loading was moved to another station without waiting for wagons at the original one.',
+                result:
+                    'The shipment did not join a queue — the cargo went by an alternative rail route within the agreed dates.',
             },
             {
-                number: '04',
-                title: 'Release and road leg',
-                description:
-                    'Customs clearance, removal of the container or wagon from the terminal and road delivery to the final point.',
+                title: 'No space on the nearest train — we found an alternative terminal',
+                situation:
+                    'A container had to be sent from Europe to Ukraine, but the nearest rail service had no free space. Waiting for the next departure would have changed the agreed delivery dates.',
+                solution:
+                    'We checked alternative rail terminals and found a way to send the container earlier. We arranged road delivery of the container to another terminal and onward rail carriage to Ukraine.',
+                result:
+                    'Instead of waiting for the next train, the container was sent by an alternative route and the agreed delivery dates were kept.',
             },
         ],
         cargoTypes: [
