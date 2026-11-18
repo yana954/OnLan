@@ -391,7 +391,7 @@ const TEXT: Record<string, ServiceText> = {
         title: 'Rail freight',
         description:
             'From the rail terminal to your business’s door. International container and wagon freight with comprehensive support.',
-        lead: 'International rail freight of container and wagon cargo from China, Asia and Europe to Ukraine. We organise the route, terminal handling, customs transit and delivery of the cargo to the final consignee.',
+        lead: 'International rail freight of container and wagon cargo from China, Asia and Europe to Ukraine.\n\nWe organise the route, terminal handling, customs transit and delivery of the cargo to the final consignee.',
         highlights: [
             'Container shipping China — Europe — Ukraine',
             'Covered wagons • flatcars • tank cars',

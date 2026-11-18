@@ -57,7 +57,7 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                             </p>
                         )}
 
-                        <p className="mt-5 max-w-[640px] text-base font-light leading-7 text-onlan-lavender md:mt-6 md:text-lg md:leading-8">
+                        <p className="mt-5 max-w-[640px] whitespace-pre-line text-base font-light leading-7 text-onlan-lavender md:mt-6 md:text-lg md:leading-8">
                             {service.lead}
                         </p>
 
