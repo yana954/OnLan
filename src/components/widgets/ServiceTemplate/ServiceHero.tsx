@@ -102,7 +102,7 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     type="text"
                                     label={t('Ваше ім’я', 'Your name')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder={t('Ваше ім’я', 'Your name')}
+                                    placeholder={t('Наприклад, Олена', 'e.g. Olena')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -114,7 +114,7 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     type="tel"
                                     label={t('Номер телефону', 'Phone number')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder={t('Номер телефону', 'Phone number')}
+                                    placeholder={t('+380 __ ___ __ __', '+380 __ ___ __ __')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -126,7 +126,7 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     type="text"
                                     label={t('Маршрут', 'Route')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder={t('Маршрут', 'Route')}
+                                    placeholder={t('Наприклад, Шанхай → Київ', 'e.g. Shanghai → Kyiv')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"
@@ -138,7 +138,7 @@ export const ServiceHero = ({ service, breadcrumbs }: ServiceHeroProps) => {
                                     type="text"
                                     label={t('Вага / м³', 'Weight / m³')}
                                     labelClassName="!text-onlan-white"
-                                    placeholder={t('Вага / м³', 'Weight / m³')}
+                                    placeholder={t('Наприклад, 1 200 кг / 8 м³', 'e.g. 1,200 kg / 8 m³')}
                                     className="w-full"
                                     inputWrapClassName="flex !h-[61px] min-h-[61px] items-center border-onlan-white bg-onlan-white"
                                     inputClassName="w-full !h-full min-h-0 py-0 leading-none"

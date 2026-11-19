@@ -75,7 +75,7 @@ export function ContactUsSection() {
                                 type="text"
                                 label={t('Ім’я', 'Name')}
                                 labelClassName="!text-onlan-white"
-                                placeholder={t('Ваше ім’я', 'Your name')}
+                                placeholder={t('Наприклад, Олена', 'e.g. Olena')}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 inputWrapClassName="flex !h-[61px] min-h-[61px] items-center bg-onlan-white border-onlan-white"
@@ -88,7 +88,7 @@ export function ContactUsSection() {
                                 type="tel"
                                 label={t('Телефон', 'Phone')}
                                 labelClassName="!text-onlan-white"
-                                placeholder={t('Номер телефону', 'Phone number')}
+                                placeholder={t('+380 __ ___ __ __', '+380 __ ___ __ __')}
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 inputWrapClassName="flex !h-[61px] min-h-[61px] items-center bg-onlan-white border-onlan-white"

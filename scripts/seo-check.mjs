@@ -205,7 +205,7 @@ async function main() {
     if (!/^<\?xml version="1\.0" encoding="UTF-8"\?>/.test(sitemapXml.trim())) {
         fail('sitemap.xml', 'missing XML declaration');
     }
-    if (!/<urlset\s+xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/.test(sitemapXml)) {
+    if (!/<urlset\s+xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"(\s+xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml")?\s*>/.test(sitemapXml)) {
         fail('sitemap.xml', 'missing/incorrect urlset namespace');
     }
     const locs = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);

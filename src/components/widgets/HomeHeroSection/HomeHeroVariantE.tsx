@@ -178,7 +178,7 @@ export const HomeHeroVariantE = () => {
                         className="hero-rise mx-auto mb-7 max-w-[720px] text-balance text-base font-medium leading-snug text-onlan-blue/80 md:text-lg"
                     >
                         <span className="font-bold text-onlan-blue">
-                            {t('Привеземо, розмитнимо й доставимо до дверей:', 'We ship, clear customs and deliver to your door:')}
+                            {t('Розмитнимо й доставимо до дверей:', 'We clear customs and deliver to your door:')}
                         </span>{' '}
                         {t(
                             'авто, море, авіа, залізниця. Оберіть напрямок — покажемо маршрут і орієнтовні терміни.',

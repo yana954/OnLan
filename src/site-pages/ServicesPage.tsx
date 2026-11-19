@@ -46,8 +46,11 @@ export default function ServicesPage({ breadcrumbs, lang }: Props) {
                     </p>
 
                     <ul className="mt-10 grid list-none grid-cols-1 gap-5 md:mt-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-                        {services.map((service) => (
-                            <li key={service.slug} className="h-full">
+                        {services.map((service, index) => (
+                            <li
+                                key={service.slug}
+                                className={`h-full${index === services.length - 1 && services.length % 3 === 1 ? ' lg:col-start-2' : ''}`}
+                            >
                                 <article className="flex h-full flex-col rounded-2xl border border-onlan-black/10 bg-onlan-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow hover:shadow-[0_12px_36px_rgba(25,30,70,0.16)] md:p-7">
                                     <div className="flex items-center gap-3">
                                         <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-onlan-lime text-xs font-bold text-onlan-blue">

@@ -20,7 +20,7 @@ import { SITE_NAME } from '@/lib/site';
  * date rather than `new Date()` — otherwise every rebuild would claim that all
  * pages changed.
  */
-const CONTENT_LAST_MODIFIED = '2026-11-17';
+const CONTENT_LAST_MODIFIED = '2026-11-19';
 
 export type BreadcrumbItem = {
     name: string;
@@ -52,7 +52,7 @@ export const HOME_SEO: PageSeo = {
     name: 'Головна',
     title: `Вантажні перевезення з Європи, Азії та США | ${SITE_NAME}`,
     description:
-        'Вантажні перевезення з Європи, Азії та США: авто, море, авіа, залізниця. Митне оформлення «під ключ» і єдиний менеджер на всьому маршруті.',
+        'Вантажні перевезення з Європи, Азії та США в Україну: авто, море, авіа, залізниця. Митне оформлення «під ключ» і єдиний менеджер на всьому маршруті.',
     path: '/',
 };
 
@@ -92,15 +92,15 @@ export const HOME_SEO_EN: PageSeo = {
     name: 'Home',
     title: `Freight from Europe, Asia and the USA to Ukraine | ${SITE_NAME}`,
     description:
-        'Freight from Europe, Asia and the USA to Ukraine: road, sea, air, rail. Turnkey customs clearance and one manager along the whole route.',
+        'International freight from Europe, Asia and the USA to Ukraine: road, sea, air and rail. Turnkey customs clearance and one manager along the whole route.',
     path: '/',
 };
 
 export const ABOUT_US_SEO_EN: PageSeo = {
     name: 'About us',
-    title: `About the company — a logistics partner for business | ${SITE_NAME}`,
+    title: `About OnLan — a logistics partner for business | ${SITE_NAME}`,
     description:
-        'OnLan Logistic is a reliable logistics partner for business: 10+ years of experience in international, multimodal and air freight, plus our team and company values.',
+        'OnLan Logistic is a reliable logistics partner for business: 10+ years in international, multimodal and air freight. Meet our team and company values.',
     path: '/about-us',
 };
 
@@ -108,7 +108,7 @@ export const SERVICES_SEO_EN: PageSeo = {
     name: 'Services',
     title: `Logistics services: road, sea, air, rail | ${SITE_NAME}`,
     description:
-        'All OnLan Logistic services in one place: road, sea, air and rail freight, oversized cargo, customs clearance and multimodal solutions.',
+        'All OnLan Logistic services in one place: road, sea, air and rail freight, oversized cargo, customs clearance and multimodal solutions for your business.',
     path: '/services',
 };
 

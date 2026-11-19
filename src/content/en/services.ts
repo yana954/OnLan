@@ -128,7 +128,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Road Freight Ukraine — Europe: FTL and LTL | OnLan Logistic',
             description:
-                'Road freight between Ukraine and the EU: FTL and LTL, curtain-sider, reefer, isothermal. GPS monitoring, fixed rate, one dedicated manager.',
+                "Road freight between Ukraine and the EU: FTL and LTL, curtain-sider, reefer, isothermal. GPS tracking, a fixed rate and a personal route manager.",
         },
     },
     'sea-container': {
@@ -260,7 +260,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Sea and Container Freight FCL and LCL | OnLan Logistic',
             description:
-                'Sea freight from China, Southeast Asia, Turkey and Europe. FCL and LCL with top lines, booking, documents and last-mile trucking.',
+                "FCL and LCL sea freight through the world’s key ports: ocean freight, port handling, customs procedures and onward delivery by road or rail. Quote on request.",
         },
     },
     air: {
@@ -383,7 +383,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Air Freight | Express and DGR | OnLan Logistic',
             description:
-                'Air delivery of urgent and high-value cargo. Express and General Cargo, DGR, pharma, electronics. Door-to-door across Ukraine.',
+                "Air delivery of urgent and high-value cargo from China, the USA, India and Europe to Ukraine: Express, General Cargo, DGR, AWB tracking. Quote on request.",
         },
     },
     rail: {
@@ -500,7 +500,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Rail Freight from Europe and Asia | OnLan Logistic',
             description:
-                'Container and wagon rail freight. China — Europe trains, transshipment, documents and road delivery to the door.',
+                "Rail freight of container and wagon cargo from China, Asia and Europe to Ukraine: terminal handling, customs transit and delivery to the consignee.",
         },
     },
     oversized: {
@@ -605,7 +605,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Oversized Cargo and Project Logistics | OnLan Logistic',
             description:
-                'Oversized cargo transport: lowboys, special permits, lashing engineering and route escort from the factory to installation.',
+                "Oversized and heavy cargo transport: lowboys, special permits, lashing engineering and route escort from the factory to installation. Quote on request.",
         },
     },
     customs: {
@@ -708,7 +708,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Customs Clearance: Import and Export | OnLan Logistic',
             description:
-                'Turnkey customs clearance: HS code classification, documents, preferences and liaison with customs. No stops, no surprise charges.',
+                "Turnkey customs clearance: HS code classification, documents, preferences and liaison with customs. No stops, no surprise charges. Quote on request.",
         },
     },
     multimodal: {
@@ -813,7 +813,7 @@ const TEXT: Record<string, ServiceText> = {
         seo: {
             title: 'Multimodal Freight: Road, Sea, Air | OnLan Logistic',
             description:
-                'Combined routes for the best transit time and price. One contract, one manager, transparent cost across the whole chain.',
+                "Multimodal freight combining road, sea, air and rail for the best transit time and price. One contract, one manager, transparent cost across the chain.",
         },
     },
 };

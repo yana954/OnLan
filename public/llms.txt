@@ -1,16 +1,16 @@
 # OnLan Logistic
 
-> Міжнародні вантажні перевезення з Європи, Азії та США в Україну та по Україні: авто, море, авіа, залізниця, митне оформлення «під ключ». Компанія працює з 2012 року, головний офіс у Вінниці, власний склад 2 000 м².
+> Міжнародні вантажні перевезення з Європи, Азії та США в Україну та по Україні: авто, море, авіа, залізниця, митне оформлення «під ключ». Компанія працює з 2012 року, головний офіс у Вінниці, склад 2 000 м². Сайт доступний українською (/) та англійською (/en).
 
-Оновлено: 2026-11-17. Терміни на сайті орієнтовні й залежать від маршруту, сезону та митниці; вартість розраховується індивідуально.
+Оновлено: 2026-11-19. Терміни на сайті орієнтовні й залежать від маршруту, сезону та митниці; вартість розраховується індивідуально.
 
 ## Послуги
-- [Автомобільні перевезення](https://onlan.com.ua/services/automotive): FTL і LTL між Україною та ЄС, тент, реф, ізотерм, GPS-моніторинг
-- [Морські та контейнерні перевезення](https://onlan.com.ua/services/sea-container): FCL і LCL з Китаю, Туреччини та Європи
-- [Авіаперевезення](https://onlan.com.ua/services/air): термінові та високовартісні вантажі
-- [Залізничні перевезення](https://onlan.com.ua/services/rail): контейнерні й вагонні, маршрути Китай — Європа
+- [Автомобільні перевезення](https://onlan.com.ua/services/automotive): FTL і LTL між Україною та ЄС, тент, реф, ізотерм, GPS-відстеження
+- [Морські та контейнерні перевезення](https://onlan.com.ua/services/sea-container): FCL і LCL через ключові порти світу, фрахт, портове обслуговування, доставка авто чи залізницею
+- [Авіаперевезення](https://onlan.com.ua/services/air): термінові та високовартісні вантажі з Китаю, США, Індії та Європи, Express, General Cargo, DGR, контроль AWB
+- [Залізничні перевезення](https://onlan.com.ua/services/rail): контейнерні й вагонні вантажі з Китаю, Азії та Європи, термінальна обробка, митний транзит
 - [Негабаритні перевезення](https://onlan.com.ua/services/oversized): трали, спецдозволи, супровід
-- [Митне оформлення](https://onlan.com.ua/services/customs): імпорт, експорт, документи, класифікація
+- [Митне оформлення](https://onlan.com.ua/services/customs): імпорт, експорт, документи, класифікація за УКТ ЗЕД
 - [Мультимодальні перевезення](https://onlan.com.ua/services/multimodal): комбіновані маршрути, один договір
 
 ## Напрямки
@@ -22,3 +22,12 @@
 ## Компанія
 - [Про нас](https://onlan.com.ua/about-us)
 - [Контакти](https://onlan.com.ua/contacts): info@onlan.com.ua, +38 096 523 73 55, Пн–Пт 9:00–18:00
+
+## English version
+International freight from Europe, Asia and the USA to Ukraine and within Ukraine: road, sea, air, rail and turnkey customs clearance. Transit times are indicative and depend on the route, season and customs; cost is calculated individually.
+
+- [Home](https://onlan.com.ua/en)
+- [Services](https://onlan.com.ua/en/services): [road](https://onlan.com.ua/en/services/automotive), [sea and container](https://onlan.com.ua/en/services/sea-container), [air](https://onlan.com.ua/en/services/air), [rail](https://onlan.com.ua/en/services/rail), [oversized](https://onlan.com.ua/en/services/oversized), [customs](https://onlan.com.ua/en/services/customs), [multimodal](https://onlan.com.ua/en/services/multimodal)
+- Routes: [China and Asia](https://onlan.com.ua/en/directions/china), [Europe](https://onlan.com.ua/en/directions/europe), [USA](https://onlan.com.ua/en/directions/usa), [within Ukraine](https://onlan.com.ua/en/directions/ukraine)
+- [About us](https://onlan.com.ua/en/about-us)
+- [Contacts](https://onlan.com.ua/en/contacts): info@onlan.com.ua, +38 096 523 73 55, Mon–Fri 9:00–18:00 (Kyiv time)

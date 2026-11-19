@@ -149,7 +149,7 @@ export function ContactsQuoteFormSection() {
                                 type="submit"
                                 variant="accent"
                                 size="md"
-                                className="mt-2 h-12 w-full justify-center underline font-semibold sm:w-auto sm:min-w-[240px] lg:h-14"
+                                className="mt-2 h-12 w-full justify-center text-base font-semibold no-underline sm:w-auto sm:min-w-[240px] lg:h-14"
                             >
                                 {c.contactsQuoteForm.submit}
                             </Elements.Button>

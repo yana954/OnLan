@@ -278,7 +278,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
             },
             {
                 title: 'Електроніка',
-                route: 'Класифікація ТН ВЕД',
+                route: 'Класифікація УКТ ЗЕД',
                 icon: 'electronics',
                 imageSeed: 'cargo-customs-electronics',
             },

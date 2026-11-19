@@ -179,7 +179,7 @@ const TEXT: Record<string, DirectionText> = {
         seo: {
             title: 'Shipping from the USA to Ukraine: Air and Sea Containers | OnLan',
             description:
-                'Freight from the USA to Ukraine: air for urgent shipments, FCL and LCL sea containers. Turnkey customs clearance. Quote on request.',
+                'Freight from the USA to Ukraine: air for urgent shipments, FCL and LCL sea containers. Turnkey customs clearance and one manager. Quote on request.',
         },
         sections: [
             {
@@ -254,7 +254,7 @@ const TEXT: Record<string, DirectionText> = {
         seo: {
             title: 'Freight within Ukraine: FTL, LTL, Warehousing | OnLan',
             description:
-                'Freight within Ukraine door to door: FTL and LTL, GPS monitoring, own 2,000 m² warehouse in Vinnytsia. Quote on request.',
+                'Freight within Ukraine door to door: FTL and LTL, GPS monitoring, a 2,000 m² warehouse in Vinnytsia, customs support. Quote on request.',
         },
         sections: [
             {

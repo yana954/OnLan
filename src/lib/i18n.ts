@@ -52,7 +52,9 @@ export function localePath(lang: Lang, href: string): string {
 
 /** Same page in the other language (hash/query dropped). */
 export function switchLangPath(pathname: string, target: Lang): string {
-    const logical = stripLang(pathname) || '/';
+    const stripped = stripLang(pathname) || '/';
+    // Error pages have no counterpart in the other language: fall back to its home page.
+    const logical = stripped.startsWith('/_not-found') ? '/' : stripped;
     return localePath(target, logical);
 }
 

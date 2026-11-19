@@ -1,13 +1,51 @@
 'use client';
 
-import Image from 'next/image';
 import { ContactsHeroShape } from '@/assets/icons/ContactsHeroShape';
-import menPhoto from '@/assets/images/men.webp';
 import { Elements } from '@/components/elements';
 import { useContent } from '@/hooks/useContent';
 import { useT } from '@/components/app/LangProvider';
 
-const HERO_CIRCLE_KEYS = ['phone', 'email', 'location', 'linkedin'] as const;
+const HERO_CIRCLES = [
+    {
+        key: 'phone',
+        bg: 'bg-onlan-blue',
+        fg: 'text-onlan-white',
+        path: <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" />,
+    },
+    {
+        key: 'email',
+        bg: 'bg-onlan-lime',
+        fg: 'text-onlan-black',
+        path: (
+            <>
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+            </>
+        ),
+    },
+    {
+        key: 'location',
+        bg: 'bg-onlan-blue',
+        fg: 'text-onlan-white',
+        path: (
+            <>
+                <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z" />
+                <circle cx="12" cy="10" r="3" />
+            </>
+        ),
+    },
+    {
+        key: 'hours',
+        bg: 'bg-onlan-lime',
+        fg: 'text-onlan-black',
+        path: (
+            <>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+            </>
+        ),
+    },
+] as const;
 
 export function ContactsHeroSection() {
     const c = useContent();
@@ -40,21 +78,27 @@ export function ContactsHeroSection() {
                             className="flex list-none items-center"
                             aria-label={t('Способи зв’язку', 'Ways to get in touch')}
                         >
-                            {HERO_CIRCLE_KEYS.map((key, index) => (
+                            {HERO_CIRCLES.map(({ key, bg, fg, path }, index) => (
                                 <li
                                     key={key}
                                     className={`relative shrink-0${index > 0 ? ' -ml-2' : ''}`}
                                     style={{ zIndex: index + 1 }}
                                 >
-                                    <span className="relative flex size-11 shrink-0 overflow-hidden rounded-full">
-                                        <Image
-                                            src={menPhoto}
-                                            alt=""
-                                            fill
-                                            className="object-cover"
-                                            sizes="44px"
+                                    <span
+                                        className={`flex size-11 shrink-0 items-center justify-center rounded-full ring-2 ring-onlan-white ${bg} ${fg}`}
+                                    >
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            className="size-5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                             aria-hidden
-                                        />
+                                        >
+                                            {path}
+                                        </svg>
                                     </span>
                                 </li>
                             ))}
