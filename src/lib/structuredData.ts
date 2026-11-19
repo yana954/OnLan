@@ -47,8 +47,9 @@ export function createOrganizationNode(lang: Lang = 'uk'): JsonLdNode {
         telephone: ORGANIZATION.telephone,
         address: {
             '@type': 'PostalAddress',
-            streetAddress: ORGANIZATION.address.street,
+            ...(ORGANIZATION.address.street ? { streetAddress: ORGANIZATION.address.street } : {}),
             addressLocality: ORGANIZATION.address.locality,
+            addressRegion: ORGANIZATION.address.region,
             addressCountry: ORGANIZATION.address.countryCode,
         },
         contactPoint: [

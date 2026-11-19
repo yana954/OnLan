@@ -244,17 +244,17 @@ const TEXT: Record<string, DirectionText> = {
     ukraine: {
         label: 'Ukraine',
         title: 'Freight within Ukraine',
-        lead: 'We deliver cargo across Ukraine door to door by road and, if needed, store it in our own 2,000 m² warehouse in Vinnytsia.',
+        lead: 'We deliver cargo across Ukraine door to door by road and, if needed, store it in our own 2,000 m² warehouse.',
         quick: [
             'Road freight in Ukraine: full truck (FTL) and groupage (LTL)',
-            'Own 2,000 m² warehouse in Vinnytsia',
-            'Operating since 2012, head office in Vinnytsia',
+            'Own 2,000 m² warehouse',
+            'Operating since 2012, head office in Lytyn',
             'GPS monitoring and agreed unloading times',
         ],
         seo: {
             title: 'Freight within Ukraine: FTL, LTL, Warehousing | OnLan',
             description:
-                'Freight within Ukraine door to door: FTL and LTL, GPS monitoring, a 2,000 m² warehouse in Vinnytsia, customs support. Quote on request.',
+                'Freight within Ukraine door to door: FTL and LTL, GPS monitoring, a 2,000 m² warehouse, customs support. Quote on request.',
         },
         sections: [
             {
@@ -267,7 +267,7 @@ const TEXT: Record<string, DirectionText> = {
             {
                 heading: 'Do you have your own warehouse?',
                 paragraphs: [
-                    'Yes, in Vinnytsia we have our own 2,000 m² warehouse. It has operated since 2015 and helps consolidate and temporarily store cargo before dispatch.',
+                    'Yes, we have our own 2,000 m² warehouse. It has operated since 2015 and helps consolidate and temporarily store cargo before dispatch.',
                     'The warehouse is convenient when cargo arrives from abroad and has to be distributed to addresses across Ukraine.',
                 ],
             },
@@ -299,7 +299,7 @@ const TEXT: Record<string, DirectionText> = {
             },
             {
                 question: 'Do you have a warehouse for storing cargo?',
-                answer: 'Yes, in Vinnytsia we have our own 2,000 m² warehouse. Cargo can be stored temporarily and sent to your addresses.',
+                answer: 'Yes, we have our own 2,000 m² warehouse. Cargo can be stored temporarily and sent to your addresses.',
             },
             {
                 question: 'Do you ship temperature-controlled goods within Ukraine?',

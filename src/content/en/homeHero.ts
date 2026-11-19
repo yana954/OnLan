@@ -9,7 +9,7 @@ export const HOME_HERO_EN: Widen<typeof UkHero> = {
     cta: 'Get a delivery quote',
     secondaryCta: 'Our services',
     facts: [
-        { key: 'since', value: 'since 2012', label: 'based in Vinnytsia' },
+        { key: 'since', value: 'since 2012', label: 'based in Lytyn' },
         { key: 'shipments', value: '5,000', label: 'successful shipments' },
         { key: 'warehouse', value: '2,000 m²', label: 'own warehouse' },
     ],

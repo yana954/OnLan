@@ -36,7 +36,7 @@ export const ABOUT_US_HISTORY_SECTION_EN: Widen<typeof UkHistSection> = {
 };
 
 export const ABOUT_US_HISTORY_MILESTONES_EN: HistoryMilestone[] = [
-    { year: 2012, text: 'ONLAN Logistic founded in Vinnytsia.', bgOpacityPercent: 20 },
+    { year: 2012, text: 'ONLAN Logistic founded.', bgOpacityPercent: 20 },
     { year: 2015, text: 'Opened our own 2,000 m² warehouse.', bgOpacityPercent: 40 },
     { year: 2018, text: 'Launched multimodal shipping between Ukraine and Asia.', bgOpacityPercent: 60 },
     { year: 2021, text: 'Turnkey customs clearance for EU clients.', bgOpacityPercent: 80 },

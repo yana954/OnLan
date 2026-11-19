@@ -35,7 +35,7 @@ const sectionLinksClass =
 export const Footer = () => {
     const t = useT();
     const { services, directions } = useContent();
-    const location = t('Вінниця, Україна', 'Vinnytsia, Ukraine');
+    const location = t('Літин, Вінницька область, Україна', 'Lytyn, Vinnytsia Oblast, Ukraine');
     const currentYear = new Date().getFullYear();
 
     return (

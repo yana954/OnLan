@@ -45,7 +45,7 @@ const COPY: Record<'uk' | 'en', Record<DirectionKey, DirectionCopy>> = {
         ukraine: {
             label: 'Україна',
             route: 'По всій Україні',
-            text: 'Доставка від дверей до дверей і власний склад 2 000 м² у Вінниці.',
+            text: 'Доставка від дверей до дверей і власний склад 2 000 м².',
             alt: 'Склад OnLan',
         },
     },
@@ -71,7 +71,7 @@ const COPY: Record<'uk' | 'en', Record<DirectionKey, DirectionCopy>> = {
         ukraine: {
             label: 'Ukraine',
             route: 'Across Ukraine',
-            text: 'Door-to-door delivery and our own 2,000 m² warehouse in Vinnytsia.',
+            text: 'Door-to-door delivery and our own 2,000 m² warehouse.',
             alt: 'OnLan warehouse',
         },
     },

@@ -13,6 +13,9 @@ export const ServiceCases = ({ service }: ServiceCasesProps) => {
     const headingId = `service-cases-${service.slug}`;
     const cases = service.cases ?? [];
 
+    // No real cases yet: hide the section instead of showing a placeholder.
+    if (cases.length === 0) return null;
+
     return (
         <section
             className="relative w-full bg-onlan-white py-12 md:py-16 lg:py-20"
@@ -35,32 +38,7 @@ export const ServiceCases = ({ service }: ServiceCasesProps) => {
                     className="mt-4 max-w-3xl text-balance text-onlan-black md:mt-6"
                 />
 
-                {cases.length === 0 ? (
-                    <>
-                        <p className="mt-4 max-w-2xl text-base leading-relaxed text-onlan-black/75 md:text-lg">
-                            {t(
-                                `Готуємо кейси для напрямку «${service.title}»: маршрути, строки, тип вантажу та рішення для клієнта. Розділ з’явиться найближчим часом.`,
-                                `We’re preparing case studies for “${service.title}”: routes, timelines, cargo types and client solutions. This section is coming soon.`,
-                            )}
-                        </p>
-                        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-10">
-                            {[t('Кейс 1', 'Case 1'), t('Кейс 2', 'Case 2')].map((label) => (
-                                <article
-                                    key={label}
-                                    className="rounded-2xl border border-dashed border-onlan-black/15 bg-onlan-white p-6 md:p-8"
-                                >
-                                    <p className="text-sm font-semibold uppercase tracking-[0.12em] text-onlan-blue">{label}</p>
-                                    <p className="mt-3 text-sm leading-relaxed text-onlan-black/60 md:text-base">
-                                        {t(
-                                            'Опис кейсу буде додано після узгодження з командою.',
-                                            'The case description will be added once agreed with the team.',
-                                        )}
-                                    </p>
-                                </article>
-                            ))}
-                        </div>
-                    </>
-                ) : (
+                {(
                     <div className="mt-8 grid grid-cols-1 gap-5 lg:mt-10 lg:grid-cols-2 lg:gap-6">
                         {cases.map((item, index) => (
                             <article

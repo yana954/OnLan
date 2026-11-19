@@ -15,7 +15,7 @@ export const ABOUT_US_HISTORY_SECTION = {
 export const ABOUT_US_HISTORY_MILESTONES: HistoryMilestone[] = [
     {
         year: 2012,
-        text: 'Заснування ONLAN Logistic у Вінниці.',
+        text: 'Заснування ONLAN Logistic.',
         bgOpacityPercent: 20,
     },
     {

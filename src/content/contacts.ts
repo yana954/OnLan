@@ -87,22 +87,26 @@ export const CONTACTS_DETAILS_SECTION = {
  * PostalAddress in structured data always describe the same place.
  */
 export const CONTACTS_ADDRESS = {
-    street: 'вул. Логістична, 12',
-    locality: 'Вінниця',
+    /** Street address is not published yet — add it when confirmed. */
+    street: '',
+    locality: 'Літин',
+    region: 'Вінницька область',
     country: 'Україна',
     /** ISO 3166-1 alpha-2, required by schema.org PostalAddress */
     countryCode: 'UA',
 } as const;
 
-export const CONTACTS_ADDRESS_TEXT = `${CONTACTS_ADDRESS.street}, ${CONTACTS_ADDRESS.locality}, ${CONTACTS_ADDRESS.country}`;
+export const CONTACTS_ADDRESS_TEXT = [CONTACTS_ADDRESS.street, CONTACTS_ADDRESS.locality, CONTACTS_ADDRESS.region, CONTACTS_ADDRESS.country]
+    .filter(Boolean)
+    .join(', ');
 
 export const CONTACTS_OFFICES_SECTION = {
     eyebrow: 'Адреси офісів та мапа',
     heading: 'Наші офіси',
-    officeTitle: 'Головний офіс (Вінниця)',
+    officeTitle: 'Головний офіс (Літин)',
     address: CONTACTS_ADDRESS_TEXT,
     mapEmbedUrl:
-        'https://www.google.com/maps?q=%D0%B2%D1%83%D0%BB.%20%D0%9B%D0%BE%D0%B3%D1%96%D1%81%D1%82%D0%B8%D1%87%D0%BD%D0%B0%2C%2012%2C%20%D0%92%D1%96%D0%BD%D0%BD%D0%B8%D1%86%D1%8F%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&z=15&output=embed',
+        'https://www.google.com/maps?q=%D0%9B%D1%96%D1%82%D0%B8%D0%BD%2C%20%D0%92%D1%96%D0%BD%D0%BD%D0%B8%D1%86%D1%8C%D0%BA%D0%B0%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&z=14&output=embed',
 } as const;
 
 export const CONTACTS_FAQ_SECTION = {

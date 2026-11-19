@@ -74,9 +74,9 @@ export const SERVICES_SEO: PageSeo = {
 
 export const CONTACTS_SEO: PageSeo = {
     name: 'Контакти',
-    title: `Контакти — телефон, email та офіс у Вінниці | ${SITE_NAME}`,
+    title: `Контакти — телефон, email та офіс у Літині | ${SITE_NAME}`,
     description:
-        'Зв’яжіться з ONLAN Logistic: телефон, email, головний офіс у Вінниці та форма заявки на прорахунок доставки. Відповідаємо в робочі години Пн–Пт 9:00–18:00.',
+        'Зв’яжіться з ONLAN Logistic: телефон, email, головний офіс у Літині та форма заявки на прорахунок доставки. Відповідаємо в робочі години Пн–Пт 9:00–18:00.',
     path: '/contacts',
 };
 
@@ -114,9 +114,9 @@ export const SERVICES_SEO_EN: PageSeo = {
 
 export const CONTACTS_SEO_EN: PageSeo = {
     name: 'Contacts',
-    title: `Contacts — phone, email and office in Vinnytsia | ${SITE_NAME}`,
+    title: `Contacts — phone, email and office in Lytyn | ${SITE_NAME}`,
     description:
-        'Contact ONLAN Logistic: phone, email, head office in Vinnytsia and a quote request form. We reply during working hours, Mon–Fri 9:00–18:00 (Kyiv time).',
+        'Contact ONLAN Logistic: phone, email, head office in Lytyn and a quote request form. We reply during working hours, Mon–Fri 9:00–18:00 (Kyiv time).',
     path: '/contacts',
 };
 

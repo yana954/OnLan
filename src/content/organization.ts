@@ -17,7 +17,7 @@ export const ORGANIZATION = {
     /** Brand spelling used in the UI */
     alternateName: 'ONLAN Logistic',
     description:
-        'Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну, митне оформлення, страхування. Працюємо з 2012 року, Вінниця.',
+        'Міжнародна логістика для бізнесу: доставка з Європи, Азії та США в Україну, митне оформлення, страхування. Працюємо з 2012 року, Літин, Вінницька область.',
     email: CONTACTS_PRIMARY.email,
     telephone: CONTACTS_PRIMARY.phone,
     address: CONTACTS_ADDRESS,
@@ -29,7 +29,7 @@ export const ORGANIZATION = {
 const ORGANIZATION_EN = {
     ...ORGANIZATION,
     description:
-        'International logistics for business: delivery from Europe, Asia and the USA to Ukraine, customs clearance, cargo insurance. Operating since 2012, Vinnytsia.',
+        'International logistics for business: delivery from Europe, Asia and the USA to Ukraine, customs clearance, cargo insurance. Operating since 2012, based in Lytyn, Vinnytsia Oblast.',
     address: CONTACTS_ADDRESS_EN,
 };
 

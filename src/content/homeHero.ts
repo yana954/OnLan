@@ -8,7 +8,7 @@ export const HOME_HERO = {
     secondaryCta: 'Наші послуги',
     /** Факти з «Історії компанії» (сторінка «Про нас»). */
     facts: [
-        { key: 'since', value: 'з 2012', label: 'року, Вінниця' },
+        { key: 'since', value: 'з 2012', label: 'року, Літин' },
         { key: 'shipments', value: '5 000', label: 'успішних відправлень' },
         { key: 'warehouse', value: '2 000 м²', label: 'власний склад' },
     ],
