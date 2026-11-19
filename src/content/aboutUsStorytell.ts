@@ -1,5 +1,5 @@
 export const ABOUT_US_STORYTELL_SCROLL = {
-    eyebrow: 'СторіТел',
+    eyebrow: 'Наш підхід',
     quote: 'Логістика — це не система. Це люди, які приймають рішення',
     authorName: 'Марина',
     authorRole: 'CEO ONLAN LOGISTIC',

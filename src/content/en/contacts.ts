@@ -89,15 +89,46 @@ export const CONTACTS_OFFICES_SECTION_EN: Widen<typeof UkOffices> = {
 export const CONTACTS_FAQ_SECTION_EN: Widen<typeof UkFaq> = {
     eyebrow: 'FAQ',
     heading: 'Frequently asked questions',
-    placeholderAnswer: 'Answer coming soon.',
     items: [
-        'What services do you provide?',
-        'How do I choose the type of transport?',
-        'Do you handle partial (groupage) loads?',
-        'How is the delivery price calculated?',
-        'Do you help prepare customs documents?',
-        'How is the delivery price calculated?',
-        'Do you work with carriers or look for partners?',
-        'Can we sign a long-term service contract?',
+        {
+            question: 'What services do you provide?',
+            answer:
+                'We organise road, sea and container, air and rail freight, oversized and multimodal routes, and customs clearance. We work on routes from Asia, the USA, Europe and within Ukraine. Choose a service in the “Services” section or write to us.',
+        },
+        {
+            question: 'How do I choose the type of transport?',
+            answer:
+                'It depends on the deadline, weight, volume and value of the cargo. Road usually suits Europe and Ukraine, sea suits large shipments from Asia, air suits urgent and valuable cargo, and rail balances price and speed. A manager will help you choose for your shipment.',
+        },
+        {
+            question: 'Do you handle partial (groupage) loads?',
+            answer:
+                'Yes. On road routes we handle LTL, consolidating groupage from several shippers, and by sea we handle LCL. This way you pay only for your own space. Send us the cargo details and we will propose the best scheme.',
+        },
+        {
+            question: 'How is the delivery price calculated?',
+            answer:
+                'We calculate the cost individually. It depends on the route, mode of transport, weight and volume, cargo type, deadlines and extra services such as customs clearance. Send a request with your cargo details and we will prepare a quote.',
+        },
+        {
+            question: 'Do you help prepare customs documents?',
+            answer:
+                'Yes. We prepare and check documents before dispatch: CMR, invoices, packing lists and certificates. We also classify the cargo by HS code and support customs clearance to minimise stops at the border.',
+        },
+        {
+            question: 'How long does delivery take?',
+            answer:
+                'Transit times depend on the route, mode of transport, season and customs clearance. Direct road trips from most EU countries take 3–7 days. For sea, rail and air we give indicative times for your specific shipment after the quote.',
+        },
+        {
+            question: 'Do you work with carriers or look for partners?',
+            answer:
+                'We work with vetted European and Ukrainian carriers and consider partnership proposals. Write to info@onlan.com.ua with your routes and type of transport, and we will get back to you.',
+        },
+        {
+            question: 'Can we sign a long-term service contract?',
+            answer:
+                'Yes. For regular shipments we can agree standing service terms. Tell us about your volumes and routes, and a manager will discuss the cooperation format.',
+        },
     ],
 };

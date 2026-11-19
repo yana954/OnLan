@@ -94,7 +94,7 @@ export const ABOUT_US_ADVANTAGES_EN: AboutUsAdvantageItem[] = [
 ];
 
 export const ABOUT_US_STORYTELL_SCROLL_EN: Widen<typeof UkScroll> = {
-    eyebrow: 'Storytelling',
+    eyebrow: 'Our approach',
     quote: 'Logistics is not a system. It is people who make decisions',
     authorName: 'Maryna',
     authorRole: 'CEO ONLAN LOGISTIC',

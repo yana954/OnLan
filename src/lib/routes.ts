@@ -60,7 +60,7 @@ export const ABOUT_US_SEO: PageSeo = {
     name: 'Про нас',
     title: `Про компанію — логістичний партнер для бізнесу | ${SITE_NAME}`,
     description:
-        'OnLan Logistic — надійний логістичний партнер для бізнесу: 10+ років досвіду в міжнародних, мультимодальних та авіаперевезеннях, команда та цінності компанії.',
+        'OnLan Logistic — надійний логістичний партнер для бізнесу: 10+ років досвіду в міжнародних, мультимодальних та авіаперевезеннях, історія та цінності компанії.',
     path: '/about-us',
 };
 
@@ -100,7 +100,7 @@ export const ABOUT_US_SEO_EN: PageSeo = {
     name: 'About us',
     title: `About OnLan — a logistics partner for business | ${SITE_NAME}`,
     description:
-        'OnLan Logistic is a reliable logistics partner for business: 10+ years in international, multimodal and air freight. Meet our team and company values.',
+        'OnLan Logistic is a reliable logistics partner for business: 10+ years in international, multimodal and air freight. Read our story and company values.',
     path: '/about-us',
 };
 

@@ -29,7 +29,7 @@ export function ContactsFaqSection() {
                 />
 
                 <ul className="mx-auto mt-8 w-full max-w-5xl md:mt-10">
-                    {c.contactsFaq.items.map((question, index) => {
+                    {c.contactsFaq.items.map(({ question, answer }, index) => {
                         const isOpen = openIndex === index;
                         const panelId = `${headingId}-panel-${index}`;
                         const buttonId = `${headingId}-button-${index}`;
@@ -77,7 +77,7 @@ export function ContactsFaqSection() {
                                     className="pb-5 pr-16 md:pb-6"
                                 >
                                     <p className="text-sm leading-relaxed text-onlan-black/85 md:text-base">
-                                        {c.contactsFaq.placeholderAnswer}
+                                        {answer}
                                     </p>
                                 </div>
                             </li>

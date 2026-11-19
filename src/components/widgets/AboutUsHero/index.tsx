@@ -83,7 +83,7 @@ export const AboutUsHero = () => {
 
                 <div className="flex flex-col items-center justify-center gap-5 text-center">
                     <Description
-                        description={t('10+ років досвіду в контрейнерних, мультимодальних та авіа-перевезеннях', '10+ years of experience in container, multimodal and air freight')}
+                        description={t('10+ років досвіду в контейнерних, мультимодальних та авіаперевезеннях', '10+ years of experience in container, multimodal and air freight')}
                         type="medium"
                     />
 

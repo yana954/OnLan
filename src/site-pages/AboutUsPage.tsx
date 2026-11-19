@@ -12,7 +12,8 @@ export default function AboutUsPage() {
             {/* <Containers.Section el={<Widgets.AboutUsCompanyIntro />} /> */}
             <Containers.Section el={<Widgets.AboutUsAdvantagesSection />} />
             <Containers.Section el={<Widgets.AboutUsHistorySection />} />
-            <Containers.Section el={<Widgets.AboutUsTeamSection />} />
+            {/* Team block hidden for now — restore when team photos and bios are ready.
+            <Containers.Section el={<Widgets.AboutUsTeamSection />} /> */}
             <Containers.Section el={<Widgets.AboutUsValuesSection />} />
             <Containers.Section el={<Widgets.AboutUsNew />} />
             <Containers.Section el={<Widgets.ContactUsSection />} />
